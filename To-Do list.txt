@@ -3,3 +3,4 @@ Movement | N
 Attack | ?
 Crafting | B
 Map | ?
+Day-Night system? - Van rá egy ötletem ha benne vagy

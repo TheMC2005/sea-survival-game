@@ -1,0 +1,4 @@
+Inventory - Hotbar -> Lehessen upgradelni | B
+Movement | N
+Attack | ?
+Crafting | B

@@ -1,4 +1,6 @@
-Inventory - Hotbar -> Lehessen upgradelni | B
-Movement | N
+Inventory - Hotbar - Elhalasztva későbre
+Movement | N - Majd nézd meg mit szólsz hozzá?
 Attack | ?
 Crafting | B
+Map | ?
+Day-Night system? - Van rá egy ötletem ha benne vagy

@@ -7,7 +7,7 @@ public class PickUpItem : MonoBehaviour
    //Ez itt a pickup system de a fejemben müködik egyenlore csak
    Transform player;
     [SerializeField] float speed = 5f; // ezt meg lehet valtoztatom de lehet jo
-    [SerializeField] float pickUpDistance = 1.5f; // Ez szerintem jol be van love
+    [SerializeField] float pickUpDistance = 1.15f; // Ez szerintem jol be van love
     [SerializeField] float TimeToLeave = 10f; //mennyi ido alatt tunik el a cucc a foldrol item despawn time roviden
     private void Awake()
     {

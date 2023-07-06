@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PickUpItem : MonoBehaviour
 {
-   //Ez itt a pickup system de a fejemben müködik egyenlore csak
+   //Ez itt a pickup system de a fejemben mï¿½kï¿½dik egyenlore csak
    Transform player;
     [SerializeField] float speed = 5f; // ezt meg lehet valtoztatom de lehet jo
     [SerializeField] float pickUpDistance = 1.15f; // Ez szerintem jol be van love

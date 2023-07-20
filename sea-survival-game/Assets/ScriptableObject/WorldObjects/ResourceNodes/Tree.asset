@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1734dabb4fd12db4aa1670f908a46f19, type: 3}
   m_Name: Tree
   m_EditorClassIdentifier: 
-  width: 0
-  height: 0
-  sprite: {fileID: 0}
-  drop_1: {fileID: 0}
-  drop_1_min: 0
-  drop_1_max: 0
-  drop_2: {fileID: 0}
-  drop_2_min: 0
-  drop_2_max: 0
+  width: 2
+  height: 2
+  sprite: {fileID: 21300000, guid: 95705e8adaf120b41a0115113fb715b5, type: 3}
+  drop_1: {fileID: 11400000, guid: f7192824366b96b44a527409e5c5ef8e, type: 2}
+  drop_1_min: 1
+  drop_1_max: 1
+  drop_2: {fileID: 11400000, guid: f7192824366b96b44a527409e5c5ef8e, type: 2}
+  drop_2_min: 1
+  drop_2_max: 1

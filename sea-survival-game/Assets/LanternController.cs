@@ -29,7 +29,7 @@ public class LanternController : MonoBehaviour
             light2d.enabled = true;
             deActivated.SetActive(false);
             Activated.SetActive(true);
-            if(mins1%3==0 && light2d.intensity<50 && mins1%2==0 && mins1%5==0)
+            if((mins1%3==0) && (light2d.intensity<50) && mins1%5==0)
             {
                 light2d.intensity += 1;
             }

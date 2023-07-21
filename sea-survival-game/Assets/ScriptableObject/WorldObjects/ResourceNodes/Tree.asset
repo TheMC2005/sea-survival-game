@@ -15,9 +15,8 @@ MonoBehaviour:
   width: 2
   height: 2
   sprite: {fileID: 21300000, guid: 95705e8adaf120b41a0115113fb715b5, type: 3}
-  drop_1: {fileID: 11400000, guid: f7192824366b96b44a527409e5c5ef8e, type: 2}
-  drop_1_min: 1
-  drop_1_max: 1
-  drop_2: {fileID: 11400000, guid: f7192824366b96b44a527409e5c5ef8e, type: 2}
-  drop_2_min: 1
-  drop_2_max: 1
+  drops:
+  - {fileID: 11400000, guid: f7192824366b96b44a527409e5c5ef8e, type: 2}
+  amount: 05000000
+  toolType: 0
+  minToolLevel: 1

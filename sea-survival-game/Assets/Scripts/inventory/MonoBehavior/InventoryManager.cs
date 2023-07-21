@@ -9,7 +9,7 @@ public class InventoryManager : MonoBehaviour
     public static List<InventorySlot> PlayerSlots;
     void Start()
     {
-        inventory = new Inventory();
+        inventory = new Inventory(27);
         PlayerSlots = buttons;
         LoadSlots(inventory, PlayerSlots);
     }

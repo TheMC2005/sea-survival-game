@@ -63,10 +63,17 @@ public class DayNightCycle : MonoBehaviour
             ppv.weight = (float)mins / 60; 
         }
 
-
         if (hours >= 6 && hours < 7) 
         {
             ppv.weight = 1 - (float)mins / 60;
+        }
+        if(hours >= 21 || hours<6) // ez csak azert kell ha veletlen tesztelsz akkor ne legyen buggos pl, hogy 19:30 van es este van
+        {
+            ppv.weight = 1;
+        }
+        if(hours >=7 && hours<20) // same here
+        {
+            ppv.weight = 0;
         }
     }
 

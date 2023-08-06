@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class test : MonoBehaviour
 {
@@ -15,12 +16,14 @@ public class test : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-            Item.SummonItem(item, cam.ScreenToWorldPoint(Input.mousePosition));
-        if (Input.GetMouseButtonDown(1))
-        {
-            inv.RemoveItem(item, 5);
-            InventoryManager.LoadSlots(InventoryManager.inventory, InventoryManager.PlayerSlots);
+        if (!EventSystem.current.IsPointerOverGameObject()){
+            if (Input.GetMouseButtonDown(0))
+                Item.SummonItem(item, cam.ScreenToWorldPoint(Input.mousePosition));
+            if (Input.GetMouseButtonDown(1))
+            {
+                inv.RemoveItem(item, 5);
+                InventoryManager.LoadSlots(InventoryManager.inventory, InventoryManager.PlayerSlots);
+            }
         }
     }
 }

@@ -22,4 +22,8 @@ public class InventorySlot : MonoBehaviour
             text.SetText(slot.count.ToString());
         }
     }
+    public void Select(){
+        Hotbar.selItem=slot;
+        Hotbar.loadHotbar(Hotbar.selItem, Hotbar.itemIcon);
+    }
 }

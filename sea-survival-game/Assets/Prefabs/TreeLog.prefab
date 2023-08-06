@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 189259650070598520}
   - component: {fileID: 8684069958512579977}
-  - component: {fileID: 666987430491904167}
+  - component: {fileID: -1789147761190242395}
   m_Layer: 0
   m_Name: TreeLog
   m_TagString: Untagged
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 736555906, guid: 6f86735c1ebca8f40ad013c94dcb86a0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 41b6a0837691d504aae7c5d11789c296, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &666987430491904167
+--- !u!114 &-1789147761190242395
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,9 +94,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3659139122441892084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29b73d473405af047a9c3b1cfad672cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 7537796e44b78874c96be630b7a483fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: f7192824366b96b44a527409e5c5ef8e, type: 2}
   speed: 5
-  pickUpDistance: 1.5
+  pickUpDistance: 1.15
   TimeToLeave: 10

@@ -8,9 +8,10 @@ public class InventorySlot : MonoBehaviour
 {
     [SerializeField] TMP_Text text;
     [SerializeField] Image icon;
-
+    Slot slot;
     public void Set(Slot slot)
     {
+        this.slot=slot;
         icon.sprite = slot.item.sprite;
         if ((slot.count == 0) || (slot.item.maxq == 1))
         {
@@ -20,5 +21,9 @@ public class InventorySlot : MonoBehaviour
         {
             text.SetText(slot.count.ToString());
         }
+    }
+    public void Select(){
+        Hotbar.selItem=slot;
+        Hotbar.loadHotbar(Hotbar.selItem, Hotbar.itemIcon);
     }
 }

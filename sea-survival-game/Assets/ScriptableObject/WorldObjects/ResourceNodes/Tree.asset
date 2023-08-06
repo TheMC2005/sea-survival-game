@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1734dabb4fd12db4aa1670f908a46f19, type: 3}
+  m_Name: Tree
+  m_EditorClassIdentifier: 
+  width: 2
+  height: 2
+  sprite: {fileID: 21300000, guid: 95705e8adaf120b41a0115113fb715b5, type: 3}
+  drops:
+  - {fileID: 11400000, guid: f7192824366b96b44a527409e5c5ef8e, type: 2}
+  amount: 05000000
+  toolType: 0
+  minToolLevel: 1

@@ -9,9 +9,9 @@ public class InventoryManager : MonoBehaviour
     public static List<InventorySlot> PlayerSlots;
     void Start()
     {
-        inventory = new Inventory();
+        inventory = new Inventory(27);
         PlayerSlots = buttons;
-        LoadSlots(inventory, PlayerSlots);
+        //LoadSlots(inventory, PlayerSlots);
     }
 
     public static void LoadSlots(Inventory inventory, List<InventorySlot> buttons)
@@ -20,5 +20,6 @@ public class InventoryManager : MonoBehaviour
         {
             buttons[i].Set(inventory.slot[i]);
         }
+        Hotbar.loadHotbar(Hotbar.selItem, Hotbar.itemIcon);
     }
 }

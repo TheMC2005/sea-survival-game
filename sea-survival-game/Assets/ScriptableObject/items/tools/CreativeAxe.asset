@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7d5f77daa1b22f43856582f1b4694bc, type: 3}
-  m_Name: Stone
+  m_Script: {fileID: 11500000, guid: ef46f2e75f4ca964ca2ec36534274d33, type: 3}
+  m_Name: CreativeAxe
   m_EditorClassIdentifier: 
-  id: 2
-  itemName: Stone
-  maxq: 99
-  sprite: {fileID: 21300000, guid: 5b8633f55481be54a93f798f4540cf66, type: 3}
+  id: 101
+  itemName: CreativeAxe
+  maxq: 1
+  sprite: {fileID: 21300000, guid: 17d277ea99d358a499d854b1de0e514e, type: 3}
+  toolType: 0
+  toolLevel: 999

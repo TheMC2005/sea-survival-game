@@ -24,15 +24,15 @@ public class dropped_item : MonoBehaviour
             Destroy(gameObject);
         }
         float distance = Vector3.Distance(transform.position, player.position); //object es player kozotti distance
-        if ((distance > pickUpDistance)||(!InventoryManager.inventory.IsFreeSpaceFor(item)))
+        if ((distance > pickUpDistance)/*||(!InventoryManager.inventory.IsFreeSpaceFor(item))*/)
         {
             return; // ha nagyobb a distance nem veszi fel csak vissza kuldi
         }
         transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
         if (distance < 0.1f)
         {
-            InventoryManager.inventory.AddItem(item);
-            InventoryManager.LoadSlots(InventoryManager.inventory, InventoryManager.PlayerSlots);
+           /* InventoryManager.inventory.AddItem(item);
+            InventoryManager.LoadSlots(InventoryManager.inventory, InventoryManager.PlayerSlots);*/
             Destroy(gameObject);
         }
     }

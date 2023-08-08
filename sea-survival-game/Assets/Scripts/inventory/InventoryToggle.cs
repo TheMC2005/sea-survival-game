@@ -5,6 +5,10 @@ using UnityEngine;
 public class InventoryToggle : MonoBehaviour
 {
    public GameObject inventoryPanel;
+    private void Start()
+    {
+        inventoryPanel.SetActive(false);
+    }
     void Update()
     {
      if(Input.GetKeyDown(KeyCode.Tab))

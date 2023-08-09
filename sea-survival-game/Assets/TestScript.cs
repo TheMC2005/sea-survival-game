@@ -19,4 +19,14 @@ public class TestScript : MonoBehaviour
             Debug.Log("Item Not Added");
         }
     }
+    public void GetSelectedItem()
+    {
+        Item receivedItem = inventoryManager.GetSelectedItem();
+        if(receivedItem != null)
+        {
+            Debug.Log(receivedItem);
+        }
+        else
+            Debug.Log("No items received");
+    }
 }

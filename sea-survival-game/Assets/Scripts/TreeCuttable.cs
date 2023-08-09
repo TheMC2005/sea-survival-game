@@ -10,7 +10,6 @@ public class TreeCuttable : ToolHit
     public override void Hit()
     {
         while(dropCount > 0)
-        
         {
           dropCount -= 1;
             Vector3 position = transform.position;

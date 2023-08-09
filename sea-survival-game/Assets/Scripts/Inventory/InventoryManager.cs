@@ -69,7 +69,7 @@ public class InventoryManager : MonoBehaviour
         //empty slotok
         for (int i = 0; i < inventorySlots.Length; i++)
         {
-            // ha van tobb hasonlo adja oket ossze
+            // ures slotos
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
             if (itemInSlot == null)

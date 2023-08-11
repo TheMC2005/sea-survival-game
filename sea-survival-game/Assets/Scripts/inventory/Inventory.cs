@@ -17,7 +17,7 @@ public class Slot
 
 public class Inventory
 {
-    private int nos;
+    private int nos;//number of slots
     Item empty = Resources.Load("Empty") as Item;
 
     public List<Slot> slot = new List<Slot>();

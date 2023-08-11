@@ -5,15 +5,21 @@ using UnityEngine.UI;
 
 public class Hotbar : MonoBehaviour
 {
-    public static Slot selItem;
-    [SerializeField] Image image;
-    public static Image itemIcon;
-    void Start()
+    public static Slot selSlot;
+    public static Hotbar[] slots = new Hotbar[9];
+    public static int selectedID;
+    [SerializeField] int id;
+
+    private void Start()
     {
-        selItem=new Slot();
-        itemIcon = image;
+        slots[id]=this;
     }
-    public static void loadHotbar(Slot slot, Image image){
-        image.sprite = slot.item.sprite;
+    public void OnLeftClick(){
+        selSlot=InventoryManager.inventory.slot[id];
+        selectedID=id;
+        for(int i=0; i<9; i++){
+            slots[i].gameObject.GetComponent<Image>().color = new Color32(255,255,255,255);
+        }
+        gameObject.GetComponent<Image>().color = new Color32(255,255,255,100);
     }
 }

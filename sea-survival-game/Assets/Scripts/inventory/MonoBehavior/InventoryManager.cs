@@ -11,15 +11,14 @@ public class InventoryManager : MonoBehaviour
     {
         inventory = new Inventory(27);
         PlayerSlots = buttons;
-        //LoadSlots(inventory, PlayerSlots);
+        LoadSlots(inventory, PlayerSlots);
     }
 
     public static void LoadSlots(Inventory inventory, List<InventorySlot> buttons)
     {
         for (int i = 0; i < buttons.Count; i++)
         {
-            buttons[i].Set(inventory.slot[i]);
+            buttons[i].Set(inventory.slot[i], i);
         }
-        Hotbar.loadHotbar(Hotbar.selItem, Hotbar.itemIcon);
     }
 }

@@ -30,6 +30,7 @@ public class ItemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             dragImage.gameObject.SetActive(false);
         }
         dragStart.icon.sprite=empty.sprite;
+        dragStart.text.SetText(string.Empty);
         dragImage.gameObject.GetComponent<Image>().sprite=dragStart.item.sprite;
     }
     public void OnEndDrag(PointerEventData eventData){

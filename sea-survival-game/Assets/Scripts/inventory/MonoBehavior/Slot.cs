@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Slot : MonoBehaviour
 {
-    [SerializeField] TMP_Text text;
+    [SerializeField] public TMP_Text text;
     [SerializeField] public Image icon;
     public Item item;
     public int count;

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1167028603001032703}
   - component: {fileID: 1240754430650713967}
   - component: {fileID: 8375987161551329169}
+  - component: {fileID: 6005681026632843226}
+  - component: {fileID: 1817907939565260808}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -63,7 +65,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 270, y: 90}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1167028603001032703
@@ -94,8 +96,8 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 30, y: 30}
-  m_Spacing: {x: 0, y: 0}
+  m_CellSize: {x: 40, y: 40}
+  m_Spacing: {x: 4, y: 4}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &8375987161551329169
@@ -138,6 +140,32 @@ MonoBehaviour:
   - {fileID: 750800196407246925}
   - {fileID: 3298141750375545377}
   - {fileID: 2779109738481952394}
+--- !u!114 &6005681026632843226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782676733795982592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bda542f0ff93d504f975869a38270901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: f7192824366b96b44a527409e5c5ef8e, type: 2}
+  cam: {fileID: 0}
+--- !u!114 &1817907939565260808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782676733795982592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b3c1b6a15c86344680dc50bc2e4a856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &252821509829784668
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146,6 +174,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8139497826724057246}
     m_Modifications:
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3025185380173019713}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnLeftClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Hotbar, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2325773628809867471, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.10167694
@@ -800,6 +856,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8139497826724057246}
     m_Modifications:
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4526676166478406920}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnLeftClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Hotbar, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2325773628809867471, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.10167694
@@ -1091,6 +1175,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8139497826724057246}
     m_Modifications:
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8945069085011513799}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnLeftClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Hotbar, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2325773628809867471, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.10167694
@@ -1261,6 +1373,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8139497826724057246}
     m_Modifications:
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7966939361677291311}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnLeftClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Hotbar, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2325773628809867471, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.10167694
@@ -1673,6 +1813,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8139497826724057246}
     m_Modifications:
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3828663551537268958}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnLeftClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Hotbar, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2325773628809867471, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.10167694
@@ -2206,6 +2374,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8139497826724057246}
     m_Modifications:
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2221318538130566473}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnLeftClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Hotbar, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2325773628809867471, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.10167694
@@ -2981,6 +3177,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8139497826724057246}
     m_Modifications:
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9047320374324527333}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnLeftClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Hotbar, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2325773628809867471, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.10167694
@@ -3151,6 +3375,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8139497826724057246}
     m_Modifications:
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3946818752995699464}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnLeftClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Hotbar, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2325773628809867471, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.10167694
@@ -3321,6 +3573,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8139497826724057246}
     m_Modifications:
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3701701072451477646}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnLeftClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Hotbar, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047955461517812204, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
+      propertyPath: leftClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2325773628809867471, guid: 49b34b2b5b6738c42b9891f41455e6d4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.10167694

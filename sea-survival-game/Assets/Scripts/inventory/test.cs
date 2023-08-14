@@ -22,7 +22,7 @@ public class test : MonoBehaviour
             if (Input.GetMouseButtonDown(1))
             {
                 inv.RemoveItem(item, 5);
-                InventoryManager.LoadSlots(InventoryManager.inventory, InventoryManager.PlayerSlots);
+                InventoryManager.LoadSlots(InventoryManager.inventory);
             }
         }
     }

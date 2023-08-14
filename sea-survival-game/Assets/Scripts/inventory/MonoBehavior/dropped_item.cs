@@ -32,7 +32,7 @@ public class dropped_item : MonoBehaviour
         if (distance < 0.1f)
         {
             InventoryManager.inventory.AddItem(item);
-            InventoryManager.LoadSlots(InventoryManager.inventory, InventoryManager.PlayerSlots);
+            InventoryManager.LoadSlots(InventoryManager.inventory);
             Destroy(gameObject);
         }
     }

@@ -5,20 +5,20 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public static Inventory inventory;
-    [SerializeField] List<InventorySlot> buttons;
-    public static List<InventorySlot> PlayerSlots;
+    [SerializeField] List<Slot> buttons;
+    public static List<Slot> PlayerSlots;
     void Start()
     {
-        inventory = new Inventory(27);
         PlayerSlots = buttons;
-        LoadSlots(inventory, PlayerSlots);
+        inventory = new Inventory(27, PlayerSlots);
+        LoadSlots(inventory);
     }
 
-    public static void LoadSlots(Inventory inventory, List<InventorySlot> buttons)
+    public static void LoadSlots(Inventory inventory)
     {
-        for (int i = 0; i < buttons.Count; i++)
+        for (int i = 0; i < inventory.nos; i++)
         {
-            buttons[i].Set(inventory.slot[i], i);
+            inventory.slot[i].Set();
         }
     }
 }

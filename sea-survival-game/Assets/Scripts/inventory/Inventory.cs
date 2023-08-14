@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Slot
+/*public class Slot
 {
     Item empty = Resources.Load("Empty") as Item;
     public Item item;
@@ -13,22 +13,18 @@ public class Slot
         item = empty;
         count = 0;
     }
-}
+}*/
 
 public class Inventory
 {
-    private int nos;//number of slots
+    public int nos;//number of slots
     Item empty = Resources.Load("Empty") as Item;
 
     public List<Slot> slot = new List<Slot>();
-    public Inventory(int nos)
+    public Inventory(int nos, List<Slot> slot)
     {
         this.nos = nos;
-        for (int i = 0; i < nos; i++)
-        {
-            Slot ns = new Slot();
-            slot.Add(ns);
-        }
+        this.slot = slot;
     }
 
     public void AddItem(Item item)

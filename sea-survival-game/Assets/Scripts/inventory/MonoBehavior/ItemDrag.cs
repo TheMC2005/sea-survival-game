@@ -6,16 +6,16 @@ using UnityEngine.EventSystems;
 
 public class ItemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler
 {
-    private InventorySlot thisSlot;
-    private static InventorySlot dragStart;
-    private static InventorySlot dragEnd;
+    private Slot thisSlot;
+    private static Slot dragStart;
+    private static Slot dragEnd;
     [SerializeField] private RectTransform dragImage;
     Item empty;
 
     private void Start()
     {
         empty = Resources.Load("Empty") as Item;
-        thisSlot = GetComponent<InventorySlot>();
+        thisSlot = GetComponent<Slot>();
         dragImage = GameObject.Find("DragImage").GetComponent<RectTransform>();
     }
     public void OnPointerEnter(PointerEventData eventData){
@@ -23,24 +23,37 @@ public class ItemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     }
     public void OnBeginDrag(PointerEventData eventData){
         dragStart = dragEnd;
-        if(dragStart.slot.item != empty){
+        if(dragStart.item != empty){
             dragImage.gameObject.SetActive(true);
         }
         else{
             dragImage.gameObject.SetActive(false);
         }
         dragStart.icon.sprite=empty.sprite;
-        dragImage.gameObject.GetComponent<Image>().sprite=dragStart.slot.item.sprite;
+        dragImage.gameObject.GetComponent<Image>().sprite=dragStart.item.sprite;
     }
     public void OnEndDrag(PointerEventData eventData){
         dragImage.gameObject.SetActive(false);
-        (InventoryManager.inventory.slot[dragStart.SlotID],InventoryManager.inventory.slot[dragEnd.SlotID])=(InventoryManager.inventory.slot[dragEnd.SlotID],InventoryManager.inventory.slot[dragStart.SlotID]);
-        //InventoryManager.inventory.slot[dragStart.SlotID]
-        //InventoryManager.inventory.slot[dragEnd.SlotID]
-        //dragStart = null;
-        //dragEnd = null;
-        Hotbar.selSlot=InventoryManager.inventory.slot[Hotbar.selectedID];
-        InventoryManager.LoadSlots(InventoryManager.inventory, InventoryManager.PlayerSlots);
+        if(dragEnd!=dragStart){
+            if(dragStart.item==dragEnd.item){
+                if(dragStart.count+dragEnd.count<=dragStart.item.maxq){
+                    dragEnd.count+=dragStart.count;
+                    dragStart.item=empty;
+                    dragStart.count=0;
+                }
+                else{
+                    int a = dragEnd.item.maxq-dragEnd.count;
+                    dragEnd.count=dragEnd.item.maxq;
+                    dragStart.count-=a;
+                }
+            }
+            else{
+                (dragStart.item,dragEnd.item)=(dragEnd.item,dragStart.item);
+                (dragStart.count,dragEnd.count)=(dragEnd.count,dragStart.count);
+            }
+        }
+        dragEnd.Set();
+        dragStart.Set();
     }
     public void OnDrag(PointerEventData eventData){
         dragImage.position=eventData.position;

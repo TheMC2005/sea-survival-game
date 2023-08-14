@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de02f9e1d18f588468e474319d09a723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD:sea-survival-game/ProjectSettings/ShaderGraphSettings.asset
   customInterpolatorErrorThreshold: 32
   customInterpolatorWarningThreshold: 16
+=======
+  itemName: Wood
+  maxq: 99
+  sprite: {fileID: 21300000, guid: 41b6a0837691d504aae7c5d11789c296, type: 3}
+>>>>>>> N-branch:sea-survival-game/Assets/ScriptableObject/items/resoures/Wood.asset

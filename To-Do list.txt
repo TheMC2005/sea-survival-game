@@ -1,6 +1,6 @@
-Inventory - Hotbar - Elhalasztva későbre
-Movement | N - Majd nézd meg mit szólsz hozzá?
+Inventory - Hotbar - Mostly kész/ Splitting mechanic
+Movement | Done
 Attack | ?
 Crafting | B
 Map | ?
-Day-Night system? - Van rá egy ötletem ha benne vagy
+Day-Night system? - Kész / Global Light Systemnél ne fura matekkal legyen megoldva az éjszaka és a nappal megjelenése a weighttel

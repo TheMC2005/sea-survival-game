@@ -8,8 +8,9 @@ public class OpenInventory : MonoBehaviour
     RectTransform rt;
     void Start()
     {
-        IsOpen=false;
-        rt=this.GetComponent<RectTransform>();
+        IsOpen = false;
+        rt =this.GetComponent<RectTransform>();
+        rt.anchoredPosition = new Vector2(0,-83);
     }
     void Update()
     {

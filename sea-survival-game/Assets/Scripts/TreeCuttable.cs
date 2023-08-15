@@ -15,8 +15,7 @@ public class TreeCuttable : ToolHit
             Vector3 position = transform.position;
             position.x += spread * UnityEngine.Random.value - spread/2;
             position.y += spread * UnityEngine.Random.value - spread / 2;
-            Item wood = Instantiate(pickUpDrop);
-            Item.SummonItem(wood, position);
+            Item.SummonItem(pickUpDrop, position);
         }
         Destroy(gameObject); 
     }

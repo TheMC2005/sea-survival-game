@@ -34,8 +34,10 @@ public class ToolsPlayerController : MonoBehaviour
             {
                 return;
             }
-            UseToolGrid();
+            UseToolGrid();  
         }
+        if(Hotbar.selSlot.tool.toolType == ToolType.Hoe)
+        Debug.Log("*");
     }
     private void SelectTile()
     {
@@ -70,22 +72,25 @@ public class ToolsPlayerController : MonoBehaviour
     } 
     private void UseToolGrid()
     {
-        if(selectable)
+       if(selectable == true)
         {
             TileBase tileBase = tileMapReadController.GetTileBase(selectedTilePosition);
             TileData tileData = tileMapReadController.GetTileData(tileBase);
-            if (tileData !=plowableTiles)
+            if (tileData != plowableTiles)
             {
                 return;
             }
-            if (cropsManager.Check(selectedTilePosition))
-            {
-                cropsManager.Seed(selectedTilePosition);
-            }
             else
             {
-                cropsManager.Plow(selectedTilePosition);
+                if (cropsManager.Check(selectedTilePosition))
+                {
+                    cropsManager.Seed(selectedTilePosition);
+                }
+                else
+                {
+                    cropsManager.Plow(selectedTilePosition);
+                }
             }
-        }
+        }      
     }
 }

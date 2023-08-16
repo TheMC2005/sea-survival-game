@@ -9,7 +9,6 @@ public class Slot : MonoBehaviour
     [SerializeField] public TMP_Text text;
     [SerializeField] public Image icon;
     public Item item;
-    public Tool tool;
     public int count;
 
     void Start()

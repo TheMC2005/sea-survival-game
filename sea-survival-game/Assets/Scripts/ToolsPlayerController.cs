@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -17,6 +18,21 @@ public class ToolsPlayerController : MonoBehaviour
     [SerializeField] TileData plowableTiles;
     Vector3Int selectedTilePosition;
     bool selectable;
+    public static bool GetToolType(ToolType toolType)
+    {
+        if (Hotbar.selSlot.item is Tool)
+        {
+            Tool toolItem = (Tool)Hotbar.selSlot.item;
+            if (toolItem.toolType == toolType)
+                return true;
+            else
+                return false;
+        }
+        else
+        {
+            return false;
+        }
+    }
     private void Awake()
     {
         character = GetComponent<CharacterController2D>();
@@ -36,8 +52,7 @@ public class ToolsPlayerController : MonoBehaviour
             }
             UseToolGrid();  
         }
-        if(Hotbar.selSlot.tool.toolType == ToolType.Hoe)
-        Debug.Log("*");
+ 
     }
     private void SelectTile()
     {
@@ -69,14 +84,15 @@ public class ToolsPlayerController : MonoBehaviour
             }
         }
         return false;
-    } 
+    }
+
     private void UseToolGrid()
     {
        if(selectable == true)
         {
             TileBase tileBase = tileMapReadController.GetTileBase(selectedTilePosition);
             TileData tileData = tileMapReadController.GetTileData(tileBase);
-            if (tileData != plowableTiles)
+            if (tileData != plowableTiles || !GetToolType(ToolType.Hoe))
             {
                 return;
             }
@@ -93,4 +109,6 @@ public class ToolsPlayerController : MonoBehaviour
             }
         }      
     }
+   
 }
+

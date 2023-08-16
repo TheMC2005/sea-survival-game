@@ -22446,7 +22446,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_1065
+      name: SeededDirt
       rect:
         serializedVersion: 2
         x: 0
@@ -22698,7 +22698,6 @@ TextureImporter:
       Overworld_1062: 518248090
       Overworld_1063: -1885645632
       Overworld_1064: -101393700
-      Overworld_1065: -1540867868
       Overworld_1066: 2034492331
       Overworld_1067: -287741407
       Overworld_1068: 622077357
@@ -23696,6 +23695,7 @@ TextureImporter:
       Overworld_999: -139003501
       PlowableDirt: -588497516
       PlowedDirt: -1964821441
+      SeededDirt: -1540867868
       TreeLog: 736555906
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

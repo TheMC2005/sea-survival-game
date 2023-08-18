@@ -22572,7 +22572,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_1071
+      name: Tomato
       rect:
         serializedVersion: 2
         x: 0
@@ -22704,7 +22704,6 @@ TextureImporter:
       Overworld_1069: -718581145
       Overworld_107: 1057681396
       Overworld_1070: -1862321250
-      Overworld_1071: -856145612
       Overworld_108: 646413711
       Overworld_109: 1762071961
       Overworld_11: 880462348
@@ -23696,6 +23695,7 @@ TextureImporter:
       PlowableDirt: -588497516
       PlowedDirt: -1964821441
       SeededDirt: -1540867868
+      Tomato: -856145612
       TreeLog: 736555906
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

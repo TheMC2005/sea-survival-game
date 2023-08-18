@@ -9,7 +9,7 @@ public class dropped_item : MonoBehaviour
     Transform player;
     [SerializeField] float speed = 5f; // ezt meg lehet valtoztatom de lehet jo
     [SerializeField] float pickUpDistance = 1.15f; // Ez szerintem jol be van love
-    [SerializeField] float TimeToLeave = 10f; //mennyi ido alatt tunik el a cucc a foldrol item despawn time roviden
+    [SerializeField] float TimeToLeave = 100f; //mennyi ido alatt tunik el a cucc a foldrol item despawn time roviden
 
     void Start()
     {

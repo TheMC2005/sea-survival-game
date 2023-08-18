@@ -10,6 +10,7 @@ public class DayNightCycle : MonoBehaviour
     public TextMeshProUGUI timeDisplay; 
     public TextMeshProUGUI dayDisplay; 
     public Volume ppv; // post processing volume
+    public CropsManager cropsManager;
 
     public float tick = 20000; 
     public float seconds;
@@ -39,7 +40,9 @@ public class DayNightCycle : MonoBehaviour
         {
             seconds = 0;
             mins += 1;
+            cropsManager.Tick();
         }
+        //Vigyazz hogy az iffekre belulre rakd az ilyeneket mert a unity update 4x lejátsza a dolgokat
 
         if (mins >= 60)
         {

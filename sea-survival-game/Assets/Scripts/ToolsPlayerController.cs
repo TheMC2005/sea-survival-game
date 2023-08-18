@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static UnityEditor.Progress;
 
 public class ToolsPlayerController : MonoBehaviour
 {
@@ -52,7 +53,6 @@ public class ToolsPlayerController : MonoBehaviour
             }
             UseToolGrid();  
         }
- 
     }
     private void SelectTile()
     {
@@ -85,14 +85,13 @@ public class ToolsPlayerController : MonoBehaviour
         }
         return false;
     }
-
     private void UseToolGrid()
     {
        if(selectable == true)
         {
             TileBase tileBase = tileMapReadController.GetTileBase(selectedTilePosition);
             TileData tileData = tileMapReadController.GetTileData(tileBase);
-            if (tileData != plowableTiles || !GetToolType(ToolType.Hoe))
+            if (tileData != plowableTiles /*|| !GetToolType(ToolType.Hoe)*/)
             {
                 return;
             }
@@ -100,7 +99,13 @@ public class ToolsPlayerController : MonoBehaviour
             {
                 if (cropsManager.Check(selectedTilePosition))
                 {
-                    cropsManager.Seed(selectedTilePosition);
+                     if(Hotbar.selSlot.item.isCropSeed)
+                    {
+                        Item item = Hotbar.selSlot.item;
+                        cropsManager.Seed(selectedTilePosition, item.crop);
+                       
+                    }
+                   
                 }
                 else
                 {

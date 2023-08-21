@@ -18,8 +18,8 @@ MonoBehaviour:
   crop: {fileID: 0}
   isCropSeed: 0
   timeToGrow: 12
-  timeToWither: 0
-  dropAmount: 0
+  timeToWither: 1
+  dropAmount: 3
   yield: {fileID: 11400000, guid: c553b10dbd9d32f419b45b6c194e1e24, type: 2}
   seededTile: {fileID: 11400000, guid: 202eed6fd7a848148aebed4b291206a4, type: 2}
   sprites:

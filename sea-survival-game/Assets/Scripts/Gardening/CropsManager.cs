@@ -13,7 +13,7 @@ public class CropsTile
     public SpriteRenderer spriteRenderer;
     public Vector3Int Pos;
     public float damage;
-   // public CropsTile toDelete;
+    public CropsTile toDelete;
 
     public bool Completed
     {
@@ -39,7 +39,7 @@ public class CropsTile
 public class CropsManager : MonoBehaviour
 {
     [SerializeField] TileBase plowed;
-    [SerializeField] TileBase seeded;
+    [SerializeField] TileBase plowableDirt;
     [SerializeField] Tilemap cropTilemap;
     [SerializeField] DayNightCycle dayNightCycle;
     [SerializeField] GameObject spriteCropPrefab;
@@ -69,12 +69,16 @@ public class CropsManager : MonoBehaviour
                     if (croptile.Completed)
                     {
                         croptile.damage += 0.1f; //csak ha megnott azutan szamolja
+                        Debug.Log(croptile.damage);
                     }
                 }
                 if(croptile.damage >= croptile.crop.timeToWither)
                 {
                     croptile.Harvested();  //ha damage nagyobb meghal a crop
-                  //  crops.Remove((Vector2Int)croptile.Pos, croptile.toDelete);
+                    crops.Remove((Vector2Int)croptile.Pos);
+                    //hiba valoszinuleg azert, mert kitorlom a cropot onnan de megmarad az ures hely
+                    //possible fixes: ne torold ki csak ird at az attributjait, vagy old meg, hogy jokor jo helyre rakja be, elso jobb otlet
+                    cropTilemap.SetTile(croptile.Pos, plowableDirt);
                 }
                 if (croptile.growTimer == 1)
                 {
@@ -122,7 +126,7 @@ public class CropsManager : MonoBehaviour
     private void CreatePlowedTile(Vector3Int position)
     {
         CropsTile crop = new CropsTile();
-       // crop.toDelete = crop;
+        crop.toDelete = crop;
         crops.Add((Vector2Int)position, crop); 
         //
         GameObject go = Instantiate(spriteCropPrefab);

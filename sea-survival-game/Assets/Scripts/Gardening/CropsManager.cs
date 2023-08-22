@@ -14,6 +14,7 @@ public class CropsTile
     public Vector3Int Pos;
     public float damage;
     public CropsTile toDelete;
+    public GameObject toDeleteGO;
 
     public bool Completed
     {
@@ -52,7 +53,8 @@ public class CropsManager : MonoBehaviour
     }
     public void Tick()
     {
-        foreach(CropsTile croptile in crops.Values) 
+        List<Vector2Int> cropsToWither = new List<Vector2Int>();
+        foreach (CropsTile croptile in crops.Values) 
         {
             if (croptile.crop == null)
             {
@@ -75,10 +77,8 @@ public class CropsManager : MonoBehaviour
                 if(croptile.damage >= croptile.crop.timeToWither)
                 {
                     croptile.Harvested();  //ha damage nagyobb meghal a crop
-                    crops.Remove((Vector2Int)croptile.Pos);
-                    //hiba valoszinuleg azert, mert kitorlom a cropot onnan de megmarad az ures hely
-                    //possible fixes: ne torold ki csak ird at az attributjait, vagy old meg, hogy jokor jo helyre rakja be, elso jobb otlet
-                    cropTilemap.SetTile(croptile.Pos, plowableDirt);
+                    cropsToWither.Add((Vector2Int)croptile.Pos);
+                    Destroy(croptile.toDeleteGO);
                 }
                 if (croptile.growTimer == 1)
                 {
@@ -104,6 +104,12 @@ public class CropsManager : MonoBehaviour
                 
             }
         }
+         foreach (Vector2Int pos in cropsToWither)
+       {
+        crops.Remove(pos);
+        cropTilemap.SetTile((Vector3Int)pos, plowableDirt);
+         
+       }
     }
     public bool Check(Vector3Int position)
     {
@@ -130,6 +136,7 @@ public class CropsManager : MonoBehaviour
         crops.Add((Vector2Int)position, crop); 
         //
         GameObject go = Instantiate(spriteCropPrefab);
+        crop.toDeleteGO = go;
         crop.Pos = position;
         go.transform.position = cropTilemap.CellToWorld(position);
         go.transform.position -= Vector3.forward *0.65f;

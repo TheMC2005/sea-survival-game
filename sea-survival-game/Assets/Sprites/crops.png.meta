@@ -207,7 +207,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crops_4
+      name: Tomato_Seedling
       rect:
         serializedVersion: 2
         x: 128
@@ -8386,6 +8386,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Tomato_Seedling: -858556114
       crops_0: 411879081
       crops_1: 1534970421
       crops_10: 1072123039
@@ -8708,7 +8709,6 @@ TextureImporter:
       crops_390: 1362279552
       crops_391: -1738385827
       crops_392: 2131189507
-      crops_4: -858556114
       crops_40: -1312410417
       crops_41: 298672568
       crops_42: 846241002

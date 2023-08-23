@@ -15,5 +15,9 @@ MonoBehaviour:
   itemName: Creative Hoe
   maxq: 1
   sprite: {fileID: 21300000, guid: dc4a0d19ecae5964cadb7549c93ced9d, type: 3}
+  crop: {fileID: 0}
+  isCropSeed: 0
+  onAction: {fileID: 0}
+  onTileMapAction: {fileID: 11400000, guid: f649f758245a92649a34c69686a9bac8, type: 2}
   toolType: 2
   toolLevel: 999

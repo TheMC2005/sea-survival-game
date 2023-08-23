@@ -15,7 +15,7 @@ using System;
     }
 }*/
 
-public class Inventory
+public class Inventory 
 {
     public int nos;//number of slots
     Item empty = Resources.Load("Empty") as Item;

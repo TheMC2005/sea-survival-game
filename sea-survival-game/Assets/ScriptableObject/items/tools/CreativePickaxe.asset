@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: CreativePickaxe
   m_EditorClassIdentifier: 
   itemName: Creative Pickaxe
-  maxq: 0
-  sprite: {fileID: 0}
+  maxq: 1
+  sprite: {fileID: 21300000, guid: c3542923f979a214282a69b5fa5d4d96, type: 3}
   crop: {fileID: 0}
   isCropSeed: 0
-  onAction: {fileID: 0}
+  onAction: {fileID: 11400000, guid: a8fd80cceb19cab428a262512b5b3dfb, type: 2}
+  onTileMapAction: {fileID: 0}
   toolType: 0
-  toolLevel: 0
+  toolLevel: 999

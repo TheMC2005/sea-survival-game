@@ -11,6 +11,8 @@ public class Item : ScriptableObject
     public Crop crop;
     public bool isCropSeed;
     public ToolAction onAction;
+    public ToolAction onTileMapAction;
+    public ToolAction onItemUsed;
 
     public static void SummonItem(Item item, Vector2 pos)
     {

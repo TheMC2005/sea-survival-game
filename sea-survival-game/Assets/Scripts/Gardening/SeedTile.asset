@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ced6fdd64e5b98244881f2da5aed4380, type: 3}
-  m_Name: Plowable
+  m_Script: {fileID: 11500000, guid: 069dad5bae32de247a97fceefcb08d6e, type: 3}
+  m_Name: SeedTile
   m_EditorClassIdentifier: 
-  tiles:
-  - {fileID: 11400000, guid: 52dd057e9768b674da16dabd5fbb493d, type: 2}
-  plowable: 1

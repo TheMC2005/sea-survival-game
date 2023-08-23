@@ -16,7 +16,8 @@ public class ToolsPlayerController : MonoBehaviour
     [SerializeField] MarkerManager markerManager;
     [SerializeField] TileMapReadController tileMapReadController;
     [SerializeField] float maxDistance = 2.3f;
-    
+    [SerializeField] ToolAction onTilePickUp;
+
     Vector3Int selectedTilePosition;
     bool selectable;
     public static bool GetToolType(ToolType toolType)
@@ -84,7 +85,7 @@ public class ToolsPlayerController : MonoBehaviour
         {
             if (item.onItemUsed != null)
             {
-               // item.onItemUsed.OnItemUsed(item, inventory);
+               item.onItemUsed.OnItemUsed(item);
             }
         }
          
@@ -95,20 +96,33 @@ public class ToolsPlayerController : MonoBehaviour
        if(selectable == true)
         {
             Item item = Hotbar.selSlot.item;
-            if(item == null) return;
-            if(item.onTileMapAction == null) return;
-            bool complete = item.onTileMapAction.OnApplyToTileMap(selectedTilePosition, tileMapReadController);
+            if (item.itemName == " ")
+            {
+                Debug.Log("**");
+                PickUpTile();
+                return;
+            }
+            if (item.onTileMapAction == null) { return; }
+            bool complete = item.onTileMapAction.OnApplyToTileMap(selectedTilePosition, tileMapReadController, item);
             if (complete == true)
             {
                 if (item.onItemUsed != null)
                 {
-                   // item.onItemUsed.OnItemUsed(item, inventory);
+                    item.onItemUsed.OnItemUsed(item);
                 }
             }
         }   
        
     }
 
+    private void PickUpTile()
+    {
+        if(onTilePickUp == null)
+        {
+            return;    
+        }
+        onTilePickUp.OnApplyToTileMap(selectedTilePosition, tileMapReadController, null);
+    }
 }
 /*
  * TileBase tileBase = tileMapReadController.GetTileBase(selectedTilePosition);

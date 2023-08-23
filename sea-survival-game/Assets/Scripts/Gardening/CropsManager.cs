@@ -71,7 +71,6 @@ public class CropsManager : MonoBehaviour
                     if (croptile.Completed)
                     {
                         croptile.damage += 0.1f; //csak ha megnott azutan szamolja
-                        Debug.Log(croptile.damage);
                     }
                 }
                 if(croptile.damage >= croptile.crop.timeToWither)
@@ -144,5 +143,20 @@ public class CropsManager : MonoBehaviour
         crop.spriteRenderer = go.GetComponent<SpriteRenderer>();
         //
         cropTilemap.SetTile(position, plowed);
+    }
+
+    internal void PickUp(Vector3Int gridposition)
+    {
+        Vector2Int position = (Vector2Int)gridposition;
+        if(crops.ContainsKey(position) == false)
+        { 
+           return;
+        }
+        CropsTile cropTile = crops[position];
+        if(cropTile.Completed)
+        {
+            Item.SummonItem(cropTile.crop.yield, cropTilemap.CellToWorld(gridposition));
+            cropTile.Harvested();
+        }
     }
 }

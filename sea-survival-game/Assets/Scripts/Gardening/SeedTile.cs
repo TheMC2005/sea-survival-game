@@ -6,22 +6,21 @@ using UnityEngine;
 public class SeedTile : ToolAction
 {
 
-    public override bool OnApplyToTileMap(Vector3Int gridposition, TileMapReadController tileMapReadController)
+    public override bool OnApplyToTileMap(Vector3Int gridposition, TileMapReadController tileMapReadController, Item item)
     {
         if(tileMapReadController.cropsManager.Check(gridposition) == false)
         {
             return false;
         }
-        if (Hotbar.selSlot.item.isCropSeed)
-        {
-            Item item = Hotbar.selSlot.item;
-            tileMapReadController.cropsManager.Seed(gridposition, item.crop);
+        
+        tileMapReadController.cropsManager.Seed(gridposition, item.crop);
 
-        }
         return true;
     }
-    public override void OnItemUsed(Item usedItem, Inventory inventory)
+    public override void OnItemUsed(Item usedItem)
     {
-        inventory.RemoveItem(usedItem, 1);
+        InventoryManager.LoadSlots(InventoryManager.inventory);
+        InventoryManager.inventory.RemoveItem(usedItem, 1);
+        InventoryManager.LoadSlots(InventoryManager.inventory);
     }
 }

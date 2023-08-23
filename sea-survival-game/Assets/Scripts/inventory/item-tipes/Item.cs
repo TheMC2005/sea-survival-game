@@ -10,6 +10,7 @@ public class Item : ScriptableObject
     public Sprite sprite;
     public Crop crop;
     public bool isCropSeed;
+    public ToolAction onAction;
 
     public static void SummonItem(Item item, Vector2 pos)
     {

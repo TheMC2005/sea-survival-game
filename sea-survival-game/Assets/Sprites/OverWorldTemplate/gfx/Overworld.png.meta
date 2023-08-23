@@ -8964,48 +8964,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_423
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 384
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bda12ade29e29ef489337b15e68644cb
-      internalID: -1288566253
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Overworld_424
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 384
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1742a29eeac050e47ab54037b412c2b5
-      internalID: -1651116965
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Overworld_425
       rect:
         serializedVersion: 2
@@ -9673,48 +9631,6 @@ TextureImporter:
       bones: []
       spriteID: d32c0d27e329acf4fad40fd9b5a76a4c
       internalID: 341224735
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Overworld_457
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 368
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 951363f6ea822884ca29ae4ce196ac96
-      internalID: 515823673
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Overworld_458
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 368
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3a4fe732a600af6478193945c2238939
-      internalID: -1838798246
       vertices: []
       indices: 
       edges: []
@@ -22613,6 +22529,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: StoneNode
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 369
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00e1c578233644146b106c43918f0113
+      internalID: -484476907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -23695,6 +23632,7 @@ TextureImporter:
       PlowableDirt: -588497516
       PlowedDirt: -1964821441
       SeededDirt: -1540867868
+      StoneNode: -484476907
       Tomato: -856145612
       TreeLog: 736555906
   mipmapLimitGroupName: 

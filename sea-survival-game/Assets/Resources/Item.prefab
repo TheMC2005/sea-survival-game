@@ -100,4 +100,4 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: f7192824366b96b44a527409e5c5ef8e, type: 2}
   speed: 5
   pickUpDistance: 1.15
-  TimeToLeave: 10
+  TimeToLeave: 100

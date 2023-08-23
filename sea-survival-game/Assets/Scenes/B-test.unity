@@ -1781,7 +1781,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 1f64b92ed0b20a747a7e99cc79822887, type: 2}
     - target: {fileID: 7069876301238443771, guid: ba7cb892eae34114c925e84fdba0d1a9, type: 3}
       propertyPath: m_Name
-      value: Item (1)
+      value: Hoe
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2933,7 +2933,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8889246646255905041, guid: 72815ebe3efc2c94b93f0cb83e705b91, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -31.1
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 8889246646255905041, guid: 72815ebe3efc2c94b93f0cb83e705b91, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3242,7 +3242,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: c553b10dbd9d32f419b45b6c194e1e24, type: 2}
     - target: {fileID: 7069876301238443771, guid: ba7cb892eae34114c925e84fdba0d1a9, type: 3}
       propertyPath: m_Name
-      value: Item (2)
+      value: Tomato
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12698,7 +12698,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 15691c6ab49e98b47a604ca2e2880eb2, type: 2}
     - target: {fileID: 7069876301238443771, guid: ba7cb892eae34114c925e84fdba0d1a9, type: 3}
       propertyPath: m_Name
-      value: Item
+      value: Axe
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

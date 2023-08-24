@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
+using static UnityEditor.PlayerSettings;
 
 public class CropsTile
 {
@@ -33,9 +34,14 @@ public class CropsTile
         StageCount = 0;
         spriteRenderer.gameObject.SetActive(false);
     }
+    public bool ReadyToWither
+    {
+        get
+        {
+            return damage >= crop.timeToWither;
+        }
+    }
 }
-
-
 
 public class CropsManager : MonoBehaviour
 {
@@ -44,21 +50,38 @@ public class CropsManager : MonoBehaviour
     [SerializeField] Tilemap cropTilemap;
     [SerializeField] DayNightCycle dayNightCycle;
     [SerializeField] GameObject spriteCropPrefab;
+    public float spread = 0.65f;
     Dictionary<Vector2Int, CropsTile> crops;
-    
-    
+    List<Vector2Int> cropsToWither = new List<Vector2Int>();
+
+
     private void Start()
     {
         crops = new Dictionary<Vector2Int, CropsTile>();
     }
+    public void Wither(CropsTile cropsTile)
+    {
+        cropsTile.Harvested();
+        cropsToWither.Add((Vector2Int)cropsTile.Pos);
+        Destroy(cropsTile.toDeleteGO);
+    }
+    public void KillCropFromDictionary()
+    {
+        foreach (Vector2Int pos in cropsToWither)
+        {
+            Debug.Log("Lefutok");
+            crops.Remove(pos);
+        }
+        cropsToWither.Clear();
+    }
     public void Tick()
     {
-        List<Vector2Int> cropsToWither = new List<Vector2Int>();
+        
         foreach (CropsTile croptile in crops.Values) 
         {
             if (croptile.crop == null)
             {
-                continue;
+               continue;
             }
             else
             {
@@ -71,19 +94,18 @@ public class CropsManager : MonoBehaviour
                     if (croptile.Completed)
                     {
                         croptile.damage += 0.1f; //csak ha megnott azutan szamolja
+
                     }
-                }
-                if(croptile.damage >= croptile.crop.timeToWither)
-                {
-                    croptile.Harvested();  //ha damage nagyobb meghal a crop
-                    cropsToWither.Add((Vector2Int)croptile.Pos);
-                    Destroy(croptile.toDeleteGO);
                 }
                 if (croptile.growTimer == 1)
                 {
                     cropTilemap.SetTile(croptile.Pos, plowed); //ha lerakod akkor meg ottmarad a tile azaz a mag es ezzel csereled le
                 }
-                if(croptile.Completed) //ez arra van, hogy segitsen az utolso leptetesnel, mert atrakta stage 3-ra a cropoot de nem futott le mert megvolt a completed feltetele
+                if (croptile.ReadyToWither)
+                {
+                    Wither(croptile);
+                }
+                if (croptile.Completed) //ez arra van, hogy segitsen az utolso leptetesnel, mert atrakta stage 3-ra a cropoot de nem futott le mert megvolt a completed feltetele
                 {
                     croptile.spriteRenderer.gameObject.SetActive(true);
                     croptile.spriteRenderer.sprite = croptile.crop.sprites[croptile.StageCount];
@@ -103,12 +125,11 @@ public class CropsManager : MonoBehaviour
                 
             }
         }
-         foreach (Vector2Int pos in cropsToWither)
-       {
-        crops.Remove(pos);
-        cropTilemap.SetTile((Vector3Int)pos, plowableDirt);
-         
-       }
+        if (cropsToWither.Count !=0)
+        {
+            KillCropFromDictionary();
+        }
+
     }
     public bool Check(Vector3Int position)
     {
@@ -155,7 +176,25 @@ public class CropsManager : MonoBehaviour
         CropsTile cropTile = crops[position];
         if(cropTile.Completed)
         {
-            Item.SummonItem(cropTile.crop.yield, cropTilemap.CellToWorld(gridposition));
+            
+            for(int i = 0; i<cropTile.crop.dropAmount; i++)
+            {
+                Vector3 positionItem = cropTilemap.CellToWorld(gridposition);
+                if (UnityEngine.Random.value < 0.5f)
+                {
+                    positionItem.x -= spread * UnityEngine.Random.value - spread * 2;
+                }
+                else
+                    positionItem.x += spread * UnityEngine.Random.value - spread / 2;
+
+                if (UnityEngine.Random.value < 0.5f)
+                {
+                    positionItem.y -= spread * UnityEngine.Random.value - spread * 2;
+                }
+                else
+                    positionItem.y += spread * UnityEngine.Random.value - spread / 2;
+                Item.SummonItem(cropTile.crop.yield, positionItem);
+            }
             cropTile.Harvested();
         }
     }

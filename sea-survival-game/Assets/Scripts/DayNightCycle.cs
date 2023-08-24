@@ -41,6 +41,7 @@ public class DayNightCycle : MonoBehaviour
             seconds = 0;
             mins += 1;
             cropsManager.Tick();
+            cropsManager.Tick2();
         }
         //Vigyazz hogy az iffekre belulre rakd az ilyeneket mert a unity update 4x lejátsza a dolgokat
 

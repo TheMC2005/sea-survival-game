@@ -20367,7 +20367,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_970
+      name: AlreadySeeded
       rect:
         serializedVersion: 2
         x: 16
@@ -22561,6 +22561,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      AlreadySeeded: 434114786
       Grass: -1817280354
       Overworld_1: 1546187268
       Overworld_10: 1617614598
@@ -23597,7 +23598,6 @@ TextureImporter:
       Overworld_968: -1836079072
       Overworld_969: 1890967791
       Overworld_97: -2109659349
-      Overworld_970: 434114786
       Overworld_971: 1545617985
       Overworld_972: 320728636
       Overworld_973: -416544172

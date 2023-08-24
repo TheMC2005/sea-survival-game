@@ -1557,8 +1557,10 @@ MonoBehaviour:
   plowed: {fileID: 11400000, guid: 7df8f3667f73f3c4abc854c260f5125c, type: 2}
   plowableDirt: {fileID: 11400000, guid: 52dd057e9768b674da16dabd5fbb493d, type: 2}
   cropTilemap: {fileID: 739108634}
+  controller: {fileID: 275563983}
   dayNightCycle: {fileID: 1148288100}
   spriteCropPrefab: {fileID: 5120887688936750939, guid: 1afeb73a326a8854e8169f55f676740f, type: 3}
+  spread: 0.65
 --- !u!1 &325381529
 GameObject:
   m_ObjectHideFlags: 0

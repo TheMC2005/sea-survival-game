@@ -5,7 +5,15 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using static UnityEditor.PlayerSettings;
+/*
++Megkellene csinalni, hogyha sima plowed dirt van akkor legyen egy timer ami egy adott ido utan unplowed dirtee csinalja
++Ha elwitherel a crop akkor legyen ott meg egy crop amit ki kell kapalni
++ ha harvestolod vagy ha witherelodik a crop rogton unplowed dirt legyen alatta
++ ne lehesen egy blockra tobbet seedelni easy fix?
++ ha leszeded a cropokat akkor torolje azokat a baszott empty gameobjecteket
 
+
+ * */
 public class CropsTile
 {
     public int growTimer;
@@ -16,7 +24,8 @@ public class CropsTile
     public float damage;
     public CropsTile toDelete;
     public GameObject toDeleteGO;
-
+    public int timerToDirt;
+    public TileBase tileBase;
     public bool Completed
     {
         get
@@ -47,14 +56,15 @@ public class CropsManager : MonoBehaviour
 {
     [SerializeField] TileBase plowed;
     [SerializeField] TileBase plowableDirt;
+    [SerializeField] TileBase alreadySeeded;
     [SerializeField] Tilemap cropTilemap;
+    public TileMapReadController controller;
     [SerializeField] DayNightCycle dayNightCycle;
     [SerializeField] GameObject spriteCropPrefab;
     public float spread = 0.65f;
     Dictionary<Vector2Int, CropsTile> crops;
     List<Vector2Int> cropsToWither = new List<Vector2Int>();
-
-
+    
     private void Start()
     {
         crops = new Dictionary<Vector2Int, CropsTile>();
@@ -64,7 +74,47 @@ public class CropsManager : MonoBehaviour
         cropsTile.Harvested();
         cropsToWither.Add((Vector2Int)cropsTile.Pos);
         Destroy(cropsTile.toDeleteGO);
+        cropsTile.tileBase = plowed;
+        cropTilemap.SetTile(cropsTile.Pos, plowed);
     }
+    public void Tick2()
+    {
+        bool dosmthing = false;
+        List<Vector3Int> positionsToRevert = new List<Vector3Int>();  // Keep track of positions to revert
+        List<CropsTile> cropsToRevert = new List<CropsTile>();  // Keep track of crops to revert
+
+        foreach (CropsTile croptile in crops.Values)
+        {
+            if (croptile.tileBase == plowed)
+            {
+                if (dayNightCycle.mins % 10 == 0)
+                {
+                    croptile.timerToDirt++;
+                    Debug.Log(croptile.timerToDirt);
+                }
+                if (croptile.timerToDirt > 10)
+                {
+                    dosmthing = true;
+                    positionsToRevert.Add(croptile.Pos);
+                    cropsToRevert.Add(croptile.toDelete);
+                }
+            }
+        }
+
+        if (dosmthing)
+        {
+            for (int i = 0; i < positionsToRevert.Count; i++)
+            {
+                RevertCrop(positionsToRevert[i], cropsToRevert[i]);
+            }
+
+            if (cropsToWither.Count != 0)
+            {
+                KillCropFromDictionary();
+            }
+        }
+    }//itt hagytad abba old meg, hogy ne tortenjen meg a killcropfromdictionary egy revertcrop utan
+
     public void KillCropFromDictionary()
     {
         foreach (Vector2Int pos in cropsToWither)
@@ -74,6 +124,7 @@ public class CropsManager : MonoBehaviour
         }
         cropsToWither.Clear();
     }
+    
     public void Tick()
     {
         
@@ -99,7 +150,8 @@ public class CropsManager : MonoBehaviour
                 }
                 if (croptile.growTimer == 1)
                 {
-                    cropTilemap.SetTile(croptile.Pos, plowed); //ha lerakod akkor meg ottmarad a tile azaz a mag es ezzel csereled le
+                    cropTilemap.SetTile(croptile.Pos, alreadySeeded); //ha lerakod akkor meg ottmarad a tile azaz a mag es ezzel csereled le
+                    croptile.tileBase = alreadySeeded;
                 }
                 if (croptile.ReadyToWither)
                 {
@@ -125,11 +177,6 @@ public class CropsManager : MonoBehaviour
                 
             }
         }
-        if (cropsToWither.Count !=0)
-        {
-            KillCropFromDictionary();
-        }
-
     }
     public bool Check(Vector3Int position)
     {
@@ -157,6 +204,7 @@ public class CropsManager : MonoBehaviour
         //
         GameObject go = Instantiate(spriteCropPrefab);
         crop.toDeleteGO = go;
+        
         crop.Pos = position;
         go.transform.position = cropTilemap.CellToWorld(position);
         go.transform.position -= Vector3.forward *0.65f;
@@ -164,6 +212,18 @@ public class CropsManager : MonoBehaviour
         crop.spriteRenderer = go.GetComponent<SpriteRenderer>();
         //
         cropTilemap.SetTile(position, plowed);
+        crop.tileBase = plowed;
+    }
+    public void RevertCrop(Vector3Int position, CropsTile crop)
+    {
+        crops.Remove((Vector2Int)position);
+        cropTilemap.SetTile(position, plowableDirt);
+
+        if (crop.toDeleteGO != null)
+        {
+            Destroy(crop.toDeleteGO);
+        }
+
     }
 
     internal void PickUp(Vector3Int gridposition)

@@ -1556,6 +1556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plowed: {fileID: 11400000, guid: 7df8f3667f73f3c4abc854c260f5125c, type: 2}
   plowableDirt: {fileID: 11400000, guid: 52dd057e9768b674da16dabd5fbb493d, type: 2}
+  alreadySeeded: {fileID: 11400000, guid: 9f75a36e3c0e8b448b48f521f71d576e, type: 2}
   cropTilemap: {fileID: 739108634}
   controller: {fileID: 275563983}
   dayNightCycle: {fileID: 1148288100}
@@ -3189,7 +3190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8889246646255905041, guid: 72815ebe3efc2c94b93f0cb83e705b91, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8889246646255905041, guid: 72815ebe3efc2c94b93f0cb83e705b91, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3242,7 +3243,7 @@ MonoBehaviour:
   dayDisplay: {fileID: 137232822}
   ppv: {fileID: 1148288101}
   cropsManager: {fileID: 275563984}
-  tick: 400
+  tick: 600
   seconds: 0
   mins: 59
   hours: 6

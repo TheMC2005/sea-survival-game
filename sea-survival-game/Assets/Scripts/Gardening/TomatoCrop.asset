@@ -17,14 +17,19 @@ MonoBehaviour:
   sprite: {fileID: 0}
   crop: {fileID: 0}
   isCropSeed: 0
+  onAction: {fileID: 0}
+  onTileMapAction: {fileID: 0}
+  onItemUsed: {fileID: 0}
+  plowWitheredGround: {fileID: 0}
   timeToGrow: 12
   timeToWither: 1
   dropAmount: 3
   yield: {fileID: 11400000, guid: c553b10dbd9d32f419b45b6c194e1e24, type: 2}
   seededTile: {fileID: 11400000, guid: 202eed6fd7a848148aebed4b291206a4, type: 2}
+  witheredSprite: {fileID: -53551226, guid: 00c1043a71f5512498087595a8d61159, type: 3}
   sprites:
-  - {fileID: 1840185392, guid: 00c1043a71f5512498087595a8d61159, type: 3}
-  - {fileID: 662023213, guid: 00c1043a71f5512498087595a8d61159, type: 3}
-  - {fileID: 1524618020, guid: 00c1043a71f5512498087595a8d61159, type: 3}
-  - {fileID: 1326729864, guid: 00c1043a71f5512498087595a8d61159, type: 3}
+  - {fileID: -2083819189, guid: 00c1043a71f5512498087595a8d61159, type: 3}
+  - {fileID: 1908878904, guid: 00c1043a71f5512498087595a8d61159, type: 3}
+  - {fileID: -316473737, guid: 00c1043a71f5512498087595a8d61159, type: 3}
+  - {fileID: 1101494271, guid: 00c1043a71f5512498087595a8d61159, type: 3}
   growthStageTimes: 0200000006000000090000000c000000

@@ -9,11 +9,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using static UnityEditor.PlayerSettings;
 /*
-+Ha elwitherel a crop akkor legyen ott meg egy crop amit ki kell kapalni
-+ ne lehesen egy blockra tobbet seedelni easy fix?
-+ ha leszeded a cropokat akkor torolje azokat a baszott empty gameobjecteket
-//possible issue csinald meg mostmar a withert ne legyen benne a harvested mert kifogja torolni a gameobjectet
-
++ complex crops
  * */
 public class CropsTile
 {
@@ -22,7 +18,7 @@ public class CropsTile
     public Crop crop;
     public SpriteRenderer spriteRenderer;
     public Vector3Int Pos;
-    public float damage;
+    public float damage = 0;
     public CropsTile toDelete;
     public GameObject toDeleteGO;
     public int timerToDirt;
@@ -43,14 +39,18 @@ public class CropsTile
         damage = 0; 
         StageCount = 0;
         spriteRenderer.gameObject.SetActive(false);
-        UnityEngine.Object.Destroy(toDeleteGO);
-
-
+    }
+    internal void _Harvested()
+    {
+        growTimer = 0;
+        StageCount = 0;
     }
     public bool ReadyToWither
     {
         get
         {
+            if (crop == null)
+                return false;
             return damage >= crop.timeToWither;
         }
     }
@@ -74,9 +74,8 @@ public class CropsManager : MonoBehaviour
     }
     public void Wither(CropsTile cropsTile)
     {
-        cropsTile.Harvested();
-        cropsTile.tileBase = plowed;
-        cropTilemap.SetTile(cropsTile.Pos, plowed);
+        cropsTile._Harvested();
+        cropsTile.spriteRenderer.sprite = cropsTile.crop.witheredSprite;
     }
     public void Tick2()
     {
@@ -114,48 +113,53 @@ public class CropsManager : MonoBehaviour
         {
             if (croptile.crop == null)
             {
-               continue;
+                continue;
             }
             else
             {
-                if (dayNightCycle.mins % 10 == 0)
-                {
-                    if(!croptile.Completed)
+                    if (dayNightCycle.mins % 10 == 0)
                     {
-                        croptile.growTimer += 1; // ne szamoljon feleslegesen
-                    }
-                    if (croptile.Completed)
-                    {
-                        croptile.damage += 0.1f; //csak ha megnott azutan szamolja
-
-                    }
-                }
-                if (croptile.growTimer == 1)
-                {
-                    cropTilemap.SetTile(croptile.Pos, alreadySeeded); //ha lerakod akkor meg ottmarad a tile azaz a mag es ezzel csereled le
-                    croptile.tileBase = alreadySeeded;
-                }
-                if (croptile.ReadyToWither)
-                {
-                    Wither(croptile);
-                }
-                if (croptile.Completed) //ez arra van, hogy segitsen az utolso leptetesnel, mert atrakta stage 3-ra a cropoot de nem futott le mert megvolt a completed feltetele
-                {
-                    croptile.spriteRenderer.gameObject.SetActive(true);
-                    croptile.spriteRenderer.sprite = croptile.crop.sprites[croptile.StageCount];
-                }
-                if (!croptile.Completed && croptile.crop !=null) // lepteti es lecsereli a crop skinjeit
-                {
-                    if (croptile.growTimer >= croptile.crop.growthStageTimes[croptile.StageCount])
-                    {
-                        croptile.spriteRenderer.gameObject.SetActive(true);
-                        croptile.spriteRenderer.sprite = croptile.crop.sprites[croptile.StageCount];
-                        if (croptile.StageCount != croptile.crop.growthStageTimes.Count-1)
+                        if (!croptile.Completed)
                         {
-                            croptile.StageCount++;
+                            croptile.growTimer += 1; // ne szamoljon feleslegesen
+                        }
+                        if (croptile.Completed)
+                        {
+                            croptile.damage += 0.1f; //csak ha megnott azutan szamolja
+
                         }
                     }
-                }
+                    if (croptile.growTimer == 1)
+                    {
+                        cropTilemap.SetTile(croptile.Pos, alreadySeeded); //ha lerakod akkor meg ottmarad a tile azaz a mag es ezzel csereled le
+                        croptile.tileBase = alreadySeeded;
+                    }
+                    if (!croptile.ReadyToWither)
+                    {
+                        if (croptile.Completed) //ez arra van, hogy segitsen az utolso leptetesnel, mert atrakta stage 3-ra a cropoot de nem futott le mert megvolt a completed feltetele
+                        {
+                            croptile.spriteRenderer.gameObject.SetActive(true);
+                            croptile.spriteRenderer.sprite = croptile.crop.sprites[croptile.StageCount];
+                        }
+                    }
+                    if (croptile.ReadyToWither)
+                    {
+                        Wither(croptile);
+                    }
+                    
+                    if (!croptile.Completed && croptile.crop != null || !croptile.ReadyToWither) // lepteti es lecsereli a crop skinjeit
+                    {
+                        if (croptile.growTimer >= croptile.crop.growthStageTimes[croptile.StageCount])
+                        {
+                            croptile.spriteRenderer.gameObject.SetActive(true);
+                            croptile.spriteRenderer.sprite = croptile.crop.sprites[croptile.StageCount];
+                            if (croptile.StageCount != croptile.crop.growthStageTimes.Count - 1)
+                            {
+                                croptile.StageCount++;
+                            }
+                        }
+                    }
+
                 
             }
         }
@@ -177,7 +181,10 @@ public class CropsManager : MonoBehaviour
         cropTilemap.SetTile(position, toSeed.seededTile);
         crops[(Vector2Int)position].crop = toSeed;
     }
-
+    public Crop GetTileCrop(Vector3Int position)
+    {
+        return crops[(Vector2Int)position].crop;
+    }
     private void CreatePlowedTile(Vector3Int position)
     {
         CropsTile crop = new CropsTile();
@@ -238,6 +245,27 @@ public class CropsManager : MonoBehaviour
                 Item.SummonItem(cropTile.crop.yield, positionItem);
             }
             cropTile.Harvested();
+            cropTile.tileBase = plowed;
+            cropTilemap.SetTile((Vector3Int)position, plowed);
         }
+    }
+
+    internal void PlowWitheredGround(Vector3Int gridposition)
+    {
+        Vector2Int position = (Vector2Int)gridposition;
+        if (crops.ContainsKey(position) == false)
+        {
+            return;
+        }
+        CropsTile cropTile = crops[position];
+        if(cropTile.ReadyToWither && cropTile.crop != null)
+        {
+            cropTile.tileBase = plowed;
+            cropTilemap.SetTile(gridposition, plowed);
+            cropTile.crop = null;
+            cropTile.damage = 0;
+            cropTile.spriteRenderer.gameObject.SetActive(false);
+        }
+       
     }
 }

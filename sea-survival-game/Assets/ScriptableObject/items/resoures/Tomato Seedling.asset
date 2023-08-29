@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Tomato Seedling
   maxq: 999
-  sprite: {fileID: -858556114, guid: 00c1043a71f5512498087595a8d61159, type: 3}
+  sprite: {fileID: -781939741, guid: 00c1043a71f5512498087595a8d61159, type: 3}
   crop: {fileID: 11400000, guid: d2f5a44c266c9194d95e73999674b3e9, type: 2}
   isCropSeed: 1
   onAction: {fileID: 0}

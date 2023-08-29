@@ -13,6 +13,7 @@ public class Item : ScriptableObject
     public ToolAction onAction;
     public ToolAction onTileMapAction;
     public ToolAction onItemUsed;
+    public ToolAction plowWitheredGround;
 
     public static void SummonItem(Item item, Vector2 pos)
     {

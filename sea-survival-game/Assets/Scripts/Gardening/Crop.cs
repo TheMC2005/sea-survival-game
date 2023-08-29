@@ -11,6 +11,7 @@ public class Crop : Item
     public int dropAmount;  
     public Item yield;
     public TileBase seededTile;
+    public Sprite witheredSprite;
     public List<Sprite> sprites;
     public List<int> growthStageTimes;
 }

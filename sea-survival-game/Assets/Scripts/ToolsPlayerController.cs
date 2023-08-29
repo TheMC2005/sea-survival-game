@@ -6,8 +6,15 @@ using System.Reflection;
 using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 using static UnityEditor.Progress;
-
+/*
+ * A jovobeli magamnak, ha epp keresed, hogy a tooloknal mert nem akar lefutni a script akkor emlekez arra, hogy vagy a use tool worldnel vagy a gridnel megkell hivnod
+ * a function meg az itemnel csinalj hozza egy masik toolactiont
+ * kb igy
+ * if(item.plowWitheredGround == null) { return; }
+            bool complete2 = item.plowWitheredGround.OnApplyToTileMap(selectedTilePosition, tileMapReadController, item);
+ * */
 public class ToolsPlayerController : MonoBehaviour
 {
     CharacterController2D character;
@@ -98,7 +105,6 @@ public class ToolsPlayerController : MonoBehaviour
             Item item = Hotbar.selSlot.item;
             if (item.itemName == " ")
             {
-                Debug.Log("**");
                 PickUpTile();
                 return;
             }
@@ -111,6 +117,10 @@ public class ToolsPlayerController : MonoBehaviour
                     item.onItemUsed.OnItemUsed(item);
                 }
             }
+            if (item.plowWitheredGround == null) { return; }
+            bool complete2 = item.plowWitheredGround.OnApplyToTileMap(selectedTilePosition, tileMapReadController, item);
+
+            
         }   
        
     }
@@ -119,32 +129,8 @@ public class ToolsPlayerController : MonoBehaviour
     {
         if(onTilePickUp == null)
         {
-            return;    
+            return;     
         }
         onTilePickUp.OnApplyToTileMap(selectedTilePosition, tileMapReadController, null);
     }
 }
-/*
- * TileBase tileBase = tileMapReadController.GetTileBase(selectedTilePosition);
-            TileData tileData = tileMapReadController.GetTileData(tileBase);
-            if (tileData != plowableTiles /*|| !GetToolType(ToolType.Hoe))
-            {
-    return;
-}
-            else
-{
-    if (cropsManager.Check(selectedTilePosition))
-    {
-        if (Hotbar.selSlot.item.isCropSeed)
-        {
-            Item item = Hotbar.selSlot.item;
-            cropsManager.Seed(selectedTilePosition, item.crop);
-
-        }
-
-    }
-    else
-    {
-        cropsManager.Plow(selectedTilePosition);
-    }
-}*/

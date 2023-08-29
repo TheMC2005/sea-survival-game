@@ -8,14 +8,19 @@ public class SeedTile : ToolAction
 
     public override bool OnApplyToTileMap(Vector3Int gridposition, TileMapReadController tileMapReadController, Item item)
     {
-        if(tileMapReadController.cropsManager.Check(gridposition) == false)
+        if (tileMapReadController.cropsManager.Check(gridposition) == false)
         {
             return false;
+            
         }
+        if(tileMapReadController.cropsManager.GetTileCrop(gridposition) == null)
+        {
+            tileMapReadController.cropsManager.Seed(gridposition, item.crop);
+            return true;
+        }
+        else
+            return false;
         
-        tileMapReadController.cropsManager.Seed(gridposition, item.crop);
-
-        return true;
     }
     public override void OnItemUsed(Item usedItem)
     {

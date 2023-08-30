@@ -18,7 +18,7 @@ MonoBehaviour:
   crop: {fileID: 0}
   isCropSeed: 0
   onAction: {fileID: 0}
-  onTileMapAction: {fileID: 0}
+  onTileMapAction: {fileID: 11400000, guid: f649f758245a92649a34c69686a9bac8, type: 2}
   onItemUsed: {fileID: 0}
   plowWitheredGround: {fileID: 11400000, guid: 023aff7f577b2e6439c33c43e4636085, type: 2}
   toolType: 2

@@ -23,6 +23,7 @@ public class CropsTile
     public GameObject toDeleteGO;
     public int timerToDirt;
     public TileBase tileBase;
+    //public Season season
     public bool Completed
     {
         get
@@ -32,6 +33,18 @@ public class CropsTile
             return growTimer >= crop.timeToGrow;
         }
     }
+    /*
+     public bool isSeasonOver
+    {
+    get
+    {
+     if(a.Season != currentSeason)
+       return false;
+    else
+    return true;
+    }
+    }
+    */
     internal void Harvested()
     {
         crop = null;
@@ -44,6 +57,11 @@ public class CropsTile
     {
         growTimer = 0;
         StageCount = 0;
+    }
+    internal void SeasonalCropHarvest()
+    {
+        StageCount = 2;
+        growTimer = crop.growthStageTimes[2];
     }
     public bool ReadyToWither
     {
@@ -129,6 +147,30 @@ public class CropsManager : MonoBehaviour
 
                         }
                     }
+                    if(croptile.crop.isSeasonialCrop)
+                    {
+                    if (croptile.growTimer == 1)
+                    {
+                        cropTilemap.SetTile(croptile.Pos, alreadySeeded); //ha lerakod akkor meg ottmarad a tile azaz a mag es ezzel csereled le
+                        croptile.tileBase = alreadySeeded;
+                    }
+                     
+                    if (!croptile.Completed && croptile.crop != null || !croptile.ReadyToWither) // lepteti es lecsereli a crop skinjeit
+                    {
+                        if (croptile.growTimer >= croptile.crop.growthStageTimes[croptile.StageCount])
+                        {
+                            croptile.spriteRenderer.gameObject.SetActive(true);
+                            croptile.spriteRenderer.sprite = croptile.crop.sprites[croptile.StageCount];
+                            if (croptile.StageCount != croptile.crop.growthStageTimes.Count - 1)
+                            {
+                                croptile.StageCount++;
+                            }
+                        }
+                    }
+
+                }
+                    else
+                { 
                     if (croptile.growTimer == 1)
                     {
                         cropTilemap.SetTile(croptile.Pos, alreadySeeded); //ha lerakod akkor meg ottmarad a tile azaz a mag es ezzel csereled le
@@ -160,7 +202,7 @@ public class CropsManager : MonoBehaviour
                         }
                     }
 
-                
+                }
             }
         }
     }
@@ -223,10 +265,9 @@ public class CropsManager : MonoBehaviour
            return;
         }
         CropsTile cropTile = crops[position];
-        if(cropTile.Completed)
+        if (cropTile.crop.isSeasonialCrop && cropTile.Completed)
         {
-            
-            for(int i = 0; i<cropTile.crop.dropAmount; i++)
+            for (int i = 0; i < cropTile.crop.dropAmount; i++)
             {
                 Vector3 positionItem = cropTilemap.CellToWorld(gridposition);
                 if (UnityEngine.Random.value < 0.5f)
@@ -244,9 +285,35 @@ public class CropsManager : MonoBehaviour
                     positionItem.y += spread * UnityEngine.Random.value - spread / 2;
                 Item.SummonItem(cropTile.crop.yield, positionItem);
             }
-            cropTile.Harvested();
-            cropTile.tileBase = plowed;
-            cropTilemap.SetTile((Vector3Int)position, plowed);
+            cropTile.SeasonalCropHarvest();
+        }
+        else
+        {
+            if (cropTile.Completed)
+            {
+
+                for (int i = 0; i < cropTile.crop.dropAmount; i++)
+                {
+                    Vector3 positionItem = cropTilemap.CellToWorld(gridposition);
+                    if (UnityEngine.Random.value < 0.5f)
+                    {
+                        positionItem.x -= spread * UnityEngine.Random.value - spread * 2;
+                    }
+                    else
+                        positionItem.x += spread * UnityEngine.Random.value - spread / 2;
+
+                    if (UnityEngine.Random.value < 0.5f)
+                    {
+                        positionItem.y -= spread * UnityEngine.Random.value - spread * 2;
+                    }
+                    else
+                        positionItem.y += spread * UnityEngine.Random.value - spread / 2;
+                    Item.SummonItem(cropTile.crop.yield, positionItem);
+                }
+                cropTile.Harvested();
+                cropTile.tileBase = plowed;
+                cropTilemap.SetTile((Vector3Int)position, plowed);
+            }
         }
     }
 

@@ -22383,7 +22383,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_1066
+      name: Carrot
       rect:
         serializedVersion: 2
         x: 16
@@ -22562,6 +22562,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       AlreadySeeded: 434114786
+      Carrot: 2034492331
       Grass: -1817280354
       Overworld_1: 1546187268
       Overworld_10: 1617614598
@@ -22636,7 +22637,6 @@ TextureImporter:
       Overworld_1062: 518248090
       Overworld_1063: -1885645632
       Overworld_1064: -101393700
-      Overworld_1066: 2034492331
       Overworld_1067: -287741407
       Overworld_1068: 622077357
       Overworld_1069: -718581145

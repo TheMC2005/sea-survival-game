@@ -8,7 +8,8 @@ public class Crop : Item
 {
     public int timeToGrow;
     public int timeToWither;
-    public int dropAmount;  
+    public int dropAmount;
+    public bool isSeasonialCrop;
     public Item yield;
     public TileBase seededTile;
     public Sprite witheredSprite;

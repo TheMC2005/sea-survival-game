@@ -8,6 +8,7 @@ public class Item : ScriptableObject
     public string itemName;
     public int maxq;
     public Sprite sprite;
+    [Header("Crops")]
     public Crop crop;
     public bool isCropSeed;
     public ToolAction onAction;

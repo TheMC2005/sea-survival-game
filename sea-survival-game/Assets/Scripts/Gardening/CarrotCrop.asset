@@ -23,7 +23,7 @@ MonoBehaviour:
   plowWitheredGround: {fileID: 0}
   timeToGrow: 12
   timeToWither: 1
-  dropAmount: 4
+  maxDropAmount: 4
   isSeasonialCrop: 0
   yield: {fileID: 11400000, guid: 1a1125db3771bf64d81c6554f3eddf54, type: 2}
   seededTile: {fileID: 11400000, guid: 6e63ec6ea8853a1489b607e459f2d41a, type: 2}

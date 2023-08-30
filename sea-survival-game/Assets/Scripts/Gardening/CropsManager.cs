@@ -8,9 +8,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using static UnityEditor.PlayerSettings;
-/*
-+ complex crops
- * */
+
 public class CropsTile
 {
     public int growTimer;
@@ -163,13 +161,22 @@ public class CropsManager : MonoBehaviour
                             croptile.spriteRenderer.sprite = croptile.crop.sprites[croptile.StageCount];
                             if (croptile.StageCount != croptile.crop.growthStageTimes.Count - 1)
                             {
-                                croptile.StageCount++;
+                               croptile.StageCount++;
                             }
                         }
                     }
-
+                    if(croptile.growTimer == croptile.crop.timeToGrow)
+                    {
+                        croptile.spriteRenderer.sprite = croptile.crop.sprites[4];
+                    }
+                    /*
+                     if(isSeasonOver)
+                    {
+                    Wither(croptile);
+                    }
+                    */
                 }
-                    else
+                else
                 { 
                     if (croptile.growTimer == 1)
                     {
@@ -259,40 +266,23 @@ public class CropsManager : MonoBehaviour
 
     internal void PickUp(Vector3Int gridposition)
     {
+
         Vector2Int position = (Vector2Int)gridposition;
         if(crops.ContainsKey(position) == false)
         { 
            return;
         }
         CropsTile cropTile = crops[position];
-        if (cropTile.crop.isSeasonialCrop && cropTile.Completed)
+        if (cropTile.tileBase == plowed)
         {
-            for (int i = 0; i < cropTile.crop.dropAmount; i++)
-            {
-                Vector3 positionItem = cropTilemap.CellToWorld(gridposition);
-                if (UnityEngine.Random.value < 0.5f)
-                {
-                    positionItem.x -= spread * UnityEngine.Random.value - spread * 2;
-                }
-                else
-                    positionItem.x += spread * UnityEngine.Random.value - spread / 2;
-
-                if (UnityEngine.Random.value < 0.5f)
-                {
-                    positionItem.y -= spread * UnityEngine.Random.value - spread * 2;
-                }
-                else
-                    positionItem.y += spread * UnityEngine.Random.value - spread / 2;
-                Item.SummonItem(cropTile.crop.yield, positionItem);
-            }
-            cropTile.SeasonalCropHarvest();
+            return;
         }
         else
         {
-            if (cropTile.Completed)
+            int randomDropAmount = UnityEngine.Random.Range(1, cropTile.crop.maxDropAmount+2);
+            if (cropTile.crop.isSeasonialCrop && cropTile.Completed)
             {
-
-                for (int i = 0; i < cropTile.crop.dropAmount; i++)
+                for (int i = 0; i < randomDropAmount; i++)
                 {
                     Vector3 positionItem = cropTilemap.CellToWorld(gridposition);
                     if (UnityEngine.Random.value < 0.5f)
@@ -310,9 +300,35 @@ public class CropsManager : MonoBehaviour
                         positionItem.y += spread * UnityEngine.Random.value - spread / 2;
                     Item.SummonItem(cropTile.crop.yield, positionItem);
                 }
-                cropTile.Harvested();
-                cropTile.tileBase = plowed;
-                cropTilemap.SetTile((Vector3Int)position, plowed);
+                cropTile.SeasonalCropHarvest();
+            }
+            else
+            {
+                if (cropTile.Completed && !cropTile.crop.isSeasonialCrop)
+                {
+
+                    for (int i = 0; i < randomDropAmount; i++)
+                    {
+                        Vector3 positionItem = cropTilemap.CellToWorld(gridposition);
+                        if (UnityEngine.Random.value < 0.5f)
+                        {
+                            positionItem.x -= spread * UnityEngine.Random.value - spread * 2;
+                        }
+                        else
+                            positionItem.x += spread * UnityEngine.Random.value - spread / 2;
+
+                        if (UnityEngine.Random.value < 0.5f)
+                        {
+                            positionItem.y -= spread * UnityEngine.Random.value - spread * 2;
+                        }
+                        else
+                            positionItem.y += spread * UnityEngine.Random.value - spread / 2;
+                        Item.SummonItem(cropTile.crop.yield, positionItem);
+                    }
+                    cropTile.Harvested();
+                    cropTile.tileBase = plowed;
+                    cropTilemap.SetTile((Vector3Int)position, plowed);
+                }
             }
         }
     }

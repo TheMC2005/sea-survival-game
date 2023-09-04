@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class CharacterController2D : MonoBehaviour
+public class CharacterController2D : MonoBehaviour, IDataPersistence
 {
     Rigidbody2D rb;
     [SerializeField] float speed = 2f;
@@ -38,5 +38,15 @@ public class CharacterController2D : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = motionVector * speed;
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.transform.position = data.playerPosition;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.playerPosition = this.transform.position;
     }
 }

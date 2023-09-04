@@ -1623,6 +1623,7 @@ GameObject:
   - component: {fileID: 275563981}
   - component: {fileID: 275563983}
   - component: {fileID: 275563984}
+  - component: {fileID: 275563985}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1692,6 +1693,20 @@ MonoBehaviour:
   dayNightCycle: {fileID: 1148288100}
   spriteCropPrefab: {fileID: 5120887688936750939, guid: 1afeb73a326a8854e8169f55f676740f, type: 3}
   spread: 0.65
+--- !u!114 &275563985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275563980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec854e0f3b2cab46b9292fcd4f4e1c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: Game-Data.json
+  useEncryption: 1
 --- !u!1 &325381529
 GameObject:
   m_ObjectHideFlags: 0

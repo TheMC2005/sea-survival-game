@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour//, IDataPersistence
 {
     public static Inventory inventory;
     [SerializeField] List<Slot> buttons;
@@ -21,4 +21,15 @@ public class InventoryManager : MonoBehaviour
             inventory.slot[i].Set();
         }
     }
+/*
+    public void LoadData(GameData data)
+    {
+        inventory = data.inventory;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.inventory = inventory;
+    }
+*/
 }

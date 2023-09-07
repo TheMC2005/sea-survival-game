@@ -12,6 +12,10 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
     public Vector2 LastMotionVector;
     Animator animator;
     public bool moving;
+    public float x;
+    public float y;
+    public float z;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -42,11 +46,11 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        this.transform.position = data.playerPosition;
+        transform.position = data.playerPosition;
     }
 
     public void SaveData(GameData data)
     {
-        data.playerPosition = this.transform.position;
+        data.playerPosition = transform.position;
     }
 }

@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class DayNightCycle : MonoBehaviour
+public class DayNightCycle : MonoBehaviour, IDataPersistence
 {
     public TextMeshProUGUI timeDisplay; 
     public TextMeshProUGUI dayDisplay; 
@@ -90,6 +90,20 @@ public class DayNightCycle : MonoBehaviour
         timeDisplay.text = string.Format("{0:00}:{1:00}", hours, mins);
         dayDisplay.text = "Day: " + days; 
     }
-   
 
+    public void LoadData(GameData data)
+    {
+        this.mins = data.mins;
+        this.days = data.days;
+        this.hours = data.hours;
+        this.seconds = data.seconds;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.mins = this.mins;
+        data.days = this.days;
+        data.hours = this.hours;
+        data.seconds = this.seconds;
+    }
 }

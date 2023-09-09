@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,18 +10,26 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using static UnityEditor.PlayerSettings;
 
+[System.Serializable]
 public class CropsTile
 {
     public int growTimer;
     public int StageCount;
     public Crop crop;
-    public SpriteRenderer spriteRenderer;
     public Vector3Int Pos;
     public float damage = 0;
     public CropsTile toDelete;
-    public GameObject toDeleteGO;
-    public int timerToDirt;
+    [JsonIgnore]
     public TileBase tileBase;
+    [JsonIgnore]
+    public SpriteRenderer spriteRenderer;
+    [JsonIgnore]
+    public GameObject toDeleteGO;
+
+    
+    
+    public int timerToDirt;
+    
     //public Season season
     public bool Completed
     {
@@ -72,7 +81,7 @@ public class CropsTile
     }
 }
 
-public class CropsManager : MonoBehaviour
+public class CropsManager : MonoBehaviour, IDataPersistence
 {
     [SerializeField] TileBase plowed;
     [SerializeField] TileBase plowableDirt;
@@ -350,5 +359,51 @@ public class CropsManager : MonoBehaviour
             cropTile.spriteRenderer.gameObject.SetActive(false);
         }
        
+    }
+
+    public void LoadData(GameData data)
+    {
+
+        crops.Clear();
+        //
+        foreach (var kvp in data.crops)
+        {
+            Vector2Int position = (Vector2Int)kvp.Key;
+            CropsTile dataCropsTile = kvp.Value;
+            //
+            CropsTile newCropsTile = new CropsTile();
+            newCropsTile.growTimer = dataCropsTile.growTimer;
+            newCropsTile.StageCount = dataCropsTile.StageCount;
+            newCropsTile.crop = dataCropsTile.crop;
+            newCropsTile.damage = dataCropsTile.damage;
+            newCropsTile.toDelete = dataCropsTile.toDelete;
+           // newCropsTile.toDeleteGO = dataCropsTile.toDeleteGO;
+            newCropsTile.timerToDirt = dataCropsTile.timerToDirt;
+          //  newCropsTile.tileBase = dataCropsTile.tileBase;
+            //
+            crops.Add(position, newCropsTile);
+        }
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.crops.Clear();
+
+        foreach (var kvp in crops)
+        {
+            Vector2Int position = kvp.Key;
+            CropsTile cropTile = kvp.Value;
+            //
+            CropsTile dataCropsTile = new CropsTile();
+            dataCropsTile.growTimer = cropTile.growTimer;
+            dataCropsTile.StageCount = cropTile.StageCount;
+            dataCropsTile.crop = cropTile.crop;
+            dataCropsTile.damage = cropTile.damage;
+            dataCropsTile.toDelete = cropTile.toDelete;
+           // dataCropsTile.toDeleteGO = cropTile.toDeleteGO;
+            dataCropsTile.timerToDirt = cropTile.timerToDirt;
+           // dataCropsTile.tileBase = cropTile.tileBase;
+            data.crops.Add(position, dataCropsTile);
+        }
     }
 }

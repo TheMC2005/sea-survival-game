@@ -35,7 +35,9 @@ public class FileDataHandler
                     }
                 }
                 // deserialize the data from Json back into the C# object
-                loadedData = JsonConvert.DeserializeObject<GameData>(dataToLoad);
+                JsonSerializerSettings jsonSettings = new JsonSerializerSettings();
+                jsonSettings.Converters.Add(new Vector2IntConverter());
+                loadedData = JsonConvert.DeserializeObject<GameData>(dataToLoad, jsonSettings);
             }
             catch (Exception e)
             {
@@ -55,10 +57,9 @@ public class FileDataHandler
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
 
             // serialize the C# game data object into Json
-            string dataToStore = JsonConvert.SerializeObject(data, Formatting.Indented, new JsonSerializerSettings
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            });
+            JsonSerializerSettings jsonSettings = new JsonSerializerSettings();
+            jsonSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            string dataToStore = JsonConvert.SerializeObject(data, Formatting.Indented, jsonSettings);
             // write the serialized data to the file
             using (FileStream stream = new FileStream(fullPath, FileMode.Create))
             {

@@ -91,6 +91,7 @@ public class CropsManager : MonoBehaviour, IDataPersistence
     [SerializeField] DayNightCycle dayNightCycle;
     [SerializeField] GameObject spriteCropPrefab;
     public float spread = 0.65f;
+    [JsonConverter(typeof(Vector2IntDictionaryConverter))]
     Dictionary<Vector2Int, CropsTile> crops;
     
     private void Start()

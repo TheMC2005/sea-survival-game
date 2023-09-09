@@ -36,7 +36,7 @@ public class FileDataHandler
                 }
                 // deserialize the data from Json back into the C# object
                 JsonSerializerSettings jsonSettings = new JsonSerializerSettings();
-                jsonSettings.Converters.Add(new Vector2IntConverter());
+                //jsonSettings.Converters.Add(new Vector2IntDictionaryConverter());
                 loadedData = JsonConvert.DeserializeObject<GameData>(dataToLoad, jsonSettings);
             }
             catch (Exception e)

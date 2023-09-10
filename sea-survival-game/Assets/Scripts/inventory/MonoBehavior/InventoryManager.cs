@@ -37,6 +37,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
             inventory.slot[i].item = itemDatabase.GetItem[items[i]];
             PlayerSlots[i].count=itemcount[i];
         }
+        LoadSlots(inventory);
     }
 
     public void SaveData(GameData data)

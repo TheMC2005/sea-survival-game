@@ -1685,9 +1685,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a39f536ad66f5047becbd3f65974f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plowed: {fileID: 11400000, guid: 7df8f3667f73f3c4abc854c260f5125c, type: 2}
-  plowableDirt: {fileID: 11400000, guid: 52dd057e9768b674da16dabd5fbb493d, type: 2}
-  alreadySeeded: {fileID: 11400000, guid: 9f75a36e3c0e8b448b48f521f71d576e, type: 2}
+  PlowedDirt: {fileID: 11400000, guid: 7df8f3667f73f3c4abc854c260f5125c, type: 2}
+  PlowableDirt: {fileID: 11400000, guid: 52dd057e9768b674da16dabd5fbb493d, type: 2}
+  AlreadySeeded: {fileID: 11400000, guid: 9f75a36e3c0e8b448b48f521f71d576e, type: 2}
   cropTilemap: {fileID: 739108634}
   controller: {fileID: 275563983}
   dayNightCycle: {fileID: 1148288100}
@@ -3316,7 +3316,7 @@ Transform:
   - {fileID: 7750290809638931729}
   - {fileID: 380218234}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1129633904
 PrefabInstance:
@@ -13276,7 +13276,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 819943013381043023, guid: ba7cb892eae34114c925e84fdba0d1a9, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 819943013381043023, guid: ba7cb892eae34114c925e84fdba0d1a9, type: 3}
       propertyPath: m_LocalPosition.x

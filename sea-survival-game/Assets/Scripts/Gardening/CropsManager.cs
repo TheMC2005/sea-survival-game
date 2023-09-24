@@ -370,8 +370,8 @@ public class CropsManager : MonoBehaviour, IDataPersistence
             newCropsTile.damage = dataCropsTile.damage;
             newCropsTile.toDeleteGO = dataCropsTile.toDeleteGO;
             newCropsTile.timerToDirt = dataCropsTile.timerToDirt;
-            newCropsTile.spriteRenderer = dataCropsTile.spriteRenderer;
             newCropsTile.tileBase = dataCropsTile.tileBase;
+            newCropsTile.spriteRenderer = dataCropsTile.spriteRenderer;
             //
             crops.Add(position, newCropsTile);
         }
@@ -393,8 +393,8 @@ public class CropsManager : MonoBehaviour, IDataPersistence
             dataCropsTile.damage = cropTile.damage;
             dataCropsTile.toDeleteGO = cropTile.toDeleteGO;
             dataCropsTile.timerToDirt = cropTile.timerToDirt;
-            dataCropsTile.spriteRenderer = cropTile.spriteRenderer;
             dataCropsTile.tileBase = cropTile.tileBase;
+            dataCropsTile.spriteRenderer = cropTile.spriteRenderer;
             data.crops.Add(position, dataCropsTile);
         }
     }

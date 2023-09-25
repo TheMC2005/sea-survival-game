@@ -37,10 +37,12 @@ public class FileDataHandler
                 // deserialize the data from Json back into the C# object
                 JsonSerializerSettings jsonSettings = new JsonSerializerSettings();
                 jsonSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                jsonSettings.TypeNameHandling = TypeNameHandling.Auto;
+                jsonSettings.MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead;
                 jsonSettings.Converters.Add(new DictionaryVector2IntJsonConverter());
                 jsonSettings.Converters.Add(new TileConverter());
                 jsonSettings.Converters.Add(new GameObjectConverter());
-                jsonSettings.Converters.Add(new SpriteRendererConverter());
+                //jsonSettings.Converters.Add(new SpriteRendererConverter());
                 loadedData = JsonConvert.DeserializeObject<GameData>(dataToLoad, jsonSettings);
             }
             catch (Exception e)
@@ -66,7 +68,7 @@ public class FileDataHandler
             jsonSettings.Converters.Add(new DictionaryVector2IntJsonConverter());
             jsonSettings.Converters.Add(new TileConverter());
             jsonSettings.Converters.Add(new GameObjectConverter());
-            jsonSettings.Converters.Add(new SpriteRendererConverter());
+            //jsonSettings.Converters.Add(new SpriteRendererConverter());
             string dataToStore = JsonConvert.SerializeObject(data, Formatting.Indented, jsonSettings);
             // write the serialized data to the file
             using (FileStream stream = new FileStream(fullPath, FileMode.Create))

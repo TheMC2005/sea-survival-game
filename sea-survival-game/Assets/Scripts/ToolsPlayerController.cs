@@ -24,6 +24,7 @@ public class ToolsPlayerController : MonoBehaviour
     [SerializeField] TileMapReadController tileMapReadController;
     [SerializeField] float maxDistance = 2.3f;
     [SerializeField] ToolAction onTilePickUp;
+    [SerializeField] CropsManager cropsManager;
 
     Vector3Int selectedTilePosition;
     bool selectable;
@@ -60,6 +61,11 @@ public class ToolsPlayerController : MonoBehaviour
                 return;
             }
             UseToolGrid();  
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+
+            cropsManager.CheckIfInDictionary(selectedTilePosition);
         }
     }
     private void SelectTile()

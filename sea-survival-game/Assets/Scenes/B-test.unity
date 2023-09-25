@@ -3414,7 +3414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8889246646255905041, guid: 72815ebe3efc2c94b93f0cb83e705b91, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -80
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8889246646255905041, guid: 72815ebe3efc2c94b93f0cb83e705b91, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4793,6 +4793,7 @@ MonoBehaviour:
   tileMapReadController: {fileID: 275563983}
   maxDistance: 2.3
   onTilePickUp: {fileID: 11400000, guid: 3830f5ceecf8ce44a9b1df30d2f480f4, type: 2}
+  cropsManager: {fileID: 275563984}
 --- !u!114 &1755755048
 MonoBehaviour:
   m_ObjectHideFlags: 0

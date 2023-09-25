@@ -1,15 +1,22 @@
-using Newtonsoft.Json.Linq;
+
+using UnityEngine;
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System;
 using Unity.VisualScripting;
+
 
 public class SpriteRendererConverter : JsonConverter<SpriteRenderer>
 {
     public override void WriteJson(JsonWriter writer, SpriteRenderer value, JsonSerializer serializer)
     {
+        if (value == null)
+        {
+            writer.WriteNull();
+            return;
+        }
+
         writer.WriteStartObject();
 
         writer.WritePropertyName("color");
@@ -29,6 +36,11 @@ public class SpriteRendererConverter : JsonConverter<SpriteRenderer>
 
     public override SpriteRenderer ReadJson(JsonReader reader, Type objectType, SpriteRenderer existingValue, bool hasExistingValue, JsonSerializer serializer)
     {
+        if (reader.TokenType == JsonToken.Null)
+        {
+            return null;
+        }
+
         if (reader.TokenType == JsonToken.StartObject)
         {
             var spriteRenderer = existingValue ?? new SpriteRenderer();
@@ -46,16 +58,20 @@ public class SpriteRendererConverter : JsonConverter<SpriteRenderer>
                     switch (propertyName)
                     {
                         case "color":
-                            spriteRenderer.color = serializer.Deserialize<Color>(reader);
+                            if (spriteRenderer != null)
+                                spriteRenderer.color = serializer.Deserialize<Color>(reader);
                             break;
                         case "sprite":
-                            spriteRenderer.sprite = serializer.Deserialize<Sprite>(reader);
+                            if (spriteRenderer != null)
+                                spriteRenderer.sprite = serializer.Deserialize<Sprite>(reader);
                             break;
                         case "sortingLayerName":
-                            spriteRenderer.sortingLayerName = serializer.Deserialize<string>(reader);
+                            if (spriteRenderer != null)
+                                spriteRenderer.sortingLayerName = serializer.Deserialize<string>(reader);
                             break;
                         case "sortingOrder":
-                            spriteRenderer.sortingOrder = serializer.Deserialize<int>(reader);
+                            if (spriteRenderer != null)
+                                spriteRenderer.sortingOrder = serializer.Deserialize<int>(reader);
                             break;
                         default:
                             reader.Skip(); // Skip other properties

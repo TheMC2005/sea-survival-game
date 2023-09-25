@@ -9,7 +9,7 @@ public class RefreshAllTiles : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             RefreshTiles();
         }
@@ -23,6 +23,6 @@ public class RefreshAllTiles : MonoBehaviour
         {
             tilemap.RefreshTile(position);
         }
-        Debug.Log("Bazdmeg");
+        Debug.Log("RefreshAllTiles Script lefutot");
     }
 }

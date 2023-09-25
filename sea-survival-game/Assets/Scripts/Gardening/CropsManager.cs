@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using static UnityEditor.PlayerSettings;
-
+//emlekezteto a majmunnak mindennek csinalj adatbazist mint ahogy a tilebasenek is csinaltal koszi
 [System.Serializable]
 public class CropsTile
 {
@@ -107,7 +107,7 @@ public class CropsManager : MonoBehaviour, IDataPersistence
 
         foreach (CropsTile croptile in crops.Values)
         {
-            if (croptile.tileBase == PlowedDirt)
+            if (croptile.tileBase == PlowedDirt) //lehet az a baj, hogy nem croptiletilebasename mert azt nem mented hulye
             {
                 if (dayNightCycle.mins % 10 == 0)
                 {
@@ -411,14 +411,17 @@ public class CropsManager : MonoBehaviour, IDataPersistence
             if (cropTile.tileBaseName == "PlowedDirt")
             {
                 cropTilemap.SetTile(cropTile.Pos, PlowedDirt);
+                cropTile.tileBase = PlowedDirt;
             }
             if (cropTile.tileBaseName == "AlreadySeeded")
             {
                 cropTilemap.SetTile(cropTile.Pos, AlreadySeeded);
+                cropTile.tileBase = AlreadySeeded;
             }
             if (cropTile.tileBaseName == "PlowableDirt")
             {
                 cropTilemap.SetTile(cropTile.Pos, PlowableDirt);
+                cropTile.tileBase = PlowableDirt;
             }
             Debug.Log("Crop added"+ position);
         }

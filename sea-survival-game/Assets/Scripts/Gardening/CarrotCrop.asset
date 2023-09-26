@@ -21,6 +21,7 @@ MonoBehaviour:
   onTileMapAction: {fileID: 0}
   onItemUsed: {fileID: 0}
   plowWitheredGround: {fileID: 0}
+  cropID: 0
   timeToGrow: 12
   timeToWither: 1
   maxDropAmount: 4

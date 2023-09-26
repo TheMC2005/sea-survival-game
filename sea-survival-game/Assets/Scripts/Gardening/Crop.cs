@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu(fileName = "NewCrop", menuName = "Crops/Create New Crop")]
 public class Crop : Item
 {
+    public int cropID;
     public int timeToGrow;
     public int timeToWither;
     public int maxDropAmount;

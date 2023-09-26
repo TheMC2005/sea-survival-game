@@ -10,13 +10,16 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using static UnityEditor.PlayerSettings;
 //emlekezteto a majmunnak mindennek csinalj adatbazist mint ahogy a tilebasenek is csinaltal koszi
+
 [System.Serializable]
 public class CropsTile
 {
     public int growTimer;
     public int StageCount;
     public int timerToDirt;
+    [JsonIgnore]
     public Crop crop;
+    public int cropsID;
     public Vector3Int Pos;
     public float damage = 0;
     [JsonIgnore]
@@ -26,7 +29,6 @@ public class CropsTile
     public SpriteRenderer spriteRenderer;
     public GameObject toDeleteGO;
     //public Season season
-    [JsonIgnore]
     public bool Completed
     {
         get
@@ -67,7 +69,6 @@ public class CropsTile
         StageCount = 2;
         growTimer = crop.growthStageTimes[2];
     }
-    [JsonIgnore]
     public bool ReadyToWither
     {
         get
@@ -85,13 +86,22 @@ public class CropsManager : MonoBehaviour, IDataPersistence
     [SerializeField] TileBase PlowableDirt;
     [SerializeField] TileBase AlreadySeeded;
     [SerializeField] Tilemap cropTilemap;
+    [SerializeField] CropDatabaseObject cropDatabaseObject;
     public TileMapReadController controller;
     [SerializeField] DayNightCycle dayNightCycle;
     [SerializeField] GameObject spriteCropPrefab;
     public float spread = 0.65f;
     [JsonConverter(typeof(DictionaryVector2IntJsonConverter))]
     Dictionary<Vector2Int, CropsTile> crops;
-    
+    [SerializeField]
+    public Dictionary<string, Crop> cropDictionary = new Dictionary<string, Crop>();
+
+    public Dictionary<string, Crop> CropDictionary
+    {
+        get { return cropDictionary; }
+        set { cropDictionary = value; }
+    }
+
     private void Start()
     {
         crops = new Dictionary<Vector2Int, CropsTile>();
@@ -238,7 +248,9 @@ public class CropsManager : MonoBehaviour, IDataPersistence
     {
         cropTilemap.SetTile(position, toSeed.seededTile);
         crops[(Vector2Int)position].crop = toSeed;
-    }
+        crops[(Vector2Int)position].cropsID = toSeed.cropID;
+
+    } 
     public Crop GetTileCrop(Vector3Int position)
     {
         return crops[(Vector2Int)position].crop;
@@ -403,10 +415,11 @@ public class CropsManager : MonoBehaviour, IDataPersistence
                 damage = dataCropsTile.damage,
                 toDeleteGO = dataCropsTile.toDeleteGO,
                 tileBaseName = dataCropsTile.tileBaseName,
+                cropsID = dataCropsTile.cropsID,
             //tileBase = dataCropsTile.tileBase,
             // spriteRenderer = dataCropsTile.spriteRenderer
         };
-
+            cropTile.crop = cropDatabaseObject.GetCrop[cropTile.cropsID];
             crops.Add(position, cropTile);
             if (cropTile.tileBaseName == "PlowedDirt")
             {
@@ -424,10 +437,10 @@ public class CropsManager : MonoBehaviour, IDataPersistence
                 cropTile.tileBase = PlowableDirt;
             }
             Debug.Log("Crop added"+ position);
+          
+            
         }
 
-        // Load other game data as needed
-        // ...
     }
 
 
@@ -451,6 +464,7 @@ public class CropsManager : MonoBehaviour, IDataPersistence
                 damage = cropTile.damage,
                 toDeleteGO = cropTile.toDeleteGO,
                 tileBaseName = cropTile.tileBaseName,
+                cropsID = cropTile.cropsID,
         //  tileBase = cropTile.tileBase,
         //spriteRenderer = cropTile.spriteRenderer
     };

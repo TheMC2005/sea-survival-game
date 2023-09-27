@@ -19,7 +19,7 @@ public class CropsTile
     public int timerToDirt;
     [JsonIgnore]
     public Crop crop;
-    public int cropsID;
+    public int? cropsID;
     public Vector3Int Pos;
     public float damage = 0;
     [JsonIgnore]
@@ -27,6 +27,7 @@ public class CropsTile
     public string tileBaseName;
     [JsonIgnore]
     public SpriteRenderer spriteRenderer;
+    [JsonIgnore]
     public GameObject toDeleteGO;
     //public Season season
     public bool Completed
@@ -413,14 +414,41 @@ public class CropsManager : MonoBehaviour, IDataPersistence
                 timerToDirt = dataCropsTile.timerToDirt,
                 crop = dataCropsTile.crop,
                 damage = dataCropsTile.damage,
-                toDeleteGO = dataCropsTile.toDeleteGO,
+                //toDeleteGO = dataCropsTile.toDeleteGO,
                 tileBaseName = dataCropsTile.tileBaseName,
                 cropsID = dataCropsTile.cropsID,
             //tileBase = dataCropsTile.tileBase,
             // spriteRenderer = dataCropsTile.spriteRenderer
         };
-            cropTile.crop = cropDatabaseObject.GetCrop[cropTile.cropsID];
-            crops.Add(position, cropTile);
+            if(cropTile.cropsID.HasValue)
+            {
+                int regularInt = cropTile.cropsID.Value;
+                cropTile.crop = cropDatabaseObject.GetCrop[regularInt];
+                //gameobjectes resz
+                GameObject go = Instantiate(spriteCropPrefab);
+                cropTile.toDeleteGO = go;
+                go.transform.position = cropTilemap.CellToWorld(cropTile.Pos);
+                go.transform.position -= Vector3.forward * 0.65f;
+                cropTile.spriteRenderer = go.GetComponent<SpriteRenderer>();
+                cropTile.spriteRenderer.gameObject.SetActive(true);
+                cropTile.spriteRenderer.sprite = cropTile.crop.sprites[cropTile.StageCount];
+
+                //gameobjectes resz vege
+                crops.Add(position, cropTile);
+            }
+            else
+            {
+                GameObject go = Instantiate(spriteCropPrefab);
+                cropTile.toDeleteGO = go;
+                go.transform.position = cropTilemap.CellToWorld(cropTile.Pos);
+                go.transform.position -= Vector3.forward * 0.65f;
+                cropTile.spriteRenderer = go.GetComponent<SpriteRenderer>();
+                cropTile.spriteRenderer.gameObject.SetActive(false);
+                cropTile.crop = null;
+                crops.Add(position, cropTile);
+            }
+            
+            
             if (cropTile.tileBaseName == "PlowedDirt")
             {
                 cropTilemap.SetTile(cropTile.Pos, PlowedDirt);
@@ -462,7 +490,7 @@ public class CropsManager : MonoBehaviour, IDataPersistence
                 timerToDirt = cropTile.timerToDirt,
                 crop = cropTile.crop,
                 damage = cropTile.damage,
-                toDeleteGO = cropTile.toDeleteGO,
+              //  toDeleteGO = cropTile.toDeleteGO,
                 tileBaseName = cropTile.tileBaseName,
                 cropsID = cropTile.cropsID,
         //  tileBase = cropTile.tileBase,

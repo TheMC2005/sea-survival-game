@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using static UnityEditor.Progress;
+
 [CreateAssetMenu(fileName = "NewCropDatabase", menuName = "Database/Create New Crop Database")]
 public class CropDatabaseObject : ScriptableObject, ISerializationCallbackReceiver
 {

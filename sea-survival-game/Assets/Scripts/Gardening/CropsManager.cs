@@ -381,7 +381,7 @@ public class CropsManager : MonoBehaviour, IDataPersistence
 
     internal void PlowWitheredGround(Vector3Int gridposition)
     {
-        Vector2Int position = (Vector2Int)gridposition;
+       /*   Vector2Int position = (Vector2Int)gridposition;
         if (crops.ContainsKey(position) == false)
         {
             return;
@@ -397,7 +397,7 @@ public class CropsManager : MonoBehaviour, IDataPersistence
             cropTile.damage = 0;
             cropTile.spriteRenderer.gameObject.SetActive(false);
         }
-       
+       */
     }
 
     public void LoadData(GameData data)
@@ -511,6 +511,19 @@ public class CropsManager : MonoBehaviour, IDataPersistence
     };
 
             data.crops.Add(position, dataCropsTile);
+        }
+    }
+
+    internal void PlowOutCrop(Vector3Int gridposition)
+    {
+        Vector2Int position = (Vector2Int)gridposition;
+        CropsTile cropTile = crops[position];
+        if (cropTile.crop != null)
+        {
+            cropTile.tileBase = PlowedDirt;
+            cropTile.tileBaseName = "PlowedDirt";
+            cropTilemap.SetTile(gridposition, PlowedDirt);
+            cropTile.Harvested();
         }
     }
 }

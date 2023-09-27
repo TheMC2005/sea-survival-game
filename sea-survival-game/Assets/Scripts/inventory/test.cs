@@ -20,4 +20,8 @@ public class test : MonoBehaviour
             }
         }
     }
+    public void additem(int a){
+        InventoryManager.inventory.AddItem(InventoryManager.itemDatabase.GetItem[a]);
+        InventoryManager.LoadSlots(InventoryManager.inventory);
+    }
 }

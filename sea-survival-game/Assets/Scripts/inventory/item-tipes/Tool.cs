@@ -9,5 +9,5 @@ public class Tool : Item
 {
     public ToolType toolType;
     public int toolLevel;
-    public ToolAction WaterCrops;
+
 }

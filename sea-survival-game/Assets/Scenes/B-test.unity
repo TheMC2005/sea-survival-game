@@ -1689,6 +1689,7 @@ MonoBehaviour:
   PlowedDirt: {fileID: 11400000, guid: 7df8f3667f73f3c4abc854c260f5125c, type: 2}
   PlowableDirt: {fileID: 11400000, guid: 52dd057e9768b674da16dabd5fbb493d, type: 2}
   AlreadySeeded: {fileID: 11400000, guid: 9f75a36e3c0e8b448b48f521f71d576e, type: 2}
+  WateredPlowedDirt: {fileID: 11400000, guid: 043585ed49eee004088b2317561a6d05, type: 2}
   cropTilemap: {fileID: 739108634}
   cropDatabaseObject: {fileID: 11400000, guid: 57a8b38b274b9dc48983c60a1b82c30c, type: 2}
   controller: {fileID: 275563983}

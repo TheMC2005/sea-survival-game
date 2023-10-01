@@ -22550,6 +22550,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: WateredPlowedDirt
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba3029466949cc74381d63b3cd7205cf
+      internalID: 1841021682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -23635,6 +23656,7 @@ TextureImporter:
       StoneNode: -484476907
       Tomato: -856145612
       TreeLog: 736555906
+      WateredPlowedDirt: 1841021682
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

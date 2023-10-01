@@ -60,6 +60,7 @@ public class ToolsPlayerController : MonoBehaviour
             {
                 return;
             }
+ 
             UseToolGrid();  
         }
         if (Input.GetKeyDown(KeyCode.R))
@@ -126,9 +127,7 @@ public class ToolsPlayerController : MonoBehaviour
             if (item.plowWitheredGround == null) { return; }
             bool complete2 = item.plowWitheredGround.OnApplyToTileMap(selectedTilePosition, tileMapReadController, item);
             if(item.plowOutCrops == null) { return; }
-            bool complete3 = item.plowOutCrops.OnApplyToTileMap(selectedTilePosition,tileMapReadController, item); 
-
-            
+            bool complete3 = item.plowOutCrops.OnApplyToTileMap(selectedTilePosition,tileMapReadController, item);
         }   
        
     }

@@ -10,12 +10,10 @@ public class PlowOutCrops : ToolAction
         if(tileMapReadController.cropsManager.Check(gridposition) == false)
         {
             tileMapReadController.cropsManager.Plow(gridposition);
-            Debug.Log("kc");
         }
         else
         {
             tileMapReadController.cropsManager.PlowOutCrop(gridposition);
-            Debug.Log("Mukodok");
         }
         return true;
     }

@@ -18,10 +18,9 @@ MonoBehaviour:
   crop: {fileID: 0}
   isCropSeed: 0
   onAction: {fileID: 0}
-  onTileMapAction: {fileID: 0}
+  onTileMapAction: {fileID: 11400000, guid: 9d4218949d866394eb9259a496efee41, type: 2}
   onItemUsed: {fileID: 0}
   plowWitheredGround: {fileID: 0}
   plowOutCrops: {fileID: 0}
-  WaterCrops: {fileID: 11400000, guid: 9d4218949d866394eb9259a496efee41, type: 2}
   toolType: 3
   toolLevel: 999

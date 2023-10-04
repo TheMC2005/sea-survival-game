@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,25 +9,32 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using static UnityEditor.PlayerSettings;
+//emlekezteto a majmunnak mindennek csinalj adatbazist mint ahogy a tilebasenek is csinaltal koszi
 
+[System.Serializable]
 public class CropsTile
 {
     public int growTimer;
     public int StageCount;
+    public int timerToDirt;
+    [JsonIgnore]
     public Crop crop;
-    public SpriteRenderer spriteRenderer;
+    public int? cropsID;
     public Vector3Int Pos;
     public float damage = 0;
-    public CropsTile toDelete;
-    public GameObject toDeleteGO;
-    public int timerToDirt;
+    [JsonIgnore]
     public TileBase tileBase;
+    public string tileBaseName;
+    [JsonIgnore]
+    public SpriteRenderer spriteRenderer;
+    [JsonIgnore]
+    public GameObject toDeleteGO;
     //public Season season
     public bool Completed
     {
         get
         {
-            if (crop == null) 
+            if (crop == null)
                 return false;
             return growTimer >= crop.timeToGrow;
         }
@@ -47,10 +55,13 @@ public class CropsTile
     {
         crop = null;
         growTimer = 0;
-        damage = 0; 
+        damage = 0;
         StageCount = 0;
         spriteRenderer.gameObject.SetActive(false);
+        timerToDirt = 0;
+        cropsID = null;
     }
+
     internal void _Harvested()
     {
         growTimer = 0;
@@ -60,6 +71,7 @@ public class CropsTile
     {
         StageCount = 2;
         growTimer = crop.growthStageTimes[2];
+        timerToDirt = 0;
     }
     public bool ReadyToWither
     {
@@ -72,18 +84,28 @@ public class CropsTile
     }
 }
 
-public class CropsManager : MonoBehaviour
+public class CropsManager : MonoBehaviour, IDataPersistence
 {
-    [SerializeField] TileBase plowed;
-    [SerializeField] TileBase plowableDirt;
-    [SerializeField] TileBase alreadySeeded;
+    [SerializeField] TileBase PlowedDirt;
+    [SerializeField] TileBase PlowableDirt;
+    [SerializeField] TileBase AlreadySeeded;
     [SerializeField] Tilemap cropTilemap;
+    [SerializeField] CropDatabaseObject cropDatabaseObject;
     public TileMapReadController controller;
     [SerializeField] DayNightCycle dayNightCycle;
     [SerializeField] GameObject spriteCropPrefab;
     public float spread = 0.65f;
+    [JsonConverter(typeof(DictionaryVector2IntJsonConverter))]
     Dictionary<Vector2Int, CropsTile> crops;
-    
+    [SerializeField]
+    public Dictionary<string, Crop> cropDictionary = new Dictionary<string, Crop>();
+
+    public Dictionary<string, Crop> CropDictionary
+    {
+        get { return cropDictionary; }
+        set { cropDictionary = value; }
+    }
+
     private void Start()
     {
         crops = new Dictionary<Vector2Int, CropsTile>();
@@ -95,13 +117,11 @@ public class CropsManager : MonoBehaviour
     }
     public void Tick2()
     {
-        
-        List<Vector3Int> positionsToRevert = new List<Vector3Int>();  // Keep track of positions to revert
-        List<CropsTile> cropsToRevert = new List<CropsTile>();  // Keep track of crops to revert
-      
+        List<Vector3Int> positionsToRevert = new List<Vector3Int>();
+
         foreach (CropsTile croptile in crops.Values)
         {
-            if (croptile.tileBase == plowed)
+            if (croptile.tileBase == PlowedDirt) //lehet az a baj, hogy nem croptiletilebasename mert azt nem mented hulye
             {
                 if (dayNightCycle.mins % 10 == 0)
                 {
@@ -110,18 +130,19 @@ public class CropsManager : MonoBehaviour
                 if (croptile.timerToDirt > 10)
                 {
                     positionsToRevert.Add(croptile.Pos);
-                    cropsToRevert.Add(croptile.toDelete);
                 }
             }
         }
-            for (int i = 0; i < positionsToRevert.Count; i++)
+        foreach (Vector3Int position in positionsToRevert)
+        {
+            if (crops.TryGetValue((Vector2Int)position, out CropsTile cropToDelete))
             {
-                RevertCrop(positionsToRevert[i], cropsToRevert[i]);
+                RevertCrop(position, cropToDelete);
             }
-            positionsToRevert.Clear();
-            cropsToRevert.Clear();
+        }
     }
-    
+
+
     public void Tick()
     {
         
@@ -149,8 +170,9 @@ public class CropsManager : MonoBehaviour
                     {
                     if (croptile.growTimer == 1)
                     {
-                        cropTilemap.SetTile(croptile.Pos, alreadySeeded); //ha lerakod akkor meg ottmarad a tile azaz a mag es ezzel csereled le
-                        croptile.tileBase = alreadySeeded;
+                        cropTilemap.SetTile(croptile.Pos, AlreadySeeded); //ha lerakod akkor meg ottmarad a tile azaz a mag es ezzel csereled le
+                        croptile.tileBase = AlreadySeeded;
+                        croptile.tileBaseName = "AlreadySeeded";
                     }
                      
                     if (!croptile.Completed && croptile.crop != null || !croptile.ReadyToWither) // lepteti es lecsereli a crop skinjeit
@@ -180,8 +202,9 @@ public class CropsManager : MonoBehaviour
                 { 
                     if (croptile.growTimer == 1)
                     {
-                        cropTilemap.SetTile(croptile.Pos, alreadySeeded); //ha lerakod akkor meg ottmarad a tile azaz a mag es ezzel csereled le
-                        croptile.tileBase = alreadySeeded;
+                        cropTilemap.SetTile(croptile.Pos, AlreadySeeded); //ha lerakod akkor meg ottmarad a tile azaz a mag es ezzel csereled le
+                        croptile.tileBase = AlreadySeeded;
+                        croptile.tileBaseName = "AlreadySeeded";
                     }
                     if (!croptile.ReadyToWither)
                     {
@@ -229,7 +252,9 @@ public class CropsManager : MonoBehaviour
     {
         cropTilemap.SetTile(position, toSeed.seededTile);
         crops[(Vector2Int)position].crop = toSeed;
-    }
+        crops[(Vector2Int)position].cropsID = toSeed.cropID;
+
+    } 
     public Crop GetTileCrop(Vector3Int position)
     {
         return crops[(Vector2Int)position].crop;
@@ -237,7 +262,6 @@ public class CropsManager : MonoBehaviour
     private void CreatePlowedTile(Vector3Int position)
     {
         CropsTile crop = new CropsTile();
-        crop.toDelete = crop;
         crops.Add((Vector2Int)position, crop); 
         //
         GameObject go = Instantiate(spriteCropPrefab);
@@ -249,13 +273,14 @@ public class CropsManager : MonoBehaviour
         go.SetActive(false);
         crop.spriteRenderer = go.GetComponent<SpriteRenderer>();
         //
-        cropTilemap.SetTile(position, plowed);
-        crop.tileBase = plowed;
+        cropTilemap.SetTile(position, PlowedDirt);
+        crop.tileBase = PlowedDirt;
+        crop.tileBaseName = "PlowedDirt";
     }
     public void RevertCrop(Vector3Int position, CropsTile crop)
     {
         crops.Remove((Vector2Int)position);
-        cropTilemap.SetTile(position, plowableDirt);
+        cropTilemap.SetTile(position, PlowableDirt);
 
         if (crop.toDeleteGO != null)
         {
@@ -263,7 +288,27 @@ public class CropsManager : MonoBehaviour
         }
 
     }
+    public void CheckIfInDictionary(Vector3Int gridposition)
+    {
+        Vector2Int position = (Vector2Int)gridposition;
 
+        if (crops.ContainsKey(position))
+        {
+            CropsTile crop = crops[position];
+
+            // Now you can access details of the crop tile
+            int cropTimer = crop.growTimer;
+            int stageCount = crop.StageCount;
+            Vector3Int pos1 = crop.Pos;
+            Debug.Log("Crop Timer: " + cropTimer);
+            Debug.Log("Stage Count: " + stageCount);
+            Debug.Log("pos1: " + pos1);
+        }
+        else
+        {
+            Debug.Log("No crop found at position: " + position);
+        }
+    }
     internal void PickUp(Vector3Int gridposition)
     {
 
@@ -273,7 +318,7 @@ public class CropsManager : MonoBehaviour
            return;
         }
         CropsTile cropTile = crops[position];
-        if (cropTile.tileBase == plowed)
+        if (cropTile.tileBase == PlowedDirt)
         {
             return;
         }
@@ -326,8 +371,9 @@ public class CropsManager : MonoBehaviour
                         Item.SummonItem(cropTile.crop.yield, positionItem);
                     }
                     cropTile.Harvested();
-                    cropTile.tileBase = plowed;
-                    cropTilemap.SetTile((Vector3Int)position, plowed);
+                    cropTile.tileBase = PlowedDirt;
+                    cropTile.tileBaseName = "PlowedDirt";
+                    cropTilemap.SetTile((Vector3Int)position, PlowedDirt);
                 }
             }
         }
@@ -335,7 +381,7 @@ public class CropsManager : MonoBehaviour
 
     internal void PlowWitheredGround(Vector3Int gridposition)
     {
-        Vector2Int position = (Vector2Int)gridposition;
+       /*   Vector2Int position = (Vector2Int)gridposition;
         if (crops.ContainsKey(position) == false)
         {
             return;
@@ -343,12 +389,141 @@ public class CropsManager : MonoBehaviour
         CropsTile cropTile = crops[position];
         if(cropTile.ReadyToWither && cropTile.crop != null)
         {
-            cropTile.tileBase = plowed;
-            cropTilemap.SetTile(gridposition, plowed);
+            cropTile.tileBase = PlowedDirt;
+            cropTile.tileBaseName = "PlowedDirt";
+            cropTilemap.SetTile(gridposition, PlowedDirt);
             cropTile.crop = null;
+            cropTile.cropsID = null;
             cropTile.damage = 0;
             cropTile.spriteRenderer.gameObject.SetActive(false);
         }
-       
+       */
+    }
+
+    public void LoadData(GameData data)
+    {
+        crops.Clear();
+
+        foreach (var kvp in data.crops)
+        {
+            Vector2Int position = kvp.Key;
+            CropsTile dataCropsTile = kvp.Value;
+            CropsTile cropTile = new CropsTile
+            {
+                growTimer = dataCropsTile.growTimer,
+                Pos = dataCropsTile.Pos,
+                StageCount = dataCropsTile.StageCount,
+                timerToDirt = dataCropsTile.timerToDirt,
+                crop = dataCropsTile.crop,
+                damage = dataCropsTile.damage,
+                tileBaseName = dataCropsTile.tileBaseName,
+                cropsID = dataCropsTile.cropsID,
+        };
+            if(cropTile.cropsID.HasValue)
+            {
+                if (cropTile.ReadyToWither && !cropTile.crop.isSeasonialCrop)
+                {
+                    int regularInt = cropTile.cropsID.Value;
+                    cropTile.crop = cropDatabaseObject.GetCrop[regularInt];
+                    //gameobjectes resz
+                    GameObject go = Instantiate(spriteCropPrefab);
+                    cropTile.toDeleteGO = go;
+                    go.transform.position = cropTilemap.CellToWorld(cropTile.Pos);
+                    go.transform.position -= Vector3.forward * 0.65f;
+                    cropTile.spriteRenderer = go.GetComponent<SpriteRenderer>();
+                    cropTile.spriteRenderer.gameObject.SetActive(true);
+                    cropTile.spriteRenderer.sprite = cropTile.crop.witheredSprite;
+
+                    //gameobjectes resz vege
+                    crops.Add(position, cropTile);
+                }
+                else
+                {
+                    int regularInt = cropTile.cropsID.Value;
+                    cropTile.crop = cropDatabaseObject.GetCrop[regularInt];
+                    //gameobjectes resz
+                    GameObject go = Instantiate(spriteCropPrefab);
+                    cropTile.toDeleteGO = go;
+                    go.transform.position = cropTilemap.CellToWorld(cropTile.Pos);
+                    go.transform.position -= Vector3.forward * 0.65f;
+                    cropTile.spriteRenderer = go.GetComponent<SpriteRenderer>();
+                    cropTile.spriteRenderer.gameObject.SetActive(true);
+                    cropTile.spriteRenderer.sprite = cropTile.crop.sprites[cropTile.StageCount];
+
+                    //gameobjectes resz vege
+                    crops.Add(position, cropTile);
+                }
+            }
+            else
+            {
+                GameObject go = Instantiate(spriteCropPrefab);
+                cropTile.toDeleteGO = go;
+                go.transform.position = cropTilemap.CellToWorld(cropTile.Pos);
+                go.transform.position -= Vector3.forward * 0.65f;
+                cropTile.spriteRenderer = go.GetComponent<SpriteRenderer>();
+                cropTile.spriteRenderer.gameObject.SetActive(false);
+                cropTile.crop = null;
+                crops.Add(position, cropTile);
+            }
+            
+            
+            if (cropTile.tileBaseName == "PlowedDirt")
+            {
+                cropTilemap.SetTile(cropTile.Pos, PlowedDirt);
+                cropTile.tileBase = PlowedDirt;
+            }
+            if (cropTile.tileBaseName == "AlreadySeeded")
+            {
+                cropTilemap.SetTile(cropTile.Pos, AlreadySeeded);
+                cropTile.tileBase = AlreadySeeded;
+            }
+            if (cropTile.tileBaseName == "PlowableDirt")
+            {
+                cropTilemap.SetTile(cropTile.Pos, PlowableDirt);
+                cropTile.tileBase = PlowableDirt;
+            }
+            Debug.Log("Crop added"+ position);
+          
+            
+        }
+
+    }
+
+
+    public void SaveData(GameData data)
+    {
+        data.crops.Clear();
+
+        foreach (var kvp in crops)
+        {
+            Vector2Int position = kvp.Key;
+            CropsTile cropTile = kvp.Value;
+            CropsTile dataCropsTile = new CropsTile
+            {
+                growTimer = cropTile.growTimer,
+                Pos = cropTile.Pos,
+                StageCount = cropTile.StageCount,
+                timerToDirt = cropTile.timerToDirt,
+                crop = cropTile.crop,
+                damage = cropTile.damage,
+                tileBaseName = cropTile.tileBaseName,
+                cropsID = cropTile.cropsID,
+    };
+
+            data.crops.Add(position, dataCropsTile);
+        }
+    }
+
+    internal void PlowOutCrop(Vector3Int gridposition)
+    {
+        Vector2Int position = (Vector2Int)gridposition;
+        CropsTile cropTile = crops[position];
+        if (cropTile.crop != null)
+        {
+            cropTile.tileBase = PlowedDirt;
+            cropTile.tileBaseName = "PlowedDirt";
+            cropTilemap.SetTile(gridposition, PlowedDirt);
+            cropTile.Harvested();
+        }
     }
 }

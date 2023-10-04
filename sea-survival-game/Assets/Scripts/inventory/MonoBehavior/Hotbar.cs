@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Hotbar : MonoBehaviour
+public class Hotbar : MonoBehaviour//, IDataPersistence
 {
     public static Slot selSlot;
     public static Hotbar[] slots = new Hotbar[9];
@@ -23,4 +23,15 @@ public class Hotbar : MonoBehaviour
         }
         gameObject.GetComponent<Image>().color = new Color32(255,255,255,100);
     }
+/*
+    public void LoadData(GameData data)
+    {
+        slots = data.slots;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.slots = slots;
+    }
+*/
 }

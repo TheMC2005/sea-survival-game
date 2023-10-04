@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef46f2e75f4ca964ca2ec36534274d33, type: 3}
-  m_Name: CreativeHoe
+  m_Name: CreativeWateringCan
   m_EditorClassIdentifier: 
-  itemName: Creative Hoe
+  itemName: Watering Can
   maxq: 1
-  sprite: {fileID: 21300000, guid: dc4a0d19ecae5964cadb7549c93ced9d, type: 3}
+  sprite: {fileID: 21300000, guid: 7dcfad17e0925cd4990662d28809f7ab, type: 3}
   crop: {fileID: 0}
   isCropSeed: 0
   onAction: {fileID: 0}
-  onTileMapAction: {fileID: 11400000, guid: f649f758245a92649a34c69686a9bac8, type: 2}
+  onTileMapAction: {fileID: 0}
   onItemUsed: {fileID: 0}
-  plowWitheredGround: {fileID: 11400000, guid: 023aff7f577b2e6439c33c43e4636085, type: 2}
-  plowOutCrops: {fileID: 11400000, guid: 089575eab193a89428d3e289b4516daa, type: 2}
-  toolType: 2
+  plowWitheredGround: {fileID: 0}
+  plowOutCrops: {fileID: 0}
+  toolType: 3
   toolLevel: 999
+  WaterCrops: {fileID: 11400000, guid: 9d4218949d866394eb9259a496efee41, type: 2}

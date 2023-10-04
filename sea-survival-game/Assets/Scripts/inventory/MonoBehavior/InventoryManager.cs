@@ -43,7 +43,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
     public void SaveData(GameData data)
     {
         for (int i = 0; i<items.Length; i++){
-            data.items[i]=InventoryManager.itemDatabase.GetID[PlayerSlots[i].item];
+            data.items[i] = InventoryManager.itemDatabase.GetID[PlayerSlots[i].item];
             data.itemcount[i]=PlayerSlots[i].count;
         }
     }

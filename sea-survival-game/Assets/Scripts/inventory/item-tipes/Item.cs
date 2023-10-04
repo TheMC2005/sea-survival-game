@@ -15,6 +15,7 @@ public class Item : ScriptableObject
     public ToolAction onTileMapAction;
     public ToolAction onItemUsed;
     public ToolAction plowWitheredGround;
+    public ToolAction plowOutCrops;
 
     public static void SummonItem(Item item, Vector2 pos)
     {

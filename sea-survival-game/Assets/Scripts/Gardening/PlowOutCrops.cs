@@ -1,13 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using UnityEngine;
+using UnityEditor.Experimental.GraphView;
 
 [CreateAssetMenu(menuName = "Data/Tool Action/Plow Out Crops")]
 public class PlowOutCrops : ToolAction
-{ 
+{
+    [SerializeField] public List<TileBase> canPlow;
     public override bool OnApplyToTileMap(Vector3Int gridposition, TileMapReadController tileMapReadController, Item item)
     {
-        if(tileMapReadController.cropsManager.Check(gridposition) == false)
+        TileBase tileToPlow = tileMapReadController.GetTileBase(gridposition);
+        if (canPlow.Contains(tileToPlow) == false)
+        {
+            return false;
+        }
+        if (canPlow.Contains(tileToPlow) == true)
         {
             tileMapReadController.cropsManager.Plow(gridposition);
         }
@@ -15,6 +22,8 @@ public class PlowOutCrops : ToolAction
         {
             tileMapReadController.cropsManager.PlowOutCrop(gridposition);
         }
+
+ 
         return true;
     }
 }

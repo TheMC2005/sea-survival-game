@@ -6,6 +6,7 @@ using System;
 public class dropped_item : MonoBehaviour
 {
     public Item item;
+    public int amount = 1;
     Transform player;
     [SerializeField] float speed = 5f; // ezt meg lehet valtoztatom de lehet jo
     [SerializeField] float pickUpDistance = 1.15f; // Ez szerintem jol be van love
@@ -31,7 +32,10 @@ public class dropped_item : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
         if (distance < 0.1f)
         {
-            InventoryManager.inventory.AddItem(item);
+            for(int i = 0; i < amount; i++)
+            { 
+                InventoryManager.inventory.AddItem(item);
+            }
             InventoryManager.LoadSlots(InventoryManager.inventory);
             Destroy(gameObject);
         }

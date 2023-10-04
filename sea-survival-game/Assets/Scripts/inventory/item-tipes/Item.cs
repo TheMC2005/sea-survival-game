@@ -8,14 +8,6 @@ public class Item : ScriptableObject
     public string itemName;
     public int maxq;
     public Sprite sprite;
-    [Header("Crops")]
-    public Crop crop;
-    public bool isCropSeed;
-    public ToolAction onAction;
-    public ToolAction onTileMapAction;
-    public ToolAction onItemUsed;
-    public ToolAction plowWitheredGround;
-    public ToolAction plowOutCrops;
 
     public static void SummonItem(Item item, Vector2 pos)
     {

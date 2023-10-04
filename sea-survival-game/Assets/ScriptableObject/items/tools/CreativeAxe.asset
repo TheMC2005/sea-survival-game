@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef46f2e75f4ca964ca2ec36534274d33, type: 3}
   m_Name: CreativeAxe
   m_EditorClassIdentifier: 
-  itemName: CreativeAxe
+  itemName: Creative Axe
   maxq: 1
   sprite: {fileID: 21300000, guid: 17d277ea99d358a499d854b1de0e514e, type: 3}
-  crop: {fileID: 0}
-  isCropSeed: 0
-  onAction: {fileID: 11400000, guid: e933298b2d6bcca4d8ba60342491eb59, type: 2}
   toolType: 0
   toolLevel: 999
+  onAction: {fileID: 11400000, guid: e933298b2d6bcca4d8ba60342491eb59, type: 2}
+  onTileMapAction: {fileID: 0}
+  onItemUsed: {fileID: 0}
+  plowWitheredGround: {fileID: 0}
+  plowOutCrops: {fileID: 0}

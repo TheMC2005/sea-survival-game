@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0eb7aa85fc3674ca36366a7f6d77ec, type: 3}
   m_Name: PlowOutCrops
   m_EditorClassIdentifier: 
+  canPlow:
+  - {fileID: 11400000, guid: 52dd057e9768b674da16dabd5fbb493d, type: 2}

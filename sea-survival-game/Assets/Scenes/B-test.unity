@@ -615,7 +615,7 @@ PrefabInstance:
     - target: {fileID: 6096505770686990541, guid: ba7cb892eae34114c925e84fdba0d1a9, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 3e1e8f9db8fdc284b8cdcace5a66afe1, type: 2}
+      objectReference: {fileID: 11400000, guid: 56f73300c2c326046851dd33d3d7f059, type: 2}
     - target: {fileID: 7069876301238443771, guid: ba7cb892eae34114c925e84fdba0d1a9, type: 3}
       propertyPath: m_Name
       value: Carrot_Seedling
@@ -3566,7 +3566,7 @@ PrefabInstance:
     - target: {fileID: 6096505770686990541, guid: ba7cb892eae34114c925e84fdba0d1a9, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 1f64b92ed0b20a747a7e99cc79822887, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7069876301238443771, guid: ba7cb892eae34114c925e84fdba0d1a9, type: 3}
       propertyPath: m_Name
       value: Hoe
@@ -3852,7 +3852,7 @@ PrefabInstance:
     - target: {fileID: 6096505770686990541, guid: ba7cb892eae34114c925e84fdba0d1a9, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 8faaef6ac2d93e245b1ea39167164212, type: 2}
+      objectReference: {fileID: 11400000, guid: 649129ed3a692e543b4fb71bc08ea4f0, type: 2}
     - target: {fileID: 7069876301238443771, guid: ba7cb892eae34114c925e84fdba0d1a9, type: 3}
       propertyPath: m_Name
       value: Tomato

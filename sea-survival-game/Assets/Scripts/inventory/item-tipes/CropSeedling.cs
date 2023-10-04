@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public enum ToolType { Axe, Pickaxe, Hoe, Watering_Can};
-
-[CreateAssetMenu(fileName = "NewTool", menuName = "Item/Create New Tool")]
-public class Tool : Item
+[CreateAssetMenu(fileName = "NewItem", menuName = "Item/Create New Cropseedling")]
+public class CropSeedling : Item
 {
-    public ToolType toolType;
-    public int toolLevel;
+    [Header("Crops")]
+    public Crop crop;
+    public bool isCropSeed;
     public ToolAction onAction;
     public ToolAction onTileMapAction;
     public ToolAction onItemUsed;
     public ToolAction plowWitheredGround;
     public ToolAction plowOutCrops;
-
 }

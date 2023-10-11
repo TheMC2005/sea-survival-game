@@ -13,6 +13,10 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
     private int[] itemcount;
     void Start()
     {
+        
+    }
+    private void Awake()
+    {
         PlayerSlots = buttons;
         inventory = new Inventory(27, PlayerSlots);
         LoadSlots(inventory);

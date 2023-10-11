@@ -102,6 +102,10 @@ public class CropsManager : MonoBehaviour, IDataPersistence
     
     private void Start()
     {
+        
+    }
+    private void Awake()
+    {
         crops = new Dictionary<Vector2Int, CropsTile>();
     }
     public void Wither(CropsTile cropsTile)
@@ -166,13 +170,15 @@ public class CropsManager : MonoBehaviour, IDataPersistence
         
         foreach (CropsTile croptile in crops.Values) 
         {
+            Debug.Log("*");
             if (croptile.crop == null)
             {
                 continue;
             }
             else
             {
-                    if (dayNightCycle.mins % 10 == 0)
+                Debug.Log("***");
+                if (dayNightCycle.mins % 10 == 0)
                     {
                         if (!croptile.Completed && (croptile.tileBase == WateredPlowedDirt || croptile.tileBase == AlreadySeeded) && croptile.waterTime >0 && !croptile.ReadyToWither)
                         {

@@ -16,9 +16,17 @@ public class DataPersistanceManager : MonoBehaviour
     private GameData gameData;
     private List<IDataPersistence> dataPersistenceObjects;
     private FileDataHandler dataHandler;
+    public static DataPersistanceManager instance { get; private set; }
     
     private void Awake()
     {
+        if(instance != null)
+        {
+            Debug.Log("Found more than one Data Persistance Manager in the scene.Destroying the newest one");
+            Destroy(this.gameObject);
+            return;
+        }
+        instance = this;
         DontDestroyOnLoad(this.gameObject);
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
     }

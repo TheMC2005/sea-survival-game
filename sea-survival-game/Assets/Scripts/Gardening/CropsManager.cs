@@ -371,6 +371,10 @@ public class CropsManager : MonoBehaviour, IDataPersistence
            return;
         }
         CropsTile cropTile = crops[position];
+        if(cropTile.cropsID == null)
+        {
+            return;
+        }
         if (cropTile.ReadyToWither)
         {
             return;

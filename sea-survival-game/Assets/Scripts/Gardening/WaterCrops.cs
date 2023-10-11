@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Data/Tool Action/Water Crops")]
 public class WaterCrops : ToolAction
 {
-    public override bool OnApplyToTileMap(Vector3Int gridposition, TileMapReadController tileMapReadController, Item item)
+    public override bool OnApplyToTileMap(Vector3Int gridposition, TileMapReadController tileMapReadController, Tool tool)
     {   if(tileMapReadController.cropsManager.Check(gridposition))
         tileMapReadController.cropsManager.WaterTile(gridposition);
     else

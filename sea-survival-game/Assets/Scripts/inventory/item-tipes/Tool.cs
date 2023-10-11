@@ -12,7 +12,5 @@ public class Tool : Item
     public ToolAction onAction;
     public ToolAction onTileMapAction;
     public ToolAction onItemUsed;
-    public ToolAction plowWitheredGround;
-    public ToolAction plowOutCrops;
 
 }

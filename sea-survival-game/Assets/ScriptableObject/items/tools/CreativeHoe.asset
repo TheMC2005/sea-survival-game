@@ -20,5 +20,3 @@ MonoBehaviour:
   onAction: {fileID: 0}
   onTileMapAction: {fileID: 11400000, guid: f649f758245a92649a34c69686a9bac8, type: 2}
   onItemUsed: {fileID: 0}
-  plowWitheredGround: {fileID: 0}
-  plowOutCrops: {fileID: 11400000, guid: 089575eab193a89428d3e289b4516daa, type: 2}

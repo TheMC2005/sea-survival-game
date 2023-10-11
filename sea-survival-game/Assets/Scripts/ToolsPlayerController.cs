@@ -135,45 +135,41 @@ public class ToolsPlayerController : MonoBehaviour
        if(selectable == true)
         {
             Item item = Hotbar.selSlot.item;
-            if (Hotbar.selSlot.item is CropSeedling)
+            if (Hotbar.selSlot.item is Item)
             {
-                CropSeedling cropseed = (CropSeedling)item;
-                if (cropseed.itemName == " ")
+                if (item.itemName == " ")
                 {
                     PickUpTile();
                     return;
                 }
+            }
+            if (Hotbar.selSlot.item is CropSeedling)
+            {
+                CropSeedling cropseed = (CropSeedling)item;
                 if (cropseed.onTileMapAction == null) { return; }
-                bool complete = cropseed.onTileMapAction.OnApplyToTileMap(selectedTilePosition, tileMapReadController, item);
+                bool complete = cropseed.onTileMapAction.OnApplyToTileMap(selectedTilePosition, tileMapReadController, cropseed);
                 if (complete == true)
                 {
                     if (cropseed.onItemUsed != null)
                     {
-                        cropseed.onItemUsed.OnItemUsed(item);
+                        cropseed.onItemUsed.OnItemUsed(cropseed);
                     }
                 }
                 if (cropseed.plowOutCrops == null) { return; }
-                bool complete3 = cropseed.plowOutCrops.OnApplyToTileMap(selectedTilePosition, tileMapReadController, item);
+                bool complete3 = cropseed.plowOutCrops.OnApplyToTileMap(selectedTilePosition, tileMapReadController, cropseed);
             }
             if (Hotbar.selSlot.item is Tool)
             {
                 Tool tool = (Tool)item;
-                if (tool.itemName == " ")
-                {
-                    PickUpTile();
-                    return;
-                }
                 if (tool.onTileMapAction == null) { return; }
-                bool complete = tool.onTileMapAction.OnApplyToTileMap(selectedTilePosition, tileMapReadController, item);
+                bool complete = tool.onTileMapAction.OnApplyToTileMap(selectedTilePosition, tileMapReadController, tool);
                 if (complete == true)
                 {
                     if (tool.onItemUsed != null)
                     {
-                        tool.onItemUsed.OnItemUsed(item);
+                        tool.onItemUsed.OnItemUsed(tool);
                     }
                 }
-                if (tool.plowOutCrops == null) { return; }
-                bool complete3 = tool.plowOutCrops.OnApplyToTileMap(selectedTilePosition, tileMapReadController, item);
             }
         }
         
@@ -185,6 +181,6 @@ public class ToolsPlayerController : MonoBehaviour
         {
             return;     
         }
-        onTilePickUp.OnApplyToTileMap(selectedTilePosition, tileMapReadController, null);
+        onTilePickUp.OnApplyToTileMap(selectedTilePosition, tileMapReadController, (Item)null);
     }
 }

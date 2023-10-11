@@ -189,13 +189,22 @@ public class CropsManager : MonoBehaviour, IDataPersistence
                     }
                     if(croptile.crop.isSeasonialCrop)
                     {
-                    if(croptile.growTimer == 2)
+                    if (croptile.growTimer == 2)
                     {
-                        cropTilemap.SetTile(croptile.Pos, AlreadySeeded);
-                        croptile.tileBase = AlreadySeeded;
-                        croptile.tileBaseName = "AlreadySeeded";
+                        if (croptile.waterTime > croptile.crop.growthStageTimes[0])
+                        {
+                            cropTilemap.SetTile(croptile.Pos, WateredPlowedDirt);
+                            croptile.tileBase = WateredPlowedDirt;
+                            croptile.tileBaseName = "WateredPlowedDirt";
+                        }
+                        else
+                        {
+                            cropTilemap.SetTile(croptile.Pos, AlreadySeeded);
+                            croptile.tileBase = AlreadySeeded;
+                            croptile.tileBaseName = "AlreadySeeded";
+                        }
                     }
-                     
+
                     if (!croptile.Completed && croptile.crop != null || !croptile.ReadyToWither) // lepteti es lecsereli a crop skinjeit
                     {
                         if (croptile.growTimer >= croptile.crop.growthStageTimes[croptile.StageCount])
@@ -223,9 +232,18 @@ public class CropsManager : MonoBehaviour, IDataPersistence
                 {
                     if (croptile.growTimer == 2)
                     {
-                        cropTilemap.SetTile(croptile.Pos, AlreadySeeded);
-                        croptile.tileBase = AlreadySeeded;
-                        croptile.tileBaseName = "AlreadySeeded";
+                        if (croptile.waterTime > croptile.crop.growthStageTimes[0])
+                        {
+                            cropTilemap.SetTile(croptile.Pos, WateredPlowedDirt);
+                            croptile.tileBase = WateredPlowedDirt;
+                            croptile.tileBaseName = "WateredPlowedDirt";
+                        }
+                        else
+                        {
+                            cropTilemap.SetTile(croptile.Pos, AlreadySeeded);
+                            croptile.tileBase = AlreadySeeded;
+                            croptile.tileBaseName = "AlreadySeeded";
+                        }
                     }
                     if (!croptile.ReadyToWither)
                     {
@@ -276,7 +294,14 @@ public class CropsManager : MonoBehaviour, IDataPersistence
         crops[(Vector2Int)position].crop = toSeed;
         crops[(Vector2Int)position].cropsID = toSeed.cropID;
         CropsTile croptile = crops[(Vector2Int)position];
-        croptile.waterTime = croptile.crop.growthStageTimes[0];
+        if (croptile.waterTime > croptile.crop.growthStageTimes[0])
+        {
+            //Do nothing
+        }
+        else
+        {
+            croptile.waterTime = croptile.crop.growthStageTimes[0];
+        }
         croptile.tileBase = AlreadySeeded;
         croptile.tileBaseName = "AlreadySeeded";
 
@@ -407,28 +432,6 @@ public class CropsManager : MonoBehaviour, IDataPersistence
             }
         }
     }
-
-    internal void PlowWitheredGround(Vector3Int gridposition)
-    {
-       /*   Vector2Int position = (Vector2Int)gridposition;
-        if (crops.ContainsKey(position) == false)
-        {
-            return;
-        }
-        CropsTile cropTile = crops[position];
-        if(cropTile.ReadyToWither && cropTile.crop != null)
-        {
-            cropTile.tileBase = PlowedDirt;
-            cropTile.tileBaseName = "PlowedDirt";
-            cropTilemap.SetTile(gridposition, PlowedDirt);
-            cropTile.crop = null;
-            cropTile.cropsID = null;
-            cropTile.damage = 0;
-            cropTile.spriteRenderer.gameObject.SetActive(false);
-        }
-       */
-    }
-
     public void LoadData(GameData data)
     {
         crops.Clear();
@@ -559,6 +562,7 @@ public class CropsManager : MonoBehaviour, IDataPersistence
             cropTile.tileBase = PlowedDirt;
             cropTile.tileBaseName = "PlowedDirt";
             cropTilemap.SetTile(gridposition, PlowedDirt);
+            cropTile.waterTime = 0;
             cropTile.Harvested();
         }
     }

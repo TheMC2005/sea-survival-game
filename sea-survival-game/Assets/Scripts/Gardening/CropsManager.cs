@@ -23,8 +23,6 @@ public class CropsTile
     public int? cropsID;
     public Vector3Int Pos;
     public float damage = 0;
-    [JsonIgnore]
-    public TileBase tileBase;
     public string tileBaseName;
     [JsonIgnore]
     public SpriteRenderer spriteRenderer;
@@ -100,10 +98,6 @@ public class CropsManager : MonoBehaviour, IDataPersistence
     [JsonConverter(typeof(DictionaryVector2IntJsonConverter))]
     Dictionary<Vector2Int, CropsTile> crops;
     
-    private void Start()
-    {
-        
-    }
     private void Awake()
     {
         crops = new Dictionary<Vector2Int, CropsTile>();
@@ -119,7 +113,7 @@ public class CropsManager : MonoBehaviour, IDataPersistence
 
         foreach (CropsTile croptile in crops.Values)
         {
-            if (croptile.tileBase == PlowedDirt) //lehet az a baj, hogy nem croptiletilebasename mert azt nem mented hulye
+            if (croptile.tileBaseName == "PlowedDirt") //lehet az a baj, hogy nem croptiletilebasename mert azt nem mented hulye
             {
                 if (dayNightCycle.mins % 10 == 0)
                 {
@@ -143,20 +137,18 @@ public class CropsManager : MonoBehaviour, IDataPersistence
         {
             if (dayNightCycle.mins % 10 == 0 && cropTile.waterTime !=0)
             {
-                if(cropTile.tileBase == (cropTile.tileBase == WateredPlowedDirt || cropTile.tileBase == AlreadySeeded) && cropTile.waterTime !=0)
+                if((cropTile.tileBaseName == "WateredPlowedDirt" || cropTile.tileBaseName == "AlreadySeeded") && cropTile.waterTime !=0)
                      cropTile.waterTime--;
             }
             if(cropTile.waterTime <= 0)
             {
                 if (cropTile.crop != null)
                 {
-                    cropTile.tileBase = AlreadySeeded;
                     cropTile.tileBaseName = "AlreadySeeded";
                     cropTilemap.SetTile(cropTile.Pos, AlreadySeeded);
                 }
                 if(cropTile.crop == null)
                 {
-                    cropTile.tileBase = PlowedDirt;
                     cropTile.tileBaseName = "PlowedDirt";
                     cropTilemap.SetTile(cropTile.Pos, PlowedDirt);
                 }
@@ -179,7 +171,7 @@ public class CropsManager : MonoBehaviour, IDataPersistence
                 if (dayNightCycle.mins % 10 == 0)
                     {
                     bool canGrow = !croptile.Completed && (croptile.tileBaseName == "WateredPlowedDirt" || croptile.tileBaseName == "AlreadySeeded") && croptile.waterTime > 0 && !croptile.ReadyToWither;
-                    if (!croptile.Completed && (croptile.tileBase == WateredPlowedDirt || croptile.tileBase == AlreadySeeded) && croptile.waterTime >0 && !croptile.ReadyToWither)
+                    if (canGrow)
                         {
                             croptile.growTimer += 1; // ne szamoljon feleslegesen
                             croptile.damage = 0;
@@ -199,13 +191,11 @@ public class CropsManager : MonoBehaviour, IDataPersistence
                         if (croptile.waterTime > croptile.crop.growthStageTimes[0])
                         {
                             cropTilemap.SetTile(croptile.Pos, WateredPlowedDirt);
-                            croptile.tileBase = WateredPlowedDirt;
                             croptile.tileBaseName = "WateredPlowedDirt";
                         }
                         else
                         {
                             cropTilemap.SetTile(croptile.Pos, AlreadySeeded);
-                            croptile.tileBase = AlreadySeeded;
                             croptile.tileBaseName = "AlreadySeeded";
                         }
                     }
@@ -240,13 +230,11 @@ public class CropsManager : MonoBehaviour, IDataPersistence
                         if (croptile.waterTime > croptile.crop.growthStageTimes[0])
                         {
                             cropTilemap.SetTile(croptile.Pos, WateredPlowedDirt);
-                            croptile.tileBase = WateredPlowedDirt;
                             croptile.tileBaseName = "WateredPlowedDirt";
                         }
                         else
                         {
                             cropTilemap.SetTile(croptile.Pos, AlreadySeeded);
-                            croptile.tileBase = AlreadySeeded;
                             croptile.tileBaseName = "AlreadySeeded";
                         }
                     }
@@ -307,7 +295,6 @@ public class CropsManager : MonoBehaviour, IDataPersistence
         {
             croptile.waterTime = croptile.crop.growthStageTimes[0];
         }
-        croptile.tileBase = AlreadySeeded;
         croptile.tileBaseName = "AlreadySeeded";
 
     } 
@@ -326,7 +313,6 @@ public class CropsManager : MonoBehaviour, IDataPersistence
         crop.spriteRenderer = go.GetComponent<SpriteRenderer>();
         //
         cropTilemap.SetTile(position, PlowedDirt);
-        crop.tileBase = PlowedDirt;
         crop.tileBaseName = "PlowedDirt";
     }
     public void RevertCrop(Vector3Int position, CropsTile crop)
@@ -355,7 +341,6 @@ public class CropsManager : MonoBehaviour, IDataPersistence
             Vector3Int pos1 = crop.Pos;
             Debug.Log("Crop Timer: " + cropTimer);
             Debug.Log("Dirt:" + crop.timerToDirt);
-            Debug.Log(crop.tileBase.ToString());
             Debug.Log("Comp:"+crop.Completed);
             Debug.Log("With:"+crop.ReadyToWither);
             Debug.Log("D:"+ crop.damage);
@@ -437,7 +422,6 @@ public class CropsManager : MonoBehaviour, IDataPersistence
                         Item.SummonItem(cropTile.crop.yield, positionItem);
                     }
                     cropTile.Harvested();
-                    cropTile.tileBase = PlowedDirt;
                     cropTile.tileBaseName = "PlowedDirt";
                     cropTile.waterTime = 0;
                     cropTilemap.SetTile((Vector3Int)position, PlowedDirt);
@@ -516,22 +500,18 @@ public class CropsManager : MonoBehaviour, IDataPersistence
             if (cropTile.tileBaseName == "PlowedDirt")
             {
                 cropTilemap.SetTile(cropTile.Pos, PlowedDirt);
-                cropTile.tileBase = PlowedDirt;
             }
             if (cropTile.tileBaseName == "AlreadySeeded")
             {
                 cropTilemap.SetTile(cropTile.Pos, AlreadySeeded);
-                cropTile.tileBase = AlreadySeeded;
             }
             if (cropTile.tileBaseName == "PlowableDirt")
             {
                 cropTilemap.SetTile(cropTile.Pos, PlowableDirt);
-                cropTile.tileBase = PlowableDirt;
             }
             if (cropTile.tileBaseName == "WateredPlowedDirt")
             {
                 cropTilemap.SetTile(cropTile.Pos, WateredPlowedDirt);
-                cropTile.tileBase = WateredPlowedDirt;
             }
             Debug.Log("Crop added"+ position);
           
@@ -572,7 +552,6 @@ public class CropsManager : MonoBehaviour, IDataPersistence
         CropsTile cropTile = crops[position];
         if (cropTile.crop != null)
         {
-            cropTile.tileBase = PlowedDirt;
             cropTile.tileBaseName = "PlowedDirt";
             cropTilemap.SetTile(gridposition, PlowedDirt);
             cropTile.waterTime = 0;
@@ -586,7 +565,6 @@ public class CropsManager : MonoBehaviour, IDataPersistence
         CropsTile cropTile = crops[position];
         cropTile.waterTime = 21;
         cropTilemap.SetTile(gridposition, WateredPlowedDirt);
-        cropTile.tileBase = WateredPlowedDirt;
         cropTile.tileBaseName = "WateredPlowedDirt";
     }
 }

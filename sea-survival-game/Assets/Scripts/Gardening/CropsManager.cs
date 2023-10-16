@@ -170,22 +170,21 @@ public class CropsManager : MonoBehaviour, IDataPersistence
         
         foreach (CropsTile croptile in crops.Values) 
         {
-            Debug.Log("*");
             if (croptile.crop == null)
             {
                 continue;
             }
             else
             {
-                Debug.Log("***");
                 if (dayNightCycle.mins % 10 == 0)
                     {
-                        if (!croptile.Completed && (croptile.tileBase == WateredPlowedDirt || croptile.tileBase == AlreadySeeded) && croptile.waterTime >0 && !croptile.ReadyToWither)
+                    bool canGrow = !croptile.Completed && (croptile.tileBaseName == "WateredPlowedDirt" || croptile.tileBaseName == "AlreadySeeded") && croptile.waterTime > 0 && !croptile.ReadyToWither;
+                    if (!croptile.Completed && (croptile.tileBase == WateredPlowedDirt || croptile.tileBase == AlreadySeeded) && croptile.waterTime >0 && !croptile.ReadyToWither)
                         {
                             croptile.growTimer += 1; // ne szamoljon feleslegesen
                             croptile.damage = 0;
                             croptile.timerToDirt = 0;
-                    }
+                        }
                         if (croptile.Completed || croptile.waterTime == 0 )
                         {
                            if(!croptile.crop.isSeasonialCrop && croptile.damage < croptile.crop.timeToWither) //a seasonal crop nem fog rohadni csak nem nol
@@ -333,7 +332,9 @@ public class CropsManager : MonoBehaviour, IDataPersistence
     public void RevertCrop(Vector3Int position, CropsTile crop)
     {
         crops.Remove((Vector2Int)position);
+        Debug.Log("En fvagayok");
         cropTilemap.SetTile(position, PlowableDirt);
+
 
         if (crop.toDeleteGO != null)
         {
@@ -354,7 +355,9 @@ public class CropsManager : MonoBehaviour, IDataPersistence
             Vector3Int pos1 = crop.Pos;
             Debug.Log("Crop Timer: " + cropTimer);
             Debug.Log("Dirt:" + crop.timerToDirt);
-            Debug.Log(crop.tileBaseName);
+            Debug.Log(crop.tileBase.ToString());
+            Debug.Log("Comp:"+crop.Completed);
+            Debug.Log("With:"+crop.ReadyToWither);
             Debug.Log("D:"+ crop.damage);
             Debug.Log("Water:" + crop.waterTime);
         }
@@ -528,7 +531,7 @@ public class CropsManager : MonoBehaviour, IDataPersistence
             if (cropTile.tileBaseName == "WateredPlowedDirt")
             {
                 cropTilemap.SetTile(cropTile.Pos, WateredPlowedDirt);
-                cropTile.tileBase = PlowableDirt;
+                cropTile.tileBase = WateredPlowedDirt;
             }
             Debug.Log("Crop added"+ position);
           

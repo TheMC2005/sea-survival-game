@@ -9,6 +9,16 @@ public class ScreenGameObjectManager : MonoBehaviour
     [SerializeField] public List<GameObject> audioGameObjects = new List<GameObject>();
     public GameObject objectToToggle;
     private bool isActive = false;
+
+    public void QuitGame()
+    {
+        Debug.Log("Kilepes");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+    }
     public void DisableAllGameObjects()
     {
         foreach (GameObject obj in gameObjectsList)

@@ -2142,6 +2142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622776dc0dac2df4187bcc471dca4262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InGameMenu: {fileID: 36508505}
   player: {fileID: 1755755039}
 --- !u!4 &275563982
 Transform:
@@ -3686,7 +3687,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2011289782}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ScreenGameObjectManager, Assembly-CSharp
         m_MethodName: ToggleObject
         m_Mode: 1
@@ -3698,9 +3699,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2011289782}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ScreenGameObjectManager, Assembly-CSharp
-        m_MethodName: EnableAllGameObjects
+        m_MethodName: DisableAllGameObjects
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3710,7 +3711,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2011289782}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ScreenGameObjectManager, Assembly-CSharp
         m_MethodName: EnableAllGameObjectsInsideSettings
         m_Mode: 1
@@ -15763,7 +15764,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2011289776}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c41f5ae86f50a4b42aa1baab315e20cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 95073fffea03ada408abc44b9a12cea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectsList:
@@ -15774,8 +15775,8 @@ MonoBehaviour:
   - {fileID: 2017967315}
   audioGameObjects:
   - {fileID: 1882835879}
-  timeDisplay: {fileID: 137232820}
-  dayDisplay: {fileID: 1992146392}
+  timeDisplay: {fileID: 1992146392}
+  dayDisplay: {fileID: 137232820}
   objectToToggle: {fileID: 970252623}
 --- !u!1 &2017967315
 GameObject:
@@ -15862,7 +15863,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2011289782}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ScreenGameObjectManager, Assembly-CSharp
         m_MethodName: EnableAllAudioObjects
         m_Mode: 1

@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class ScreenGameObjectManager : MonoBehaviour
+public class InGameScreenManager : MonoBehaviour
 {
     [SerializeField] public List<GameObject> gameObjectsList = new List<GameObject>();
     [SerializeField] public List<GameObject> gameObjectsListinsideSettingsmenu = new List<GameObject>();
@@ -74,21 +73,18 @@ public class ScreenGameObjectManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             DeactivateObject();
-           EnableAllGameObjects();
+            EnableAllGameObjects();
             DisableAllAudioObjects();
         }
-        if(objectToToggle.activeSelf)
+        if (objectToToggle.activeSelf)
         {
-                if (objectToToggle.activeSelf)
-                {
-                    timeDisplay.SetActive(false);
-                    dayDisplay.SetActive(false);
-                }
-                else
-                {
-                    timeDisplay.SetActive(true);
-                    dayDisplay.SetActive(true);
-                }
+            timeDisplay.SetActive(false);
+            dayDisplay.SetActive(false);
+        }
+        else
+        {
+            timeDisplay.SetActive(true);
+            dayDisplay.SetActive(true);
         }
     }
 

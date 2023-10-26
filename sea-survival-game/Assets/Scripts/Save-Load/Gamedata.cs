@@ -16,7 +16,9 @@ public class GameData
     public int[] items;
     public int[] itemcount;
     public Dictionary<Vector2Int, CropsTile> crops;
-    
+    public float musicSliderValue;
+    public float masterSliderValue;
+
     public GameData()
     {
         playerPosition = Vector3.zero;

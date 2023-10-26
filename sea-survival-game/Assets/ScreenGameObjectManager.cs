@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ScreenGameObjectManager : MonoBehaviour
@@ -7,7 +8,10 @@ public class ScreenGameObjectManager : MonoBehaviour
     [SerializeField] public List<GameObject> gameObjectsList = new List<GameObject>();
     [SerializeField] public List<GameObject> gameObjectsListinsideSettingsmenu = new List<GameObject>();
     [SerializeField] public List<GameObject> audioGameObjects = new List<GameObject>();
+    public GameObject timeDisplay;
+    public GameObject dayDisplay;
     public GameObject objectToToggle;
+
     private bool isActive = false;
 
     public void QuitGame()
@@ -19,6 +23,7 @@ public class ScreenGameObjectManager : MonoBehaviour
             Application.Quit();
 #endif
     }
+
     public void DisableAllGameObjects()
     {
         foreach (GameObject obj in gameObjectsList)
@@ -71,6 +76,19 @@ public class ScreenGameObjectManager : MonoBehaviour
             DeactivateObject();
            EnableAllGameObjects();
             DisableAllAudioObjects();
+        }
+        if(objectToToggle.activeSelf)
+        {
+                if (objectToToggle.activeSelf)
+                {
+                    timeDisplay.SetActive(false);
+                    dayDisplay.SetActive(false);
+                }
+                else
+                {
+                    timeDisplay.SetActive(true);
+                    dayDisplay.SetActive(true);
+                }
         }
     }
 

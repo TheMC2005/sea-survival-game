@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class GameManagerSingleton : MonoBehaviour
 {
-  public static GameManagerSingleton Instance { get; private set; }
+    public GameObject InGameMenu;
+    public static GameManagerSingleton Instance { get; private set; }
+    public bool IsPaused
+    {
+        get
+        {
+            return InGameMenu.activeSelf;
+        }
+    }
     private void Awake()
     {
         if(Instance !=null) 

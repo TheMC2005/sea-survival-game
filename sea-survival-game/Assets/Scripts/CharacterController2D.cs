@@ -24,18 +24,21 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
     }
     private void Update()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        motionVector = new Vector2(horizontal,vertical);
-        animator.SetFloat("horizontal", horizontal);
-        animator.SetFloat("vertical", vertical);
-        moving = horizontal != 0 || vertical != 0;
-        animator.SetBool("moving", moving);
-        if (horizontal !=0 || vertical !=0)
+        if (!GameManagerSingleton.Instance.IsPaused)
         {
-            LastMotionVector = new Vector2(horizontal, vertical).normalized;
-            animator.SetFloat("lastHorizontal", horizontal);
-            animator.SetFloat("lastVertical", vertical);
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+            motionVector = new Vector2(horizontal, vertical);
+            animator.SetFloat("horizontal", horizontal);
+            animator.SetFloat("vertical", vertical);
+            moving = horizontal != 0 || vertical != 0;
+            animator.SetBool("moving", moving);
+            if (horizontal != 0 || vertical != 0)
+            {
+                LastMotionVector = new Vector2(horizontal, vertical).normalized;
+                animator.SetFloat("lastHorizontal", horizontal);
+                animator.SetFloat("lastVertical", vertical);
+            }
         }
     }
 

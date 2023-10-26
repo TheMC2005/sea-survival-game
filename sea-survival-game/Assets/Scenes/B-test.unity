@@ -3687,8 +3687,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ScreenGameObjectManager, Assembly-CSharp
+      - m_Target: {fileID: 2011289782}
+        m_TargetAssemblyTypeName: InGameScreenManager, Assembly-CSharp
         m_MethodName: ToggleObject
         m_Mode: 1
         m_Arguments:
@@ -3699,8 +3699,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ScreenGameObjectManager, Assembly-CSharp
+      - m_Target: {fileID: 2011289782}
+        m_TargetAssemblyTypeName: InGameScreenManager, Assembly-CSharp
         m_MethodName: DisableAllGameObjects
         m_Mode: 1
         m_Arguments:
@@ -3711,8 +3711,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ScreenGameObjectManager, Assembly-CSharp
+      - m_Target: {fileID: 2011289782}
+        m_TargetAssemblyTypeName: InGameScreenManager, Assembly-CSharp
         m_MethodName: EnableAllGameObjectsInsideSettings
         m_Mode: 1
         m_Arguments:
@@ -15863,8 +15863,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ScreenGameObjectManager, Assembly-CSharp
+      - m_Target: {fileID: 2011289782}
+        m_TargetAssemblyTypeName: InGameScreenManager, Assembly-CSharp
         m_MethodName: EnableAllAudioObjects
         m_Mode: 1
         m_Arguments:

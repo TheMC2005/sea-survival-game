@@ -1013,7 +1013,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1863281669}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: OnContinueClicked
+        m_MethodName: OnContinueGameClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2060,22 +2060,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1384127345556343405, guid: 09368a08dc34d8741a9eb868b4a4bfe2, type: 3}
-      propertyPath: useEncryption
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1384127345556343405, guid: 09368a08dc34d8741a9eb868b4a4bfe2, type: 3}
-      propertyPath: overwrittenProfileID
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1384127345556343405, guid: 09368a08dc34d8741a9eb868b4a4bfe2, type: 3}
-      propertyPath: disableDataPersistance
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1384127345556343405, guid: 09368a08dc34d8741a9eb868b4a4bfe2, type: 3}
-      propertyPath: overrideSelectedProfileID
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5296265701547395209, guid: 09368a08dc34d8741a9eb868b4a4bfe2, type: 3}
       propertyPath: m_Name
       value: DataPersistanceManager

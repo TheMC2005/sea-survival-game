@@ -8,6 +8,7 @@ using UnityEngine.Tilemaps;
 [System.Serializable]
 public class GameData
 {
+    public long lastUpdated;
     public float seconds;
     public int mins;
     public int hours;

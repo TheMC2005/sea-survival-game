@@ -21,16 +21,20 @@ public class FileDataHandler
         this.useEncryption = useEncryption;
     }
 
-    public GameData Load()
+    public GameData Load(string profileID)
     {
-        // use Path.Combine to account for different OS's having different path separators
-        string fullPath = Path.Combine(dataDirPath, dataFileName);
+        //ha a profileid null
+        if(profileID == null)
+        {
+            Debug.LogWarning("A profileid null");
+            return null;
+        }
+        string fullPath = Path.Combine(dataDirPath, profileID, dataFileName);
         GameData loadedData = null;
         if (File.Exists(fullPath))
         {
             try
             {
-                // load the serialized data from the file
                 string dataToLoad = "";
                 using (FileStream stream = new FileStream(fullPath, FileMode.Open))
                 {
@@ -43,7 +47,6 @@ public class FileDataHandler
                 {
                     dataToLoad = Decrypt(dataToLoad);
                 }
-                // deserialize the data from Json back into the C# object
                 JsonSerializerSettings jsonSettings = new JsonSerializerSettings();
                 jsonSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 jsonSettings.TypeNameHandling = TypeNameHandling.Auto;
@@ -51,7 +54,6 @@ public class FileDataHandler
                 jsonSettings.Converters.Add(new DictionaryVector2IntJsonConverter());
                 jsonSettings.Converters.Add(new TileConverter());
                 jsonSettings.Converters.Add(new GameObjectConverter());
-                //jsonSettings.Converters.Add(new SpriteRendererConverter());
                 loadedData = JsonConvert.DeserializeObject<GameData>(dataToLoad, jsonSettings);
             }
             catch (Exception e)
@@ -62,28 +64,28 @@ public class FileDataHandler
         return loadedData;
     }
 
-    public void Save(GameData data)
+    public void Save(GameData data, string profileID)
     {
-        // use Path.Combine to account for different OS's having different path separators
-        string fullPath = Path.Combine(dataDirPath, dataFileName);
+        //ha a profileid null
+        if (profileID == null)
+        {
+            Debug.LogWarning("A profileid null");
+            return;
+        }
+        string fullPath = Path.Combine(dataDirPath,profileID,dataFileName);
         try
         {
-            // create the directory the file will be written to if it doesn't already exist
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
-
-            // serialize the C# game data object into Json
             JsonSerializerSettings jsonSettings = new JsonSerializerSettings();
             jsonSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             jsonSettings.Converters.Add(new DictionaryVector2IntJsonConverter());
             jsonSettings.Converters.Add(new TileConverter());
             jsonSettings.Converters.Add(new GameObjectConverter());
-            //jsonSettings.Converters.Add(new SpriteRendererConverter());
             string dataToStore = JsonConvert.SerializeObject(data, Formatting.Indented, jsonSettings);
             if (useEncryption)
             {
                 dataToStore = Encrypt(dataToStore);
             }
-            // write the serialized data to the file
             using (FileStream stream = new FileStream(fullPath, FileMode.Create))
             {
                 using (StreamWriter writer = new StreamWriter(stream))
@@ -110,7 +112,71 @@ public class FileDataHandler
         byte[] encryptedBytes = memoryStream.ToArray();
         return Convert.ToBase64String(encryptedBytes);
     }
+    public Dictionary<string, GameData> LoadAllProfiles()
+    {
+        Dictionary<string, GameData> profileDictionary = new Dictionary<string, GameData>();
 
+        // loop over all directory names in the data directory path
+        IEnumerable<DirectoryInfo> dirInfos = new DirectoryInfo(dataDirPath).EnumerateDirectories();
+        foreach (DirectoryInfo dirInfo in dirInfos)
+        {
+            string profileId = dirInfo.Name;
+
+            string fullPath = Path.Combine(dataDirPath, profileId, dataFileName);
+            if (!File.Exists(fullPath))
+            {
+                Debug.LogWarning("Skipping directory when loading all profiles because it does not contain data: "
+                    + profileId);
+                continue;
+            }
+
+            GameData profileData = Load(profileId);
+
+            if (profileData != null)
+            {
+                profileDictionary.Add(profileId, profileData);
+            }
+            else
+            {
+                Debug.LogError("Tried to load profile but something went wrong. ProfileId: " + profileId);
+            }
+        }
+
+        return profileDictionary;
+    }
+
+    public string GetMostRecentlyUpdatedProfileId()
+    {
+        string mostRecentProfileId = null;
+
+        Dictionary<string, GameData> profilesGameData = LoadAllProfiles();
+        foreach (KeyValuePair<string, GameData> pair in profilesGameData)
+        {
+            string profileId = pair.Key;
+            GameData gameData = pair.Value;
+
+            if (gameData == null)
+            {
+                continue;
+            }
+
+            if (mostRecentProfileId == null)
+            {
+                mostRecentProfileId = profileId;
+            }
+            else
+            {
+                DateTime mostRecentDateTime = DateTime.FromBinary(profilesGameData[mostRecentProfileId].lastUpdated);
+                DateTime newDateTime = DateTime.FromBinary(gameData.lastUpdated);
+                if (newDateTime > mostRecentDateTime)
+                {
+                    mostRecentProfileId = profileId;
+                }
+            }
+        }
+        return mostRecentProfileId;
+    }
+    
     private string Decrypt(string data)
     {
         byte[] cipherBytes = Convert.FromBase64String(data);

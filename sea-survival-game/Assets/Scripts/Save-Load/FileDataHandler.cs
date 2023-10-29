@@ -4,14 +4,16 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
+using System.Security.Cryptography;
+using System.Text;
 
 public class FileDataHandler
 {
     private string dataDirPath = "";
     private string dataFileName = "";
     private bool useEncryption = false;
-    private readonly string encryptionCodeWord = "word";
-
+    private const string KEY = "VwBDhEQbWCHSMkQNqrgx31nTWVsGhGp0OmvsCdA83rc=";
+    private const string IV = "RkrDta4Rmr8xff7XdWL1OQ==";
     public FileDataHandler(string dataDirPath, string dataFileName, bool useEncryption)
     {
         this.dataDirPath = dataDirPath;
@@ -39,7 +41,7 @@ public class FileDataHandler
                 }
                 if (useEncryption)
                 {
-                    dataToLoad = EncryptDecrypt(dataToLoad);
+                    dataToLoad = Decrypt(dataToLoad);
                 }
                 // deserialize the data from Json back into the C# object
                 JsonSerializerSettings jsonSettings = new JsonSerializerSettings();
@@ -79,7 +81,7 @@ public class FileDataHandler
             string dataToStore = JsonConvert.SerializeObject(data, Formatting.Indented, jsonSettings);
             if (useEncryption)
             {
-                dataToStore = EncryptDecrypt(dataToStore);
+                dataToStore = Encrypt(dataToStore);
             }
             // write the serialized data to the file
             using (FileStream stream = new FileStream(fullPath, FileMode.Create))
@@ -95,14 +97,32 @@ public class FileDataHandler
             Debug.LogError("Error occured when trying to save data to file: " + fullPath + "\n" + e);
         }
     }
-    private string EncryptDecrypt(string data)
+    private string Encrypt(string data)
     {
-        string modifiedData = "";
-        for (int i = 0; i < data.Length; i++)
-        {
-            modifiedData += (char)(data[i] ^ encryptionCodeWord[i % encryptionCodeWord.Length]);
-        }
-        return modifiedData;
+        byte[] clearBytes = Encoding.Unicode.GetBytes(data);
+        using Aes aes = Aes.Create();
+        aes.Key = Convert.FromBase64String(KEY);
+        aes.IV = Convert.FromBase64String(IV);
+        using MemoryStream memoryStream = new MemoryStream();
+        using CryptoStream cryptoStream = new CryptoStream(memoryStream, aes.CreateEncryptor(), CryptoStreamMode.Write);
+        cryptoStream.Write(clearBytes, 0, clearBytes.Length);
+        cryptoStream.Close();
+        byte[] encryptedBytes = memoryStream.ToArray();
+        return Convert.ToBase64String(encryptedBytes);
+    }
+
+    private string Decrypt(string data)
+    {
+        byte[] cipherBytes = Convert.FromBase64String(data);
+        using Aes aes = Aes.Create();
+        aes.Key = Convert.FromBase64String(KEY);
+        aes.IV = Convert.FromBase64String(IV);  
+        using MemoryStream memoryStream = new MemoryStream();
+        using CryptoStream cryptoStream = new CryptoStream(memoryStream, aes.CreateDecryptor(), CryptoStreamMode.Write);
+        cryptoStream.Write(cipherBytes, 0, cipherBytes.Length);
+        cryptoStream.Close();
+        byte[] decryptedBytes = memoryStream.ToArray();
+        return Encoding.Unicode.GetString(decryptedBytes);
     }
 }
 

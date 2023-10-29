@@ -50,6 +50,11 @@ public class InGameMenu : MonoBehaviour
         MainMenuPanel.SetActive(false);
         DisableMenuButtons();
         Time.timeScale = 1.0f;
+        timeDisplayColor.a = 1f;
+        timeDisplay.color = timeDisplayColor;
+
+        dayDisplayColor.a = 1f;
+        dayDisplay.color = dayDisplayColor;
     }
 
     private void DisableMenuButtons()

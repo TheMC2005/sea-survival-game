@@ -8,6 +8,7 @@ public class SavedSlot : MonoBehaviour
 {
     [Header("Profile")]
     [SerializeField] private string profileId = "";
+    public bool hasGameData;
 
     [Header("Content")]
     [SerializeField] private GameObject noDataContent;

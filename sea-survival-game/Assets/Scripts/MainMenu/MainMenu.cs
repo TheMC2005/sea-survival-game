@@ -25,13 +25,13 @@ public class MainMenu : Menu
 
     public void OnNewGameClicked()
     {
-        saveSlotsMenu.ActivateMenu(false);
+        saveSlotsMenu.ActivateMenu();
         this.DeactivateMenu();
     }
 
     public void OnLoadGameClicked()
     {
-        saveSlotsMenu.ActivateMenu(true);
+        saveSlotsMenu.ActivateMenu();
         this.DeactivateMenu();
     }
 

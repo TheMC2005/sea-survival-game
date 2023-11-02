@@ -14,7 +14,6 @@ public class SaveSlotsMenu : Menu
 
     private SavedSlot[] saveSlots;
 
-    private bool isLoadingGame = false;
 
     private void Awake()
     {
@@ -25,16 +24,11 @@ public class SaveSlotsMenu : Menu
     {
 
         DisableMenuButtons();
-
-
         DataPersistanceManager.instance.ChangeSelectedProfileID(saveSlot.GetProfileId());
-       
-
-        if (!isLoadingGame)
+        if(saveSlot.hasGameData == false)
         {
-            DataPersistanceManager.instance.NewGame();
+           DataPersistanceManager.instance.NewGame();
         }
-
         SceneManager.LoadSceneAsync("B-test");
     }
 
@@ -44,11 +38,10 @@ public class SaveSlotsMenu : Menu
         this.DeactivateMenu();
     }
 
-    public void ActivateMenu(bool isLoadingGame)
+    public void ActivateMenu()
     {
 
         this.gameObject.SetActive(true);
-        this.isLoadingGame = isLoadingGame;
         Dictionary<string, GameData> profilesGameData = DataPersistanceManager.instance.GetAllProfilesGameData();
 
         GameObject firstSelected = backButton.gameObject;
@@ -57,18 +50,17 @@ public class SaveSlotsMenu : Menu
             GameData profileData = null;
             profilesGameData.TryGetValue(saveSlot.GetProfileId(), out profileData);
             saveSlot.SetData(profileData);
-            if (profileData == null && isLoadingGame)
+            if (profileData != null)
             {
-                saveSlot.SetInteractable(false);
+                saveSlot.hasGameData = true;
             }
             else
-            {
-                saveSlot.SetInteractable(true);
+                saveSlot.hasGameData = false;
+ 
                 if (firstSelected.Equals(backButton.gameObject))
                 {
                     firstSelected = saveSlot.gameObject;
                 }
-            }
         }
         StartCoroutine(this.SetFirstSelected(firstSelected));
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SavedSlot : MonoBehaviour
@@ -9,12 +10,12 @@ public class SavedSlot : MonoBehaviour
     [Header("Profile")]
     [SerializeField] private string profileId = "";
     public bool hasGameData;
+    public string days;
 
     [Header("Content")]
     [SerializeField] private GameObject noDataContent;
     [SerializeField] private GameObject hasDataContent;
     [SerializeField] private TextMeshProUGUI dayText;
-
     private Button saveSlotButton;
 
     private void Awake()
@@ -38,6 +39,19 @@ public class SavedSlot : MonoBehaviour
 
             dayText.text = "DAYS "+data.days;
         }
+    }
+    private void Update()
+    {
+        //Debug.Log(EventSystem.current.currentSelectedGameObject);
+        //Debug.Log(saveSlotButton.gameObject);
+        if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == saveSlotButton.gameObject)
+        {
+            GetInformationOnSavedFile();
+        }
+    }
+    public void GetInformationOnSavedFile()
+    {
+        Debug.Log(days);
     }
 
     public string GetProfileId()

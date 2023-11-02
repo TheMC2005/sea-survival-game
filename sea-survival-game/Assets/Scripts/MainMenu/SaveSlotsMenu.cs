@@ -53,9 +53,13 @@ public class SaveSlotsMenu : Menu
             if (profileData != null)
             {
                 saveSlot.hasGameData = true;
+                saveSlot.days = profileData.days.ToString();
             }
             else
+            {
                 saveSlot.hasGameData = false;
+                saveSlot.days = "Empty Game";
+            }
  
                 if (firstSelected.Equals(backButton.gameObject))
                 {

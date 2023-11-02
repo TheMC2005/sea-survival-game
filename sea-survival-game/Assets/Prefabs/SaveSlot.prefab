@@ -64,7 +64,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4918986595417073626}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1.5889363}
   m_LocalScale: {x: 0.34937498, y: 0.34937498, z: 0.34937498}
   m_ConstrainProportionsScale: 0
@@ -185,10 +185,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efcfc43a0da449e4dbf6050e98448239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profileId: 
+  profileId: 1
+  hasGameData: 0
+  days: 
   noDataContent: {fileID: 195704661128855879}
   hasDataContent: {fileID: 6300807860611192073}
   dayText: {fileID: 1434498779759986325}
+  saveFileInformation: {fileID: 0}
 --- !u!1 &6300807860611192073
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,9 @@ public class DataPersistanceManager : MonoBehaviour
     [Header("File Storage Config")]
     [SerializeField] private string fileName;
     [SerializeField] private bool useEncryption;
-    
+    [Header("Movement to Save")]
+    public bool readyToSave;
+
 
     [Header("Debug")]
     [SerializeField] private bool initalizeDataIfNull = false;
@@ -114,7 +116,15 @@ public class DataPersistanceManager : MonoBehaviour
         // pass the data to other scripts so they can update it
         foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
         {
-            dataPersistenceObj.SaveData(gameData);
+            if (dataPersistenceObj.GetType() == typeof(CharacterController2D) && readyToSave)
+            {
+                dataPersistenceObj.SaveData(gameData);
+                readyToSave = false;
+            }
+            if (!(dataPersistenceObj.GetType() == typeof(CharacterController2D)))
+            {
+                dataPersistenceObj.SaveData(gameData);
+            }
         }
         gameData.lastUpdated = System.DateTime.Now.ToBinary();
         dataHandler.Save(gameData, selectedProfileID);

@@ -56,7 +56,12 @@ public class InGameMenu : MonoBehaviour
         dayDisplayColor.a = 1f;
         dayDisplay.color = dayDisplayColor;
     }
-
+    public void QuitToMainMenu()
+    {
+        DisableMenuButtons();
+        ResumeGame();
+        SceneManager.LoadSceneAsync("MainMenu");
+    }
     private void DisableMenuButtons()
     {
         resumeGameButton.interactable = false;

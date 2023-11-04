@@ -50,23 +50,24 @@ public class ToolsPlayerController : MonoBehaviour
     }
     private void Update()
     {
-
-        SelectTile();
-        CanSelectCheck();
-        Marker();
-        if (Input.GetMouseButtonDown(0)) 
+        if (!GameManagerSingleton.Instance.IsPaused)
         {
-            if(UseToolWorld() == true)
+            SelectTile();
+            CanSelectCheck();
+            Marker();
+            if (Input.GetMouseButtonDown(0))
             {
-                return;
-            }
- 
-            UseToolGrid();  
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
+                if (UseToolWorld() == true)
+                {
+                    return;
+                }
 
-            cropsManager.CheckIfInDictionary(selectedTilePosition);
+                UseToolGrid();
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                cropsManager.CheckIfInDictionary(selectedTilePosition);
+            }
         }
     }
     private void SelectTile()

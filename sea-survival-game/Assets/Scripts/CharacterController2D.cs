@@ -47,6 +47,11 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
         rb.velocity = motionVector * speed;
     }
 
+    private void OnDestroy()
+    {
+        DataPersistanceManager.instance.readyToSave = true;
+        DataPersistanceManager.instance.SaveGame();
+    }
     public void LoadData(GameData data)
     {
         transform.position = data.playerPosition;

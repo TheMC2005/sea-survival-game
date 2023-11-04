@@ -4414,7 +4414,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 112.348236, y: -176.36627}
+  m_AnchoredPosition: {x: 112.348236, y: -250}
   m_SizeDelta: {x: 2563.4941, y: 1445}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &970252625
@@ -16042,6 +16042,7 @@ MonoBehaviour:
   - {fileID: 1475500798}
   - {fileID: 774841299}
   - {fileID: 1682453499}
+  - {fileID: 313968026}
   gameObjectsListinsideSettingsmenu:
   - {fileID: 2017967315}
   audioGameObjects:
@@ -16616,7 +16617,6 @@ MonoBehaviour:
   speedTurnOff: 0.2
   LightPlaceHolderTurnOff: 0
   LightIntensityTurnOff: 0
-  scriptReference: {fileID: 1148288100}
 --- !u!4 &7750290809638931729 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 440797170649414013, guid: 1e6daab422faa684eadec4955273869e, type: 3}

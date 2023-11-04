@@ -17,8 +17,15 @@ public class DayNightCycle : MonoBehaviour, IDataPersistence
     public int mins;
     public int hours;
     public int days = 1;
-
-
+    public static DayNightCycle Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogError("There is multiple instances of a singleton");
+        }
+        Instance = this;
+    }
     void Start()
     {
         ppv = gameObject.GetComponent<Volume>();

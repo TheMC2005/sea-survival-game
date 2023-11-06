@@ -29,7 +29,6 @@ public class LanternController : MonoBehaviour
     float _currentTurnOn = 0;
     int _targetTurnOff = 1;
     float _currentTurnOff = 0;
-    public DayNightCycle scriptReference;
     
     private void Start()
     {
@@ -39,9 +38,8 @@ public class LanternController : MonoBehaviour
 
     void Update()
     {
-
-        int hours1 = scriptReference.hours;
-        int mins1 = scriptReference.mins;
+        int hours1 = DayNightCycle.Instance.hours;
+        int mins1 = DayNightCycle.Instance.mins;
         if(hours1 == hoursOn && mins1 > minsOn && start==true)
         {
             light2d.enabled = true;

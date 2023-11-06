@@ -12,16 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef46f2e75f4ca964ca2ec36534274d33, type: 3}
   m_Name: CreativeWateringCan
   m_EditorClassIdentifier: 
-  itemName: Watering Can
+  itemName: Creative Watering Can
   maxq: 1
   sprite: {fileID: 21300000, guid: 7dcfad17e0925cd4990662d28809f7ab, type: 3}
-  crop: {fileID: 0}
-  isCropSeed: 0
+  toolType: 3
+  toolLevel: 999
   onAction: {fileID: 0}
-  onTileMapAction: {fileID: 0}
+  onTileMapAction: {fileID: 11400000, guid: 9d4218949d866394eb9259a496efee41, type: 2}
   onItemUsed: {fileID: 0}
   plowWitheredGround: {fileID: 0}
   plowOutCrops: {fileID: 0}
-  toolType: 3
-  toolLevel: 999
-  WaterCrops: {fileID: 11400000, guid: 9d4218949d866394eb9259a496efee41, type: 2}

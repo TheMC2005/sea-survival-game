@@ -21,6 +21,7 @@ MonoBehaviour:
   onTileMapAction: {fileID: 0}
   onItemUsed: {fileID: 0}
   plowWitheredGround: {fileID: 0}
+  plowOutCrops: {fileID: 0}
   cropID: 1
   timeToGrow: 15
   timeToWither: 1
@@ -35,4 +36,4 @@ MonoBehaviour:
   - {fileID: -53551226, guid: 00c1043a71f5512498087595a8d61159, type: 3}
   - {fileID: -316473737, guid: 00c1043a71f5512498087595a8d61159, type: 3}
   - {fileID: 1101494271, guid: 00c1043a71f5512498087595a8d61159, type: 3}
-  growthStageTimes: 0200000006000000090000000c0000000f000000
+  growthStageTimes: 0400000006000000090000000c0000000f000000

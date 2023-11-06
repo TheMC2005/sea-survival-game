@@ -8,6 +8,7 @@ using UnityEngine.Tilemaps;
 [System.Serializable]
 public class GameData
 {
+    public long lastUpdated;
     public float seconds;
     public int mins;
     public int hours;
@@ -16,7 +17,9 @@ public class GameData
     public int[] items;
     public int[] itemcount;
     public Dictionary<Vector2Int, CropsTile> crops;
-    
+    public float musicSliderValue;
+    public float masterSliderValue;
+
     public GameData()
     {
         playerPosition = Vector3.zero;

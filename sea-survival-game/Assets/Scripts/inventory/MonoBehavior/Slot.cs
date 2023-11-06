@@ -13,7 +13,11 @@ public class Slot : MonoBehaviour
 
     void Start()
     {
-        item=Resources.Load("Empty") as Item;
+        
+    }
+    private void Awake()
+    {
+        item = Resources.Load("Empty") as Item;
     }
     public void Set()
     {

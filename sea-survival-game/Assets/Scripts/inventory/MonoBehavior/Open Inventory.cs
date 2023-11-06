@@ -14,7 +14,7 @@ public class OpenInventory : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab)){
+        if (Input.GetKeyDown(KeyCode.Tab) && !GameManagerSingleton.Instance.IsPaused){
             if(IsOpen){
                 rt.anchoredPosition = new Vector2(0, -83);
                 IsOpen = false;

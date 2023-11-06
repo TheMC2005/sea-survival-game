@@ -5016,7 +5016,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_235
+      name: water1
       rect:
         serializedVersion: 2
         x: 32
@@ -5037,7 +5037,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_236
+      name: water2
       rect:
         serializedVersion: 2
         x: 48
@@ -5058,7 +5058,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_237
+      name: water3
       rect:
         serializedVersion: 2
         x: 64
@@ -5856,7 +5856,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_275
+      name: water4
       rect:
         serializedVersion: 2
         x: 32
@@ -5877,7 +5877,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_276
+      name: water5
       rect:
         serializedVersion: 2
         x: 48
@@ -5898,7 +5898,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_277
+      name: water6
       rect:
         serializedVersion: 2
         x: 64
@@ -6591,7 +6591,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_310
+      name: water7
       rect:
         serializedVersion: 2
         x: 32
@@ -6612,7 +6612,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_311
+      name: water8
       rect:
         serializedVersion: 2
         x: 48
@@ -6633,7 +6633,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_312
+      name: water9
       rect:
         serializedVersion: 2
         x: 64
@@ -7389,7 +7389,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_348
+      name: water10
       rect:
         serializedVersion: 2
         x: 32
@@ -7410,7 +7410,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_349
+      name: water11
       rect:
         serializedVersion: 2
         x: 48
@@ -8082,7 +8082,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_381
+      name: water12
       rect:
         serializedVersion: 2
         x: 32
@@ -8103,7 +8103,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_382
+      name: water13
       rect:
         serializedVersion: 2
         x: 48
@@ -20136,7 +20136,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_959
+      name: NearWater1
       rect:
         serializedVersion: 2
         x: 224
@@ -20157,7 +20157,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_960
+      name: NearWater2
       rect:
         serializedVersion: 2
         x: 240
@@ -20178,7 +20178,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_961
+      name: NearWater3
       rect:
         serializedVersion: 2
         x: 256
@@ -20619,7 +20619,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_982
+      name: NearWater4
       rect:
         serializedVersion: 2
         x: 224
@@ -20640,7 +20640,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_983
+      name: NearWater5
       rect:
         serializedVersion: 2
         x: 240
@@ -20661,7 +20661,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_984
+      name: NearWater6
       rect:
         serializedVersion: 2
         x: 256
@@ -21123,7 +21123,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_1006
+      name: NearWater7
       rect:
         serializedVersion: 2
         x: 224
@@ -21144,7 +21144,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_1007
+      name: NearWater8
       rect:
         serializedVersion: 2
         x: 240
@@ -21165,7 +21165,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_1008
+      name: NearWater9
       rect:
         serializedVersion: 2
         x: 256
@@ -21669,7 +21669,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_1032
+      name: NearWater10
       rect:
         serializedVersion: 2
         x: 224
@@ -21690,7 +21690,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_1033
+      name: NearWater11
       rect:
         serializedVersion: 2
         x: 240
@@ -22173,7 +22173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_1056
+      name: NearWater12
       rect:
         serializedVersion: 2
         x: 224
@@ -22194,7 +22194,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_1057
+      name: NearWater13
       rect:
         serializedVersion: 2
         x: 240
@@ -22559,7 +22559,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -22585,6 +22585,19 @@ TextureImporter:
       AlreadySeeded: 434114786
       Carrot: 2034492331
       Grass: -1817280354
+      NearWater1: -1523580358
+      NearWater10: -829617197
+      NearWater11: -1557037682
+      NearWater12: -1596386916
+      NearWater13: 1852215151
+      NearWater2: 666094088
+      NearWater3: -1093234475
+      NearWater4: 1980839178
+      NearWater5: -1628348722
+      NearWater6: -943640073
+      NearWater7: 516176924
+      NearWater8: -385086781
+      NearWater9: -1555367522
       Overworld_1: 1546187268
       Overworld_10: 1617614598
       Overworld_100: -345759830
@@ -22594,9 +22607,6 @@ TextureImporter:
       Overworld_1003: 685897206
       Overworld_1004: 1410534677
       Overworld_1005: -1719663645
-      Overworld_1006: 516176924
-      Overworld_1007: -385086781
-      Overworld_1008: -1555367522
       Overworld_1009: 1322677094
       Overworld_101: -883266559
       Overworld_1010: -244506290
@@ -22622,8 +22632,6 @@ TextureImporter:
       Overworld_103: 221433542
       Overworld_1030: 575742605
       Overworld_1031: 337735780
-      Overworld_1032: -829617197
-      Overworld_1033: -1557037682
       Overworld_1034: -1424002025
       Overworld_1035: 1125015977
       Overworld_1036: 775912102
@@ -22648,8 +22656,6 @@ TextureImporter:
       Overworld_1053: -1711142469
       Overworld_1054: -646213286
       Overworld_1055: 651736488
-      Overworld_1056: -1596386916
-      Overworld_1057: 1852215151
       Overworld_1058: 1233941043
       Overworld_1059: -151878253
       Overworld_106: -1032544182
@@ -22803,9 +22809,6 @@ TextureImporter:
       Overworld_232: 980979681
       Overworld_233: 488973341
       Overworld_234: 1162026959
-      Overworld_235: 1525954593
-      Overworld_236: 1508597967
-      Overworld_237: -2136451956
       Overworld_238: 921378632
       Overworld_239: -1917098521
       Overworld_24: -1082728319
@@ -22847,9 +22850,6 @@ TextureImporter:
       Overworld_272: 1857638551
       Overworld_273: 1358630236
       Overworld_274: -1108624126
-      Overworld_275: -202508164
-      Overworld_276: -2078945766
-      Overworld_277: -1844914312
       Overworld_278: 723643817
       Overworld_279: 380509754
       Overworld_28: 948021121
@@ -22887,9 +22887,6 @@ TextureImporter:
       Overworld_308: -1086937354
       Overworld_309: -1087957904
       Overworld_31: -1385457793
-      Overworld_310: -918755857
-      Overworld_311: 1321763775
-      Overworld_312: -1017284401
       Overworld_313: 1177494846
       Overworld_314: -909875535
       Overworld_315: 215717624
@@ -22928,8 +22925,6 @@ TextureImporter:
       Overworld_345: 816831131
       Overworld_346: 1364178622
       Overworld_347: -1957967726
-      Overworld_348: -1512080843
-      Overworld_349: -1223313813
       Overworld_35: 592295746
       Overworld_350: 821522408
       Overworld_351: -1321254657
@@ -22965,8 +22960,6 @@ TextureImporter:
       Overworld_379: -332254037
       Overworld_38: 252311902
       Overworld_380: -1180366616
-      Overworld_381: -1686721856
-      Overworld_382: 1527002186
       Overworld_383: 1843939619
       Overworld_384: 1342664093
       Overworld_385: -1305795171
@@ -23606,10 +23599,7 @@ TextureImporter:
       Overworld_956: 1085949531
       Overworld_957: -1170133025
       Overworld_958: 1632613229
-      Overworld_959: -1523580358
       Overworld_96: -2712446
-      Overworld_960: 666094088
-      Overworld_961: -1093234475
       Overworld_962: -810553198
       Overworld_963: 2032031271
       Overworld_964: -1746430597
@@ -23631,9 +23621,6 @@ TextureImporter:
       Overworld_98: 1697481348
       Overworld_980: 1686644833
       Overworld_981: 782344402
-      Overworld_982: 1980839178
-      Overworld_983: -1628348722
-      Overworld_984: -943640073
       Overworld_985: -219812639
       Overworld_986: -382375350
       Overworld_987: -1493966982
@@ -23657,6 +23644,19 @@ TextureImporter:
       Tomato: -856145612
       TreeLog: 736555906
       WateredPlowedDirt: 1841021682
+      water1: 1525954593
+      water10: -1512080843
+      water11: -1223313813
+      water12: -1686721856
+      water13: 1527002186
+      water2: 1508597967
+      water3: -2136451956
+      water4: -202508164
+      water5: -2078945766
+      water6: -1844914312
+      water7: -918755857
+      water8: 1321763775
+      water9: -1017284401
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

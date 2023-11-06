@@ -48,6 +48,10 @@ public class DataPersistanceManager : MonoBehaviour
             Debug.LogWarning("Overrode the selected profileid to this:" + overwrittenProfileID);
         }
     }
+    public string GetCurrentProfileID()
+    {
+        return dataHandler.GetMostRecentlyUpdatedProfileId();
+    }
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;

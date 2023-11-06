@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,6 +14,8 @@ public class SaveSlotsMenu : Menu
     [SerializeField] private Button backButton;
 
     private SavedSlot[] saveSlots;
+    public SavedSlot savedSlot;
+    public string selectedSlotID;
 
 
     private void Awake()
@@ -81,5 +84,25 @@ public class SaveSlotsMenu : Menu
             saveSlot.SetInteractable(false);
         }
         backButton.interactable = false;
+    }
+    public void SetSelectedProfileID(string n)
+    {
+        selectedSlotID = n;
+    }
+
+    public void DeleteFolder()
+    {
+        if(selectedSlotID == null) return;
+        string fullPath = Path.Combine(Application.persistentDataPath, selectedSlotID);
+
+        if (Directory.Exists(fullPath))
+        {
+            Directory.Delete(fullPath, true);
+            Debug.Log("Folder deleted successfully.");
+        }
+        else
+        {
+            Debug.Log("Folder not found.");
+        }
     }
 }

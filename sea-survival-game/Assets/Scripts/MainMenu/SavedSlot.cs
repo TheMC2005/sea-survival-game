@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Profiling;
 using UnityEngine.UI;
 
 public class SavedSlot : MonoBehaviour
 {
     [Header("Profile")]
-    [SerializeField] private string profileId = "";
+    [SerializeField] public string profileId = "";
     public bool hasGameData;
     public string days;
 

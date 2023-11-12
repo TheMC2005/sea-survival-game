@@ -8,7 +8,6 @@ using UnityEngine.Tilemaps;
 public class insideWaterTileMap : MonoBehaviour
 {
     [SerializeField] CharacterController2D characterController;
-    public bool insideWater;
     public float _speedAfterExitingWater;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -18,7 +17,7 @@ public class insideWaterTileMap : MonoBehaviour
             Debug.Log("Player entered the waterTilemap!");
             GameManagerSingleton.Instance.isSwimming = true;
         }
-        insideWater = true;
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -28,14 +27,13 @@ public class insideWaterTileMap : MonoBehaviour
             Debug.Log("Player exited the waterTilemap!");
             GameManagerSingleton.Instance.isSwimming = false;
             characterController.speed = 0.2f;
-            insideWater = false;
         }
     }
     private void Update()
     {
-        if (!insideWater)
+        if (!GameManagerSingleton.Instance.isSwimming)
         {
-          _speedAfterExitingWater = Mathf.MoveTowards(characterController.speed, 5, 2*Time.deltaTime);
+          _speedAfterExitingWater = Mathf.MoveTowards(characterController.speed, 3, 2*Time.deltaTime);
             characterController.speed = _speedAfterExitingWater;
         }
     }

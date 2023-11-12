@@ -7,8 +7,8 @@ using UnityEngine;
 public class CharacterController2D : MonoBehaviour, IDataPersistence
 {
     Rigidbody2D rb;
-    [SerializeField] public float speed = 2f;
-    [SerializeField] public float swimmingSpeed = 3f;
+    [SerializeField] public float speed = 3f;
+    [SerializeField] public float swimmingSpeed = 2f;
     public Vector2 motionVector;
     public Vector2 swimmingMotionVector;
     public Vector2 LastMotionVector;

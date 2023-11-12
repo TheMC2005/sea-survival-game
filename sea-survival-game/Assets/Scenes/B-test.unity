@@ -20349,6 +20349,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cd1b0605b66c4740abc3ffb417503ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterController: {fileID: 1755755045}
+  insideWater: 0
+  _speedAfterExitingWater: 0
 --- !u!1001 &651183976
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24231,6 +24234,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   swimmingSpeed: 3
+  motionVector: {x: 0, y: 0}
+  swimmingMotionVector: {x: 0, y: 0}
   LastMotionVector: {x: 0, y: 0}
   moving: 0
 --- !u!61 &1755755046

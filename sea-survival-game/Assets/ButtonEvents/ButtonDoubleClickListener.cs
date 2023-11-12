@@ -1,7 +1,4 @@
-﻿/*--------------------------------------
-   Email  : hamza95herbou@gmail.com
-   Github : https://github.com/herbou
-----------------------------------------*/
+﻿
 
 using System;
 using UnityEngine;

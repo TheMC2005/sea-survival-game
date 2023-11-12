@@ -9,12 +9,10 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
     Rigidbody2D rb;
     [SerializeField] float speed = 2f;
     Vector2 motionVector;
+    Vector2 swimmingMotionVector;
     public Vector2 LastMotionVector;
     Animator animator;
     public bool moving;
-    public float x;
-    public float y;
-    public float z;
 
     void Awake()
     {
@@ -26,25 +24,45 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
     {
         if (!GameManagerSingleton.Instance.IsPaused)
         {
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            float vertical = Input.GetAxisRaw("Vertical");
-            motionVector = new Vector2(horizontal, vertical);
-            animator.SetFloat("horizontal", horizontal);
-            animator.SetFloat("vertical", vertical);
-            moving = horizontal != 0 || vertical != 0;
-            animator.SetBool("moving", moving);
-            if (horizontal != 0 || vertical != 0)
+            if (GameManagerSingleton.Instance.isSwimming)
             {
-                LastMotionVector = new Vector2(horizontal, vertical).normalized;
-                animator.SetFloat("lastHorizontal", horizontal);
-                animator.SetFloat("lastVertical", vertical);
+                animator.SetBool("isSwimming", true);
+                float shorizontal = Input.GetAxisRaw("Horizontal");
+                float svertical = Input.GetAxisRaw("Vertical");
+                swimmingMotionVector = new Vector2(shorizontal, svertical);
+                animator.SetFloat("horizontalSwimming", shorizontal);
+                animator.SetFloat("verticalSwimming", svertical);
+            }
+            else
+            {
+                animator.SetBool("isSwimming", false);
+                float horizontal = Input.GetAxisRaw("Horizontal");
+                float vertical = Input.GetAxisRaw("Vertical");
+                motionVector = new Vector2(horizontal, vertical);
+                animator.SetFloat("horizontal", horizontal);
+                animator.SetFloat("vertical", vertical);
+                moving = horizontal != 0 || vertical != 0;
+                animator.SetBool("moving", moving);
+                if (horizontal != 0 || vertical != 0)
+                {
+                    LastMotionVector = new Vector2(horizontal, vertical).normalized;
+                    animator.SetFloat("lastHorizontal", horizontal);
+                    animator.SetFloat("lastVertical", vertical);
+                }
             }
         }
     }
 
     void FixedUpdate()
     {
-        rb.velocity = motionVector * speed;
+        if (GameManagerSingleton.Instance.isSwimming)
+        {
+            rb.velocity = swimmingMotionVector * speed;
+        }
+        else
+        {
+            rb.velocity = motionVector * speed;
+        }
     }
 
     private void OnDestroy()

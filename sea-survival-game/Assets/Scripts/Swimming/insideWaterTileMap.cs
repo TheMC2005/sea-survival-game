@@ -12,6 +12,7 @@ public class insideWaterTileMap : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Debug.Log("Player entered the waterTilemap!");
+            GameManagerSingleton.Instance.isSwimming = true;
         }
     }
 
@@ -20,6 +21,7 @@ public class insideWaterTileMap : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Debug.Log("Player exited the waterTilemap!");
+            GameManagerSingleton.Instance.isSwimming = false;
         }
     }
     private void OnTriggerStay2D(Collider2D collision)

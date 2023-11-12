@@ -68,6 +68,11 @@ public class ToolsPlayerController : MonoBehaviour
             {
                 cropsManager.CheckIfInDictionary(selectedTilePosition);
             }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                GameManagerSingleton.Instance.player.transform.position = selectedTilePosition;
+                Debug.Log("WOOOOSH");
+            }
         }
     }
     private void SelectTile()

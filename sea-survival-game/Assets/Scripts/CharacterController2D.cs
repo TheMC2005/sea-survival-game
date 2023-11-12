@@ -10,6 +10,7 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
     [SerializeField] public float speed = 3f;
     [SerializeField] public float shallowSpeed = 2.5f;
     [SerializeField] public float swimmingSpeed = 2f;
+    public float speedMultiplier;
     public Vector2 motionVector;
     public Vector2 swimmingMotionVector;
     public Vector2 shallowMotionVector;
@@ -74,17 +75,23 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
 
     void FixedUpdate()
     {
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+          speedMultiplier = 1.5f;
+        }
+        else
+        speedMultiplier = 1.0f;
         if (GameManagerSingleton.Instance.inShallow)
         {
-            rb.velocity = shallowMotionVector * shallowSpeed;
+            rb.velocity = shallowMotionVector * shallowSpeed * speedMultiplier;
         }
         if (GameManagerSingleton.Instance.isSwimming)
         {
-            rb.velocity = swimmingMotionVector * swimmingSpeed;
+            rb.velocity = swimmingMotionVector * swimmingSpeed * speedMultiplier;
         }
         if(GameManagerSingleton.Instance.isMoving)
         {
-            rb.velocity = motionVector * speed;
+            rb.velocity = motionVector * speed * speedMultiplier;
         }
     }
 

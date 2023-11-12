@@ -18,7 +18,5 @@ MonoBehaviour:
   toolType: 1
   toolLevel: 999
   onAction: {fileID: 11400000, guid: a8fd80cceb19cab428a262512b5b3dfb, type: 2}
-  onTileMapAction: {fileID: 0}
+  onTileMapAction: {fileID: 11400000, guid: 0aa9b570a3326264e8f087220e426a3b, type: 2}
   onItemUsed: {fileID: 0}
-  plowWitheredGround: {fileID: 0}
-  plowOutCrops: {fileID: 0}

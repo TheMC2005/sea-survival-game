@@ -10,8 +10,7 @@ public class SeedTile : ToolAction
     {
         if (tileMapReadController.cropsManager.Check(gridposition) == false)
         {
-            return false;
-            
+            return false; 
         }
         if(tileMapReadController.cropsManager.GetTileCrop(gridposition) == null)
         {

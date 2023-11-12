@@ -177,6 +177,20 @@ public class ToolsPlayerController : MonoBehaviour
                     }
                 }
             }
+
+            if (Hotbar.selSlot.item is building)
+            {
+                building Building = (building)item;
+                if (Building.onTileMapAction == null) { return; }
+                bool complete = Building.onTileMapAction.OnApplyToTileMap(selectedTilePosition, tileMapReadController, Building);
+                if (complete == true)
+                {
+                    if (Building.onItemUsed != null)
+                    {
+                        Building.onItemUsed.OnItemUsed(Building);
+                    }
+                }
+            }
         }
         
     }

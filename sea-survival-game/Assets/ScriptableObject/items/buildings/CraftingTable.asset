@@ -16,3 +16,5 @@ MonoBehaviour:
   maxq: 99
   sprite: {fileID: 21300000, guid: 6bf99eea50a53bc478e86afabea970fe, type: 3}
   tile: {fileID: 11400000, guid: e00f5593247a6ae41b7361c4871b19a1, type: 2}
+  onTileMapAction: {fileID: 11400000, guid: 5750cc2fabd8cc1489e905973dcc1f81, type: 2}
+  onItemUsed: {fileID: 0}

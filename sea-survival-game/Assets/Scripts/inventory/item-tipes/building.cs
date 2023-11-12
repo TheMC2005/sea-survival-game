@@ -7,4 +7,6 @@ using UnityEngine.Tilemaps;
 public class building : Item
 {
     public TileBase tile;
+    public ToolAction onTileMapAction;
+    public ToolAction onItemUsed;
 }

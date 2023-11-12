@@ -19,14 +19,13 @@ public class insideWaterTileMap : MonoBehaviour
         }
         
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             Debug.Log("Player exited the waterTilemap!");
             GameManagerSingleton.Instance.isSwimming = false;
-            characterController.speed = 0.2f;
+            characterController.speed = 0.8f;
         }
     }
     private void Update()

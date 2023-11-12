@@ -8,9 +8,11 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
 {
     Rigidbody2D rb;
     [SerializeField] public float speed = 3f;
+    [SerializeField] public float shallowSpeed = 2.5f;
     [SerializeField] public float swimmingSpeed = 2f;
     public Vector2 motionVector;
     public Vector2 swimmingMotionVector;
+    public Vector2 shallowMotionVector;
     public Vector2 LastMotionVector;
     Animator animator;
     public bool moving;
@@ -25,18 +27,19 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
     {
         if (!GameManagerSingleton.Instance.IsPaused)
         {
-            if (GameManagerSingleton.Instance.isSwimming)
+            if (GameManagerSingleton.Instance.inShallow)
             {
-                animator.SetBool("isSwimming", true);
-                float shorizontal = Input.GetAxisRaw("Horizontal");
-                float svertical = Input.GetAxisRaw("Vertical");
-                swimmingMotionVector = new Vector2(shorizontal, svertical);
-                animator.SetFloat("horizontalSwimming", shorizontal);
-                animator.SetFloat("verticalSwimming", svertical);
+                animator.SetBool("inShallow", true);
+                animator.SetBool("isSwimming", false);
+                float shallowHorizontal = Input.GetAxisRaw("Horizontal");
+                float shallowVertical = Input.GetAxisRaw("Vertical");
+                swimmingMotionVector = new Vector2(shallowHorizontal, shallowVertical);
+                animator.SetFloat("horizontalShallow", shallowHorizontal);
+                animator.SetFloat("verticalShallow", shallowVertical);
             }
             else
             {
-                animator.SetBool("isSwimming", false);
+                animator.SetBool("inShallow", false);
                 float horizontal = Input.GetAxisRaw("Horizontal");
                 float vertical = Input.GetAxisRaw("Vertical");
                 motionVector = new Vector2(horizontal, vertical);
@@ -51,11 +54,47 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
                     animator.SetFloat("lastVertical", vertical);
                 }
             }
+
+            if (GameManagerSingleton.Instance.isSwimming)
+            {
+                animator.SetBool("inShallow", false);
+                animator.SetBool("isSwimming", true);
+                float shorizontal = Input.GetAxisRaw("Horizontal");
+                float svertical = Input.GetAxisRaw("Vertical");
+                swimmingMotionVector = new Vector2(shorizontal, svertical);
+                animator.SetFloat("horizontalSwimming", shorizontal);
+                animator.SetFloat("verticalSwimming", svertical);
+            }
+            else
+            {
+                    animator.SetBool("isSwimming", false);
+                    float horizontal = Input.GetAxisRaw("Horizontal");
+                    float vertical = Input.GetAxisRaw("Vertical");
+                    motionVector = new Vector2(horizontal, vertical);
+                    animator.SetFloat("horizontal", horizontal);
+                    animator.SetFloat("vertical", vertical);
+                    moving = horizontal != 0 || vertical != 0;
+                    animator.SetBool("moving", moving);
+                    if (horizontal != 0 || vertical != 0)
+                    {
+                        LastMotionVector = new Vector2(horizontal, vertical).normalized;
+                        animator.SetFloat("lastHorizontal", horizontal);
+                        animator.SetFloat("lastVertical", vertical);
+                    }
+            }
         }
     }
 
     void FixedUpdate()
     {
+        if (GameManagerSingleton.Instance.inShallow)
+        {
+            rb.velocity = shallowMotionVector * shallowSpeed;
+        }
+        else
+        {
+            rb.velocity = motionVector * speed;
+        }
         if (GameManagerSingleton.Instance.isSwimming)
         {
             rb.velocity = swimmingMotionVector * swimmingSpeed;
@@ -64,6 +103,7 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
         {
             rb.velocity = motionVector * speed;
         }
+
     }
 
     private void OnDestroy()

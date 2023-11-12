@@ -6,6 +6,7 @@ public class GameManagerSingleton : MonoBehaviour
 {
     public GameObject InGameMenu;
     public bool isSwimming;
+    public bool inShallow;
     public static GameManagerSingleton Instance { get; private set; }
     public bool IsPaused
     {

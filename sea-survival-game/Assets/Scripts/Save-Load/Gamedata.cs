@@ -19,9 +19,11 @@ public class GameData
     public Dictionary<Vector2Int, CropsTile> crops;
     public float musicSliderValue;
     public float masterSliderValue;
+    public bool isSwimming;
 
     public GameData()
     {
+        isSwimming = false;
         playerPosition = Vector3.zero;
         seconds = 0;
         mins = 0;

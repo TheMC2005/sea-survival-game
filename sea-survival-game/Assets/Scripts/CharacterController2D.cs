@@ -7,9 +7,10 @@ using UnityEngine;
 public class CharacterController2D : MonoBehaviour, IDataPersistence
 {
     Rigidbody2D rb;
-    [SerializeField] float speed = 2f;
-    Vector2 motionVector;
-    Vector2 swimmingMotionVector;
+    [SerializeField] public float speed = 2f;
+    [SerializeField] public float swimmingSpeed = 3f;
+    public Vector2 motionVector;
+    public Vector2 swimmingMotionVector;
     public Vector2 LastMotionVector;
     Animator animator;
     public bool moving;
@@ -57,7 +58,7 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
     {
         if (GameManagerSingleton.Instance.isSwimming)
         {
-            rb.velocity = swimmingMotionVector * speed;
+            rb.velocity = swimmingMotionVector * swimmingSpeed;
         }
         else
         {
@@ -73,10 +74,12 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         transform.position = data.playerPosition;
+        GameManagerSingleton.Instance.isSwimming = data.isSwimming;
     }
 
     public void SaveData(GameData data)
     {
         data.playerPosition = transform.position;
+        data.isSwimming = GameManagerSingleton.Instance.isSwimming;
     }
 }

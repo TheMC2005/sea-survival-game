@@ -13,6 +13,8 @@ public class PlaceBuilding : ToolAction
         if (tileMapReadController.cropsManager.Check(gridposition) == false)
         {
             tileMapReadController.cropsTileMap.SetTile(gridposition, item.tile);
+            BuildDic.PosToTile.Add(gridposition, item.tile);
+            BuildDic.PosToItem.Add(gridposition, item);
         }
         return true;
     }

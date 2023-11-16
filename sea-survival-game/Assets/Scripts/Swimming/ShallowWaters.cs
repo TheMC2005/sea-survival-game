@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ShallowWaters : MonoBehaviour
 {
-    [SerializeField] CharacterController2D characterController;
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             Debug.Log("Player entered the shallowWaters!");
+            GameManagerSingleton.Instance.isSwimming = false;
             GameManagerSingleton.Instance.inShallow = true;
         }
 
@@ -25,6 +25,7 @@ public class ShallowWaters : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-
+        GameManagerSingleton.Instance.inShallow = true;
+        GameManagerSingleton.Instance.isSwimming = false;
     }
 }

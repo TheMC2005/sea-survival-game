@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterController2D : MonoBehaviour, IDataPersistence
@@ -35,6 +36,7 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
                 animator.SetBool("isMoving", false);
                 float shallowHorizontal = Input.GetAxisRaw("Horizontal");
                 float shallowVertical = Input.GetAxisRaw("Vertical");
+                moving = shallowHorizontal != 0 || shallowVertical != 0;
                 shallowMotionVector = new Vector2(shallowHorizontal, shallowVertical);
                 animator.SetFloat("horizontalShallow", shallowHorizontal);
                 animator.SetFloat("verticalShallow", shallowVertical);
@@ -66,6 +68,7 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
                 animator.SetBool("isMoving", false);
                 float shorizontal = Input.GetAxisRaw("Horizontal");
                 float svertical = Input.GetAxisRaw("Vertical");
+                moving = shorizontal != 0 || svertical != 0;
                 swimmingMotionVector = new Vector2(shorizontal, svertical);
                 animator.SetFloat("horizontalSwimming", shorizontal);
                 animator.SetFloat("verticalSwimming", svertical);

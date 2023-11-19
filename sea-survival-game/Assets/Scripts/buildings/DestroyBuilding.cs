@@ -9,8 +9,6 @@ public class DestroyBuilding : ToolAction
     public override bool OnApplyToTileMap(Vector3Int gridposition, TileMapReadController tileMapReadController, Tool item)
     {
         Item.SummonItem(BuildDic.PosToItem[gridposition], new Vector2(gridposition.x, gridposition.y));
-        BuildDic.PosToTile.Remove(gridposition);
-        BuildDic.PosToItem.Remove(gridposition);
         tileMapReadController.cropsTileMap.SetTile(gridposition, null);
         return true;
     }

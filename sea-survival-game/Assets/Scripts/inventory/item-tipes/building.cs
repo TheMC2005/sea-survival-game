@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(fileName = "NewBuilding", menuName = "Item/Create New Building")]
 public class Building : Item
 {
-    public TileBase tile;
-    public ToolAction onTileMapAction;
+    public GameObject building;
     public ToolAction onItemUsed;
+    public ToolAction onTileMapAction;
 }

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: Game-Data.json
-  useEncryption: 1
+  useEncryption: 0
   readyToSave: 0
   initalizeDataIfNull: 0
   disableDataPersistance: 0

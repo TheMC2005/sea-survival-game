@@ -1,20 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(menuName = "Data/Tool Action/Place Building")]
 public class PlaceBuilding : ToolAction
 {
-    public Tilemap tilemap;
     public override bool OnApplyToTileMap(Vector3Int gridposition, TileMapReadController tileMapReadController, Building item)
     {
-        if (tileMapReadController.cropsManager.Check(gridposition) == false)
-        {
-            tileMapReadController.cropsTileMap.SetTile(gridposition, item.tile);
-            BuildDic.PosToTile.Add(gridposition, item.tile);
-            BuildDic.PosToItem.Add(gridposition, item);
-        }
+        GameObject building = Instantiate(item.building, Camera.main.ScreenToWorldPoint(Input.mousePosition), new Quaternion(0,0,0,1));
+        building.transform.Translate(Vector3.forward*5);
         return true;
     }
 

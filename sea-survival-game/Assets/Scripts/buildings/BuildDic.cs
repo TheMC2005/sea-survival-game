@@ -5,6 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class BuildDic
 {
-    public static Dictionary<Vector3Int,TileBase> PosToTile = new Dictionary<Vector3Int, TileBase>();
-    public static Dictionary<Vector3Int,Item> PosToItem = new Dictionary<Vector3Int, Item>();
+    public static Dictionary<Vector3,GameObject> PosToBuild = new Dictionary<Vector3, GameObject>();
+    public static Dictionary<Vector3,Item> PosToItem = new Dictionary<Vector3, Item>();
 }

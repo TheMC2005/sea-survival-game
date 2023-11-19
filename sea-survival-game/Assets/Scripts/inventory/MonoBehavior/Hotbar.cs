@@ -11,10 +11,8 @@ public class Hotbar : MonoBehaviour//, IDataPersistence
 
     private void Start()
     {
-        slots[id]=this;
-        if(slots[0]!=null){
-            slots[0].OnLeftClick();
-        }
+        slots[id] = this;
+        StartCoroutine(HotbarStart());
     }
     public void OnLeftClick(){
         selSlot=gameObject.GetComponent<Slot>();
@@ -22,6 +20,15 @@ public class Hotbar : MonoBehaviour//, IDataPersistence
             slots[i].gameObject.GetComponent<Image>().color = new Color32(255,255,255,255);
         }
         gameObject.GetComponent<Image>().color = new Color32(255,255,255,100);
+    }
+    public IEnumerator HotbarStart()
+    {
+        yield return new WaitForEndOfFrame();
+        if (slots[0] != null)
+        {
+            slots[0].OnLeftClick();
+        }
+
     }
 /*
     public void LoadData(GameData data)

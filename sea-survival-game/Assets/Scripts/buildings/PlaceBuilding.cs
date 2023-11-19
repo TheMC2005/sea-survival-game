@@ -7,9 +7,8 @@ using UnityEngine.Tilemaps;
 public class PlaceBuilding : ToolAction
 {
     public Tilemap tilemap;
-    public override bool OnApplyToTileMap(Vector3Int gridposition, TileMapReadController tileMapReadController, building item)
+    public override bool OnApplyToTileMap(Vector3Int gridposition, TileMapReadController tileMapReadController, Building item)
     {
-        Debug.Log("Bazdmeg");
         if (tileMapReadController.cropsManager.Check(gridposition) == false)
         {
             tileMapReadController.cropsTileMap.SetTile(gridposition, item.tile);

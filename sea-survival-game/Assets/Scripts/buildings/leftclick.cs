@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class leftclick : MonoBehaviour
 {
-    [SerializeField] building sample;
+    [SerializeField] Building sample;
     [SerializeField] Tilemap tilemap;
     [SerializeField] MarkerManager marker;
     void Update()

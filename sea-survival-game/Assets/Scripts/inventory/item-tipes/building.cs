@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(fileName = "NewBuilding", menuName = "Item/Create New Building")]
-public class building : Item
+public class Building : Item
 {
     public TileBase tile;
     public ToolAction onTileMapAction;

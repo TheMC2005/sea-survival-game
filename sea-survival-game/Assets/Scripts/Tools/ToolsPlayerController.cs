@@ -178,9 +178,9 @@ public class ToolsPlayerController : MonoBehaviour
                 }
             }
 
-            if (Hotbar.selSlot.item is building)
+            if (Hotbar.selSlot.item is Building)
             {
-                building Building = (building)item;
+                Building Building = (Building)item;
                 if (Building.onTileMapAction == null) { return; }
                 bool complete = Building.onTileMapAction.OnApplyToTileMap(selectedTilePosition, tileMapReadController, Building);
                 if (complete == true)

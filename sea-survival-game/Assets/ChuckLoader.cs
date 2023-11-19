@@ -5,31 +5,41 @@ using UnityEngine;
 
 public class ChuckLoader : MonoBehaviour
 {
-    [SerializeField] public List<GameObject> islands;
-    public CharacterController2D characterController;
-    public readonly List<Vector3> islandCoordinates = new List<Vector3>();
+    [SerializeField] private List<GameObject> islands;
+    [SerializeField] private CharacterController2D characterController;
+    [SerializeField] private List<Transform> islandPosition;
+    float distanceLimitSquared = 65f*65f;
     private Transform playerTransform;
 
-    void Start()
+    private IEnumerator UpdateIslandsCoroutine()
     {
-        foreach (GameObject island in islands)
+        WaitForSeconds wait = new WaitForSeconds(0.5f); // hány secenként updatelje
+
+        while (true)
         {
-            islandCoordinates.Add(island.transform.position); //gyorsabb caching miatt
+            if (characterController.moving)
+            {
+                UpdateIslands();
+            }
+
+            yield return wait;
         }
-        playerTransform = GameManagerSingleton.Instance.player.transform;
     }
 
-    void Update()
+    private void UpdateIslands()
     {
         Vector3 playerPosition = playerTransform.position;
-        if(characterController.moving == true) // csak akkor számoljon ha mozog a karakter ne legyen extra számitás
-        { 
-           for (int i = 0; i < islands.Count; i++)
-           {
-            float distance = Vector3.Distance(playerPosition, islandCoordinates[i]); // kiszámolja a karakter vs. islandek távolságát
-            bool shouldBeActive = distance < 65f;
+        for (int i = 0; i < islands.Count; i++)
+        {
+            float distanceSquared = (playerPosition - islandPosition[i].position).sqrMagnitude;
+            bool shouldBeActive = distanceSquared < distanceLimitSquared;
             islands[i].SetActive(shouldBeActive);
-           }
         }
+    }
+
+    private void Start()
+    {
+        playerTransform = GameManagerSingleton.Instance.player.transform;
+        StartCoroutine(UpdateIslandsCoroutine());
     }
 }

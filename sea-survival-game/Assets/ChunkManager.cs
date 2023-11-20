@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,7 +52,7 @@ public class ChunkManager : MonoBehaviour
                 Vector3 chunkMiddlePoint = tilemap.GetCellCenterWorld(chunkPosition);
 
                 TilemapChunk chunk = new TilemapChunk(chunkPosition, chunkMiddlePoint, new Vector3Int(chunkWidth, chunkHeight, 1));
-                chunk.CreateGameObject(tilemap);
+                chunk.SetTiles(tilemap.GetTilesBlock(new BoundsInt(chunk.position, chunk.size)));
                 chunks.Add(chunk);
             }
         }
@@ -71,28 +72,25 @@ public class ChunkManager : MonoBehaviour
             {
                 UpdateTiles(chunk, null, waterTile);
             }
+
+            chunk.UpdateTilemap(tilemap);
         }
     }
 
     void UpdateTiles(TilemapChunk chunk, TileBase tileToReplace, TileBase replacementTile)
     {
-        BoundsInt chunkBounds = new BoundsInt(chunk.position, chunk.size);
-        TileBase[] tiles = tilemap.GetTilesBlock(chunkBounds);
-
-        for (int i = 0; i < tiles.Length; i++)
+        for (int i = 0; i < chunk.tiles.Length; i++)
         {
-            if (tilesToNotRemove.Contains(tiles[i]))
+            if (tilesToNotRemove.Contains(chunk.tiles[i]))
             {
                 continue;
             }
 
-            if (tiles[i] == tileToReplace)
+            if (chunk.tiles[i] == tileToReplace)
             {
-                tiles[i] = replacementTile;
+                chunk.tiles[i] = replacementTile;
             }
         }
-
-        tilemap.SetTilesBlock(chunkBounds, tiles);
     }
 }
 
@@ -101,26 +99,27 @@ public class TilemapChunk
     public Vector3Int position;
     public Vector3 middlePoint;
     public Vector3Int size;
+    public TileBase[] tiles;
 
     public TilemapChunk(Vector3Int position, Vector3 middlePoint, Vector3Int size)
     {
         this.position = position;
         this.middlePoint = middlePoint;
         this.size = size;
+        this.tiles = new TileBase[size.x * size.y];
     }
 
-    public void CreateGameObject(Tilemap originalTilemap)
+    public void SetTiles(TileBase[] tiles)
     {
-        GameObject chunkObject = new GameObject("Chunk_" + position.x + "_" + position.y);
-        chunkObject.transform.position = middlePoint;
+        if (tiles.Length == this.tiles.Length)
+        {
+            Array.Copy(tiles, this.tiles, tiles.Length);
+        }
+    }
 
-        Tilemap chunkTilemap = chunkObject.AddComponent<Tilemap>();
-        chunkTilemap.tileAnchor = originalTilemap.tileAnchor;
-
-        TilemapRenderer chunkRenderer = chunkObject.AddComponent<TilemapRenderer>();
-        chunkRenderer.sharedMaterial = originalTilemap.GetComponent<TilemapRenderer>().sharedMaterial;
-
-        TileBase[] tiles = originalTilemap.GetTilesBlock(new BoundsInt(position, size));
-        chunkTilemap.SetTilesBlock(new BoundsInt(Vector3Int.zero, size), tiles);
+    public void UpdateTilemap(Tilemap tilemap)
+    {
+        BoundsInt bounds = new BoundsInt(position, size);
+        tilemap.SetTilesBlock(bounds, tiles);
     }
 }

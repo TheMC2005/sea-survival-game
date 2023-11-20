@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
-public class ChuckLoader : MonoBehaviour
+public class ChunkLoader : MonoBehaviour
 {
     [SerializeField] private List<GameObject> islands;
     [SerializeField] private CharacterController2D characterController;

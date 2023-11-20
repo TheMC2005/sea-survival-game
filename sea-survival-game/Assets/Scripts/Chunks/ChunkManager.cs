@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-
+//hashsettekkel optomalizáld a tilestonotremoveot, meg lehet a chunks-ot is gyorsaság + checkplayerproximityvel kezdj valamit mert néha spikeol
 public class ChunkManager : MonoBehaviour
 {
     public Tilemap tilemap; // Reference to your Tilemap

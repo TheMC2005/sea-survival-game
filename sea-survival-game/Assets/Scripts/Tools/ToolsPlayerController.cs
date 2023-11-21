@@ -134,6 +134,25 @@ public class ToolsPlayerController : MonoBehaviour
 
             return complete;
         }
+        if (Hotbar.selSlot.item is Building)
+        {
+            Building building = (Building)item;
+            if (building == null)
+                return false;
+            if (building.onAction == null)
+                return false;
+            bool complete = building.onAction.OnApply(position);
+
+            if (complete == true)
+            {
+                if (building.onItemUsed != null)
+                {
+                    building.onItemUsed.OnItemUsed(item);
+                }
+            }
+
+            return complete;
+        }
         return false;
     }
     private void UseToolGrid()
@@ -178,7 +197,7 @@ public class ToolsPlayerController : MonoBehaviour
                 }
             }
 
-            if (Hotbar.selSlot.item is Building)
+            /*if (Hotbar.selSlot.item is Building)
             {
                 Building Building = (Building)item;
                 if (Building.onTileMapAction == null) { return; }
@@ -190,7 +209,7 @@ public class ToolsPlayerController : MonoBehaviour
                         Building.onItemUsed.OnItemUsed(Building);
                     }
                 }
-            }
+            }*/
         }
         
     }

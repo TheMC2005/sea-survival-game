@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CutTree
   m_EditorClassIdentifier: 
   sizeOfInteractableArea: 1
-  canHitNodesOfType: 01000000
+  canHitNodesOfType: 0100000003000000

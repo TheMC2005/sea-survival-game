@@ -6,6 +6,6 @@ using UnityEngine;
 public class Building : Item
 {
     public GameObject building;
+    public ToolAction onAction;
     public ToolAction onItemUsed;
-    public ToolAction onTileMapAction;
 }

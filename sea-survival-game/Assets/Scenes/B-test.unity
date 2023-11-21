@@ -6101,7 +6101,6 @@ GameObject:
   - component: {fileID: 275563984}
   - component: {fileID: 275563986}
   - component: {fileID: 275563987}
-  - component: {fileID: 275563988}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6209,18 +6208,6 @@ MonoBehaviour:
   islandPosition:
   - {fileID: 1962954506}
   - {fileID: 1677661850}
---- !u!114 &275563988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275563980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff0d492d40babe94e9e27fbf895e501a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &322191915 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7955946886515764467, guid: 6ae3d4dfea252c44db68d06f3595f042, type: 3}
@@ -70922,6 +70909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1861301587}
   waterTile: {fileID: 11400000, guid: a52d1b87085b6014bb5839e24f42786d, type: 2}
+  check: {fileID: 11400000, guid: 6b89b26268d3b1843b986981edf6c2d8, type: 2}
   chunkSize: 32
   playerProximityThreshold: 64
   tilesToNotRemove:
@@ -82048,7 +82036,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 48.914, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

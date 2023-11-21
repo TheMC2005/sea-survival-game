@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-
+//hashsettekkel optomalizáld a tilestonotremoveot, meg lehet a chunks-ot is gyorsaság + checkplayerproximityvel kezdj valamit mert néha spikeol
 public class ChunkManager : MonoBehaviour
 {
     public Tilemap tilemap; // Reference to your Tilemap
     public TileBase waterTile; // Reference to your water tile
+    public TileBase check;
     public int chunkSize = 16; // Size of each chunk
     public float playerProximityThreshold = 64f; // Proximity threshold to the player
 
@@ -18,12 +20,9 @@ public class ChunkManager : MonoBehaviour
     {
         player = Camera.main.transform;
         DivideTilemapIntoChunks();
-
-        // Start the coroutine for periodic checks
         StartCoroutine(CheckPlayerProximityCoroutine());
     }
 
-    // Coroutine for periodic checks
     IEnumerator CheckPlayerProximityCoroutine()
     {
         while (true)
@@ -37,26 +36,30 @@ public class ChunkManager : MonoBehaviour
     {
         BoundsInt bounds = tilemap.cellBounds;
 
-        foreach (var position in bounds.allPositionsWithin)
+        for (int x = bounds.x; x < bounds.xMax; x += chunkSize)
         {
-            int x = position.x;
-            int y = position.y;
-
-            if (x % chunkSize == 0 && y % chunkSize == 0)
+            for (int y = bounds.y; y < bounds.yMax; y += chunkSize)
             {
-                int chunkWidth = Mathf.Min(chunkSize, bounds.size.x - x);
-                int chunkHeight = Mathf.Min(chunkSize, bounds.size.y - y);
+                int chunkWidth = Mathf.Min(chunkSize, bounds.xMax - x);
+                int chunkHeight = Mathf.Min(chunkSize, bounds.yMax - y);
 
                 Vector3Int chunkPosition = new Vector3Int(x, y, 0);
-                Vector3 chunkMiddlePoint = tilemap.GetCellCenterWorld(chunkPosition);
+                Vector3 chunkMiddlePoint = tilemap.GetCellCenterWorld(new Vector3Int(x + chunkWidth / 2, y + chunkHeight / 2, 0));
 
                 TilemapChunk chunk = new TilemapChunk(chunkPosition, chunkMiddlePoint, new Vector3Int(chunkWidth, chunkHeight, 1));
-                chunk.CreateGameObject(tilemap);
+                chunk.SetTiles(tilemap.GetTilesBlock(new BoundsInt(chunk.position, chunk.size)));
                 chunks.Add(chunk);
             }
         }
     }
-
+    public void ShowMiddlePoint()
+    {
+        foreach (var chunk in chunks)
+        {
+            Vector3Int chunkmid = Vector3Int.RoundToInt(chunk.middlePoint);
+            tilemap.SetTile(chunkmid,check);
+        }
+    }
     void CheckPlayerProximity()
     {
         foreach (var chunk in chunks)
@@ -71,28 +74,25 @@ public class ChunkManager : MonoBehaviour
             {
                 UpdateTiles(chunk, null, waterTile);
             }
+            //ShowMiddlePoint();
+            chunk.UpdateTilemap(tilemap);
         }
     }
 
     void UpdateTiles(TilemapChunk chunk, TileBase tileToReplace, TileBase replacementTile)
     {
-        BoundsInt chunkBounds = new BoundsInt(chunk.position, chunk.size);
-        TileBase[] tiles = tilemap.GetTilesBlock(chunkBounds);
-
-        for (int i = 0; i < tiles.Length; i++)
+        for (int i = 0; i < chunk.tiles.Length; i++)
         {
-            if (tilesToNotRemove.Contains(tiles[i]))
+            if (tilesToNotRemove.Contains(chunk.tiles[i]))
             {
                 continue;
             }
 
-            if (tiles[i] == tileToReplace)
+            if (chunk.tiles[i] == tileToReplace)
             {
-                tiles[i] = replacementTile;
+                chunk.tiles[i] = replacementTile;
             }
         }
-
-        tilemap.SetTilesBlock(chunkBounds, tiles);
     }
 }
 
@@ -101,26 +101,27 @@ public class TilemapChunk
     public Vector3Int position;
     public Vector3 middlePoint;
     public Vector3Int size;
+    public TileBase[] tiles;
 
     public TilemapChunk(Vector3Int position, Vector3 middlePoint, Vector3Int size)
     {
         this.position = position;
         this.middlePoint = middlePoint;
         this.size = size;
+        this.tiles = new TileBase[size.x * size.y];
     }
 
-    public void CreateGameObject(Tilemap originalTilemap)
+    public void SetTiles(TileBase[] tiles)
     {
-        GameObject chunkObject = new GameObject("Chunk_" + position.x + "_" + position.y);
-        chunkObject.transform.position = middlePoint;
+        if (tiles.Length == this.tiles.Length)
+        {
+            Array.Copy(tiles, this.tiles, tiles.Length);
+        }
+    }
 
-        Tilemap chunkTilemap = chunkObject.AddComponent<Tilemap>();
-        chunkTilemap.tileAnchor = originalTilemap.tileAnchor;
-
-        TilemapRenderer chunkRenderer = chunkObject.AddComponent<TilemapRenderer>();
-        chunkRenderer.sharedMaterial = originalTilemap.GetComponent<TilemapRenderer>().sharedMaterial;
-
-        TileBase[] tiles = originalTilemap.GetTilesBlock(new BoundsInt(position, size));
-        chunkTilemap.SetTilesBlock(new BoundsInt(Vector3Int.zero, size), tiles);
+    public void UpdateTilemap(Tilemap tilemap)
+    {
+        BoundsInt bounds = new BoundsInt(position, size);
+        tilemap.SetTilesBlock(bounds, tiles);
     }
 }

@@ -74,7 +74,7 @@ public class ChunkManager : MonoBehaviour
             {
                 UpdateTiles(chunk, null, waterTile);
             }
-            ShowMiddlePoint();
+            //ShowMiddlePoint();
             chunk.UpdateTilemap(tilemap);
         }
     }

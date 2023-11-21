@@ -70909,6 +70909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1861301587}
   waterTile: {fileID: 11400000, guid: a52d1b87085b6014bb5839e24f42786d, type: 2}
+  check: {fileID: 11400000, guid: 6b89b26268d3b1843b986981edf6c2d8, type: 2}
   chunkSize: 32
   playerProximityThreshold: 64
   tilesToNotRemove:

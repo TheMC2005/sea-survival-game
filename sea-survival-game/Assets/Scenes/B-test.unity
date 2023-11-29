@@ -36384,8 +36384,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seat: {fileID: 802674823}
-  speed: 10
-  isPlayerInSeat: 0
+  maxSpeed: 5
+  rotationSpeed: 2
+  acceleration: 1
+  deceleration: 0.5
+  turnSpeed: 2
   characterController: {fileID: 1755755045}
 --- !u!50 &455360757
 Rigidbody2D:

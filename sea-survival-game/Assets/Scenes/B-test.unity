@@ -36384,12 +36384,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seat: {fileID: 802674823}
+  characterController: {fileID: 1755755045}
   maxSpeed: 5
-  rotationSpeed: 2
+  rotationSpeed: 0.5
   acceleration: 1
   deceleration: 0.5
-  turnSpeed: 2
-  characterController: {fileID: 1755755045}
+  turnSpeed: 0.5
+  boatMotionVector: {x: 0, y: 0}
 --- !u!50 &455360757
 Rigidbody2D:
   serializedVersion: 4
@@ -36425,7 +36426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455360755}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.8, y: 34.26, z: 0}
+  m_LocalPosition: {x: 14.73, y: -0.43, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -80155,6 +80156,10 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2011289777}
+    - target: {fileID: 4539218524622360041, guid: 44a183d260710094581a1831adde035a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4539218524622360041, guid: 44a183d260710094581a1831adde035a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0

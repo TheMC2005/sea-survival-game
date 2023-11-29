@@ -73,6 +73,10 @@ public class ToolsPlayerController : MonoBehaviour
                 GameManagerSingleton.Instance.player.transform.position = selectedTilePosition;
                 Debug.Log("WOOOOSH");
             }
+            if(Input.GetKeyDown(KeyCode.P))
+            {
+                DayNightCycle.Instance.hours = 7;
+            }
         }
     }
     private void SelectTile()

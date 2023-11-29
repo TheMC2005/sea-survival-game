@@ -17,11 +17,7 @@ public class ChunkLoader : MonoBehaviour
 
         while (true)
         {
-            if (characterController.moving)
-            {
-                UpdateIslands();
-            }
-
+            UpdateIslands();
             yield return wait;
         }
     }

@@ -1,17 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class BoatController : MonoBehaviour
 {
 
     public GameObject seat;
     public CharacterController2D characterController;
+    public UnityEngine.UI.Slider speedslider;
+    public TextMeshProUGUI speedText;
+    public Canvas boatUICanvas;
 
     public float maxSpeed = 5f;
-    public float rotationSpeed = 0.01f;
-    public float acceleration = 2f;
-    public float deceleration = 0.5f;
+    public float rotationSpeed = 0.3f;
+    public float acceleration = 0.3f;
+    public float deceleration = 0.25f;
     public float turnSpeed = 0.5f;
     private bool isPlayerInSeat = false;
 
@@ -22,6 +28,9 @@ public class BoatController : MonoBehaviour
     void Start()
     {
         boatrb = GetComponent<Rigidbody2D>();
+        speedslider.maxValue = 30;
+        speedslider.minValue = 0;
+        speedText.text = string.Empty;
     }
 
     void Update()
@@ -29,6 +38,7 @@ public class BoatController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             ToggleSeat();
+            
         }
 
         if (isPlayerInSeat)
@@ -44,10 +54,12 @@ public class BoatController : MonoBehaviour
         {
             characterController.enabled = true;
             isPlayerInSeat = false;
+            boatUICanvas.enabled = false;
         }
         else
         {
             isPlayerInSeat = true;
+            boatUICanvas.enabled = true;
             characterController.enabled = false;
             GameManagerSingleton.Instance.player.transform.position = seat.transform.position;
         }
@@ -72,6 +84,8 @@ public class BoatController : MonoBehaviour
 
         //sebbesége a hajónak, plussz idővel csökken
         boatrb.velocity = boatMotionVector * maxSpeed;
+        speedslider.value = boatrb.velocity.magnitude*6;
+        speedText.text = Mathf.CeilToInt((boatrb.velocity.magnitude * 6)).ToString();
         boatrb.velocity *= (1f - Time.deltaTime * deceleration);
     }
 

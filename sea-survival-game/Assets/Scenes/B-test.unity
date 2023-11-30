@@ -36930,7 +36930,7 @@ MonoBehaviour:
       outWeight: 0.7330713
     - serializedVersion: 3
       time: 0.06688079
-      value: 0.031384893
+      value: 0.007337041
       inSlope: 0.2359511
       outSlope: 0.2359511
       tangentMode: 0
@@ -36940,17 +36940,17 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.28607726
       value: 0.044820547
-      inSlope: 0.39028442
-      outSlope: 0.39028442
+      inSlope: 0.15497684
+      outSlope: 0.15497684
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.49166453
-      value: 0.19269408
-      inSlope: 0.17279668
-      outSlope: 0.17279668
+      time: 0.43004954
+      value: 0.06482543
+      inSlope: 0.114526935
+      outSlope: 0.114526935
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -36958,8 +36958,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.75540084
       value: 0.094140984
-      inSlope: -0.2463167
-      outSlope: -0.2463167
+      inSlope: -0.01442432
+      outSlope: -0.01442432
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -36977,11 +36977,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   maxSpeed: 5
-  rotationSpeed: 0.3
+  maxTorque: 0.1
+  torqueDecayRate: 0.0075
+  rotationSpeed: 0.075
   acceleration: 0.3
   deceleration: 0.25
-  turnSpeed: 0.075
-  boatMotionVector: {x: 0, y: 0}
 --- !u!50 &455360757
 Rigidbody2D:
   serializedVersion: 4

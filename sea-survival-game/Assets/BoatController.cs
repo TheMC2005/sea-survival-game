@@ -16,19 +16,18 @@ public class BoatController : MonoBehaviour
     public AnimationCurve turnSpeedCurve;
 
     public float maxSpeed = 5f;
-    public float rotationSpeed = 0.3f;
+    public float maxTorque = 0.1f;
+    public float torqueDecayRate = 0.075f;
+    public float rotationSpeed = 0.075f;
     public float acceleration = 0.15f;
     public float deceleration = 0.25f;
-    public float turnSpeed = 0.075f;
     private bool isPlayerInSeat = false;
 
-
     private Rigidbody2D boatrb;
-    public Vector2 boatMotionVector;
+
 
     void Start()
     {
-
         boatrb = GetComponent<Rigidbody2D>();
         speedslider.maxValue = 30;
         speedslider.minValue = 0;
@@ -40,7 +39,6 @@ public class BoatController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             ToggleSeat();
-            
         }
 
         if (isPlayerInSeat)
@@ -72,33 +70,42 @@ public class BoatController : MonoBehaviour
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
+
+        // Prevent moving backward
         if (verticalInput < 0)
         {
             verticalInput = 0;
         }
-        RotateBoat(horizontalInput);
-        Vector2 forwardVector = transform.right; // merre van az eleje a hajónak
-        if(verticalInput >0)
-        boatrb.AddForce(forwardVector*verticalInput*30);
 
-        if (boatMotionVector.magnitude > 1f)
-        {
-            boatMotionVector.Normalize();
-        }
-        //sebbesége a hajónak, plussz idővel csökken
-        speedslider.value = boatrb.velocity.magnitude*6;
+        float torqueToApply = -horizontalInput * rotationSpeed;
+        torqueToApply = Mathf.Clamp(torqueToApply, -maxTorque, maxTorque);
+        boatrb.AddTorque(torqueToApply);
+
+        // Decay torque over time
+        boatrb.AddTorque(-boatrb.angularVelocity * torqueDecayRate);
+
+        Vector2 forwardVector = transform.right;
+        boatrb.AddForce(forwardVector * verticalInput * acceleration, ForceMode2D.Impulse);
+
+        LimitSpeed();
+
+        speedslider.value = boatrb.velocity.magnitude * 6;
         speedText.text = Mathf.CeilToInt((boatrb.velocity.magnitude * 6)).ToString();
+
         boatrb.velocity *= (1f - Time.deltaTime * deceleration);
     }
+
     void ChangeTurnFloat(float currentVelocity)
     {
-       // float newTurnSpeed = turnSpeedCurve.Evaluate(currentVelocity);
-        //turnSpeed = newTurnSpeed;
+       //
     }
-    void RotateBoat(float horizontalInput)
+
+    void LimitSpeed()
     {
-        // ez itt nem tudom mi a fasz ctrl cztem
-        float targetRotation = transform.eulerAngles.z - horizontalInput * turnSpeed;
-        transform.rotation = Quaternion.Euler(0, 0, targetRotation);
+        float currentSpeed = boatrb.velocity.magnitude;
+        if (currentSpeed > maxSpeed)
+        {
+            boatrb.velocity = boatrb.velocity.normalized * maxSpeed;
+        }
     }
 }

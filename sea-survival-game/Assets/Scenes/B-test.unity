@@ -340,7 +340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -27, y: 91}
+  m_AnchoredPosition: {x: -27, y: 100}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &84595955
@@ -5492,7 +5492,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 510.6, y: -151.9}
+  m_AnchoredPosition: {x: 528.9, y: -143.6}
   m_SizeDelta: {x: 72, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &202013743
@@ -5578,7 +5578,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 29.16626, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -36916,11 +36916,71 @@ MonoBehaviour:
   speedslider: {fileID: 84595955}
   speedText: {fileID: 202013743}
   boatUICanvas: {fileID: 967192857}
+  turnSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.19745502
+      outSlope: 0.19745502
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.7330713
+    - serializedVersion: 3
+      time: 0.06688079
+      value: 0.031384893
+      inSlope: 0.2359511
+      outSlope: 0.2359511
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.28607726
+      value: 0.044820547
+      inSlope: 0.39028442
+      outSlope: 0.39028442
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.49166453
+      value: 0.19269408
+      inSlope: 0.17279668
+      outSlope: 0.17279668
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.75540084
+      value: 0.094140984
+      inSlope: -0.2463167
+      outSlope: -0.2463167
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9916687
+      value: 0.066036224
+      inSlope: -0.11895295
+      outSlope: -0.11895295
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   maxSpeed: 5
   rotationSpeed: 0.3
   acceleration: 0.3
   deceleration: 0.25
-  turnSpeed: 0.15
+  turnSpeed: 0.075
   boatMotionVector: {x: 0, y: 0}
 --- !u!50 &455360757
 Rigidbody2D:

@@ -13,12 +13,13 @@ public class BoatController : MonoBehaviour
     public UnityEngine.UI.Slider speedslider;
     public TextMeshProUGUI speedText;
     public Canvas boatUICanvas;
+    public AnimationCurve turnSpeedCurve;
 
     public float maxSpeed = 5f;
     public float rotationSpeed = 0.3f;
-    public float acceleration = 0.3f;
+    public float acceleration = 0.15f;
     public float deceleration = 0.25f;
-    public float turnSpeed = 0.5f;
+    public float turnSpeed = 0.075f;
     private bool isPlayerInSeat = false;
 
 
@@ -27,6 +28,7 @@ public class BoatController : MonoBehaviour
 
     void Start()
     {
+
         boatrb = GetComponent<Rigidbody2D>();
         speedslider.maxValue = 30;
         speedslider.minValue = 0;
@@ -45,6 +47,7 @@ public class BoatController : MonoBehaviour
         {
             GameManagerSingleton.Instance.player.transform.position = seat.transform.position;
             HandleBoatMovement();
+            ChangeTurnFloat(boatrb.velocity.magnitude);
         }
     }
 
@@ -75,20 +78,23 @@ public class BoatController : MonoBehaviour
         }
         RotateBoat(horizontalInput);
         Vector2 forwardVector = transform.right; // merre van az eleje a hajónak
-        boatMotionVector = Vector2.Lerp(boatMotionVector, forwardVector * verticalInput, Time.deltaTime * acceleration);
+        if(verticalInput >0)
+        boatrb.AddForce(forwardVector*verticalInput*30);
 
         if (boatMotionVector.magnitude > 1f)
         {
             boatMotionVector.Normalize();
         }
-
         //sebbesége a hajónak, plussz idővel csökken
-        boatrb.velocity = boatMotionVector * maxSpeed;
         speedslider.value = boatrb.velocity.magnitude*6;
         speedText.text = Mathf.CeilToInt((boatrb.velocity.magnitude * 6)).ToString();
         boatrb.velocity *= (1f - Time.deltaTime * deceleration);
     }
-
+    void ChangeTurnFloat(float currentVelocity)
+    {
+       // float newTurnSpeed = turnSpeedCurve.Evaluate(currentVelocity);
+        //turnSpeed = newTurnSpeed;
+    }
     void RotateBoat(float horizontalInput)
     {
         // ez itt nem tudom mi a fasz ctrl cztem

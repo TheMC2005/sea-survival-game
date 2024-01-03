@@ -5,6 +5,7 @@ using System;
 
 public class Aim : MonoBehaviour
 {
+    public static GameObject aim;
     public Camera cam;
     private Rigidbody2D rb;
     GameObject pl;
@@ -15,6 +16,7 @@ public class Aim : MonoBehaviour
     void Start()
     {
         pl = GameObject.Find("player");
+        aim = this.gameObject;
     }
 
     void Update()

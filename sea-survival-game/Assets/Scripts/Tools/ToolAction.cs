@@ -37,4 +37,8 @@ public class ToolAction : ScriptableObject
     {
         
     }
+    public virtual void OnItemUsed(Weapon usedItem)
+    {
+        
+    }
 }

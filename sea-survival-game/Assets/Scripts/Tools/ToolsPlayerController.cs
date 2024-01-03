@@ -157,6 +157,25 @@ public class ToolsPlayerController : MonoBehaviour
 
             return complete;
         }
+        if (Hotbar.selSlot.item is Weapon)
+        {
+            Weapon weapon = (Weapon)item;
+            if (weapon == null)
+                return false;
+            if (weapon.onAction == null)
+                return false;
+            bool complete = weapon.onAction.OnApply(position);
+
+            if (complete == true)
+            {
+                if (weapon.onItemUsed != null)
+                {
+                    weapon.onItemUsed.OnItemUsed(item);
+                }
+            }
+
+            return complete;
+        }
         return false;
     }
     private void UseToolGrid()

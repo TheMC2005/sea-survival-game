@@ -1,85 +1,45 @@
-﻿using Cinemachine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
-public class BoatController : MonoBehaviour
+public class TopDownCarController : MonoBehaviour
 {
-    enum BoatType
-    {
-        BoatLevelOne,
-        BoatLevelTwo, 
-        BoatLevelThree,
-    }
-
-    [Header("Boat settings")]
+    [Header("Car settings")]
     public float driftFactor = 0.95f;
     public float accelerationFactor = 30.0f;
     public float turnFactor = 3.5f;
     public float maxSpeed = 20;
 
-    [SerializeField] BoatType boatType;
     //Local variables
     float accelerationInput = 0;
     float steeringInput = 0;
     bool isPlayerInSeat;
     float rotationAngle = 0;
 
+    float velocityVsUp = 0;
 
     //Components
     Rigidbody2D carRigidbody2D;
-    [SerializeField] CharacterController2D characterController;
-    [SerializeField] Canvas boatUICanvas;
-    public GameObject cinemachineCamera;
-    public GameObject seat;
-    CinemachineVirtualCamera cinemachineVirtualCamera;
-    float velocityVsUp = 0;
+
     //Awake is called when the script instance is being loaded.
     void Awake()
     {
         carRigidbody2D = GetComponent<Rigidbody2D>();
-        cinemachineVirtualCamera = cinemachineCamera.GetComponent<CinemachineVirtualCamera>();
     }
 
     //Frame-rate independent for physics calculations.
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            ToggleSeat();
-        }
-
-        if (isPlayerInSeat)
-        {
-            GameManagerSingleton.Instance.player.transform.position = seat.transform.position; //megoldás majd megoldom
+        
             ApplyEngineForce();
 
             KillOrthogonalVelocity();
 
             ApplySteering();
-        }
+
+        
     }
-    void ToggleSeat()
-    {
-        if (isPlayerInSeat)
-        {
-            characterController.enabled = false;
-            isPlayerInSeat =false;
-            cinemachineVirtualCamera.m_Lens.OrthographicSize = 5;
-            boatUICanvas.enabled = false;
-        }
-        else
-        {
-            isPlayerInSeat = true;
-            boatUICanvas.enabled = true;
-            characterController.enabled = false;
-            cinemachineVirtualCamera.m_Lens.OrthographicSize = 10;
-            GameManagerSingleton.Instance.player.transform.position = seat.transform.position;
-        }
-    }
+
     void ApplyEngineForce()
     {
         //Apply drag if there is no accelerationInput so the car stops when the player lets go of the accelerator
@@ -95,7 +55,7 @@ public class BoatController : MonoBehaviour
             return;
 
         //Limit so we cannot go faster than the 50% of max speed in the "reverse" direction
-        if (velocityVsUp < -maxSpeed * 0.5f && accelerationInput < 0)
+        if (velocityVsUp < -maxSpeed*0.5f && accelerationInput < 0)
             return;
 
         //Limit so we cannot go faster in any direction while accelerating

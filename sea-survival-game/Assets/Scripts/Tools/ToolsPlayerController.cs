@@ -170,7 +170,7 @@ public class ToolsPlayerController : MonoBehaviour
             {
                 if (weapon.onItemUsed != null)
                 {
-                    weapon.onItemUsed.OnItemUsed(item);
+                    weapon.onItemUsed.OnItemUsed(weapon);
                 }
             }
 

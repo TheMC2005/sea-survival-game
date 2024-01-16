@@ -1,9 +1,17 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TopDownCarController : MonoBehaviour
 {
+    enum BoatType
+    {
+        BoatLevelOne,
+        BoatLevelTwo,
+        BoatLevelThree,
+    }
+
     [Header("Car settings")]
     public float driftFactor = 0.95f;
     public float accelerationFactor = 30.0f;
@@ -13,30 +21,60 @@ public class TopDownCarController : MonoBehaviour
     //Local variables
     float accelerationInput = 0;
     float steeringInput = 0;
-    bool isPlayerInSeat;
+    bool isPlayerInSeat = false;
     float rotationAngle = 0;
-
     float velocityVsUp = 0;
 
     //Components
     Rigidbody2D carRigidbody2D;
+    public GameObject seat;
+    CinemachineVirtualCamera cinemachineVirtualCamera;
+    public GameObject cinemachineCamera;
+    public Canvas boatUICanvas;
+    [SerializeField]BoatType boatType;
+    //public CharacterController2D characterController;
 
     //Awake is called when the script instance is being loaded.
     void Awake()
     {
         carRigidbody2D = GetComponent<Rigidbody2D>();
+        cinemachineVirtualCamera = cinemachineCamera.GetComponent<CinemachineVirtualCamera>();
     }
 
+    void ToggleSeat()
+    {
+        if (isPlayerInSeat)
+        {
+            //characterController.enabled = true;
+            isPlayerInSeat = false;
+            cinemachineVirtualCamera.m_Lens.OrthographicSize = 5;
+            boatUICanvas.enabled = false;
+        }
+        else
+        {
+            isPlayerInSeat = true;
+            boatUICanvas.enabled = true;
+           // characterController.enabled = false;
+            cinemachineVirtualCamera.m_Lens.OrthographicSize = 10;
+            GameManagerSingleton.Instance.player.transform.position = seat.transform.position;
+        }
+    }
     //Frame-rate independent for physics calculations.
     void FixedUpdate()
     {
-        
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            ToggleSeat();
+        }
+
+        if (isPlayerInSeat)
+        {
+            GameManagerSingleton.Instance.player.transform.position = seat.transform.position; //megoldás majd megoldom
             ApplyEngineForce();
-
             KillOrthogonalVelocity();
-
             ApplySteering();
-
+        }
+        
         
     }
 

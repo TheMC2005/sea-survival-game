@@ -1,7 +1,10 @@
 ﻿using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TopDownCarController : MonoBehaviour
 {
@@ -13,10 +16,10 @@ public class TopDownCarController : MonoBehaviour
     }
 
     [Header("Car settings")]
-    public float driftFactor = 0.95f;
-    public float accelerationFactor = 30.0f;
-    public float turnFactor = 3.5f;
-    public float maxSpeed = 20;
+    public float driftFactor;
+    public float accelerationFactor;
+    public float turnFactor;
+    public float maxSpeed;
 
     //Local variables
     float accelerationInput = 0;
@@ -32,6 +35,8 @@ public class TopDownCarController : MonoBehaviour
     public GameObject cinemachineCamera;
     public Canvas boatUICanvas;
     [SerializeField]BoatType boatType;
+    [SerializeField] Slider speedSlider;
+    [SerializeField] TextMeshProUGUI boatSpeedText;
     //public CharacterController2D characterController;
 
     //Awake is called when the script instance is being loaded.
@@ -39,6 +44,31 @@ public class TopDownCarController : MonoBehaviour
     {
         carRigidbody2D = GetComponent<Rigidbody2D>();
         cinemachineVirtualCamera = cinemachineCamera.GetComponent<CinemachineVirtualCamera>();
+    }
+    private void Start()
+    {
+        if(boatType == BoatType.BoatLevelOne)
+        {
+            driftFactor = 0.95f;
+            accelerationFactor = 0.625f;
+            turnFactor = 0.75f;
+            maxSpeed = 5f;
+        }
+        if (boatType == BoatType.BoatLevelTwo)
+        {
+            driftFactor = 0.95f;
+            accelerationFactor = 1.25f;
+            turnFactor = 1.125f;
+            maxSpeed = 7.5f;
+        }
+        if (boatType == BoatType.BoatLevelThree)
+        {
+            driftFactor = 0.95f;
+            accelerationFactor = 1.875f;
+            turnFactor = 1.75f;
+            maxSpeed = 10f;
+        }
+        boatSpeedText.text = 0.ToString();
     }
 
     void ToggleSeat()
@@ -62,6 +92,7 @@ public class TopDownCarController : MonoBehaviour
     //Frame-rate independent for physics calculations.
     void FixedUpdate()
     {
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             ToggleSeat();
@@ -73,6 +104,8 @@ public class TopDownCarController : MonoBehaviour
             ApplyEngineForce();
             KillOrthogonalVelocity();
             ApplySteering();
+            speedSlider.value = GetVelocityMagnitude()*5;
+            boatSpeedText.text = (Mathf.CeilToInt(speedSlider.value)).ToString();
         }
         
         

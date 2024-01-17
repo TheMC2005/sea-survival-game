@@ -72320,6 +72320,7 @@ MonoBehaviour:
   seat: {fileID: 798940721}
   cinemachineCamera: {fileID: 1709282465}
   boatUICanvas: {fileID: 967192857}
+  boatType: 2
 --- !u!50 &1721709851
 Rigidbody2D:
   serializedVersion: 4

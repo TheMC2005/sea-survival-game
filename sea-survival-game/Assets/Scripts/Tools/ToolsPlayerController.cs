@@ -25,6 +25,9 @@ public class ToolsPlayerController : MonoBehaviour
     [SerializeField] float maxDistance = 2.3f;
     [SerializeField] ToolAction onTilePickUp;
     [SerializeField] CropsManager cropsManager;
+    [SerializeField] TopDownCarController topDownCarController;
+    [SerializeField] NotificationScript notificationscript;
+    float distance;
 
     Vector3Int selectedTilePosition;
     bool selectable;
@@ -77,6 +80,23 @@ public class ToolsPlayerController : MonoBehaviour
             {
                 DayNightCycle.Instance.hours = 7;
             }
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                topDownCarController.ToggleSeat();
+            }
+            distance = (GameManagerSingleton.Instance.player.transform.position-topDownCarController.seat.transform.position).sqrMagnitude;
+            Debug.Log(distance);
+            if(distance < 5f && distance > 0.1f)
+            {
+               notificationscript.boatToggle = true;
+                notificationscript.ToggleBoatNotification();
+            }
+            else
+            {
+                notificationscript.boatToggle = false;
+                notificationscript.ToggleBoatNotification();
+            }
+            
         }
     }
     private void SelectTile()

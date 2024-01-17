@@ -71,7 +71,7 @@ public class TopDownCarController : MonoBehaviour
         boatSpeedText.text = 0.ToString();
     }
 
-    void ToggleSeat()
+    public void ToggleSeat()
     {
         if (isPlayerInSeat)
         {
@@ -92,12 +92,6 @@ public class TopDownCarController : MonoBehaviour
     //Frame-rate independent for physics calculations.
     void FixedUpdate()
     {
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            ToggleSeat();
-        }
-
         if (isPlayerInSeat)
         {
             GameManagerSingleton.Instance.player.transform.position = seat.transform.position; //megoldás majd megoldom
@@ -107,8 +101,6 @@ public class TopDownCarController : MonoBehaviour
             speedSlider.value = GetVelocityMagnitude()*5;
             boatSpeedText.text = (Mathf.CeilToInt(speedSlider.value)).ToString();
         }
-        
-        
     }
 
     void ApplyEngineForce()

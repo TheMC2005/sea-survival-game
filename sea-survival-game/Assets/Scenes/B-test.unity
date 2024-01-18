@@ -76549,6 +76549,7 @@ MonoBehaviour:
   accelerationFactor: 30
   turnFactor: 3.5
   maxSpeed: 20
+  playerRigidbody: {fileID: 1755755044}
   seat: {fileID: 798940721}
   cinemachineCamera: {fileID: 1709282465}
   boatUICanvas: {fileID: 967192857}

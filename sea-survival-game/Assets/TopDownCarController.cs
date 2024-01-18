@@ -27,6 +27,7 @@ public class TopDownCarController : MonoBehaviour
     bool isPlayerInSeat = false;
     float rotationAngle = 0;
     float velocityVsUp = 0;
+    Vector3Int tileFromBoat;
 
     //Components
     Rigidbody2D carRigidbody2D;
@@ -39,6 +40,7 @@ public class TopDownCarController : MonoBehaviour
     [SerializeField] Slider speedSlider;
     [SerializeField] TextMeshProUGUI boatSpeedText;
     [SerializeField] GameObject player;
+    [SerializeField] TileMapReadController tileMapReadController;
     
     public CharacterController2D characterController;
 
@@ -96,16 +98,17 @@ public class TopDownCarController : MonoBehaviour
         if (isPlayerInSeat)
         {
             RigidbodyConstraints2D constraints = playerRigidbody.constraints;
-            player.transform.position = seat.transform.position;
+            GameManagerSingleton.Instance.player.transform.position = seat.transform.position;
             constraints = RigidbodyConstraints2D.FreezePosition;
             playerRigidbody.constraints = constraints;
         }
         else
         {
             RigidbodyConstraints2D constraints = playerRigidbody.constraints;
-            player.transform.parent = null;
             constraints = RigidbodyConstraints2D.None;
             playerRigidbody.constraints = constraints;
+            tileFromBoat = tileMapReadController.GetGridPosition(player.transform.position, true);
+            GameManagerSingleton.Instance.player.transform.position = tileFromBoat;
         }
     }
     //Frame-rate independent for physics calculations.

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,18 +21,17 @@ public class TopDownCarController : MonoBehaviour
     public float accelerationFactor;
     public float turnFactor;
     public float maxSpeed;
-
+    public bool isPlayerInSeat = false;
     //Local variables
     float accelerationInput = 0;
     float steeringInput = 0;
-    bool isPlayerInSeat = false;
+    
     float rotationAngle = 0;
     float velocityVsUp = 0;
-    Vector3Int tileFromBoat;
 
     //Components
     Rigidbody2D carRigidbody2D;
-   public Rigidbody2D playerRigidbody;
+    public Rigidbody2D playerRigidbody;
     public GameObject seat;
     CinemachineVirtualCamera cinemachineVirtualCamera;
     public GameObject cinemachineCamera;
@@ -39,9 +39,10 @@ public class TopDownCarController : MonoBehaviour
     [SerializeField]BoatType boatType;
     [SerializeField] Slider speedSlider;
     [SerializeField] TextMeshProUGUI boatSpeedText;
-    [SerializeField] GameObject player;
-    [SerializeField] TileMapReadController tileMapReadController;
-    
+    [SerializeField] SpriteRenderer playerSpriterenderer;
+    [SerializeField] Sprite boatSpritePlayer;
+    [SerializeField] Sprite swimmingPlayer;
+
     public CharacterController2D characterController;
 
     //Awake is called when the script instance is being loaded.
@@ -80,17 +81,19 @@ public class TopDownCarController : MonoBehaviour
     {
         if (isPlayerInSeat)
         {
-           // characterController.enabled = true;
+            characterController.enabled = true;
             isPlayerInSeat = false;
             cinemachineVirtualCamera.m_Lens.OrthographicSize = 5;
             boatUICanvas.enabled = false;
+            playerSpriterenderer.sprite = swimmingPlayer;
         }
         else
         {
             isPlayerInSeat = true;
             boatUICanvas.enabled = true;
-            //characterController.enabled = false;
             cinemachineVirtualCamera.m_Lens.OrthographicSize = 10;
+            playerSpriterenderer.sprite = boatSpritePlayer;
+            characterController.enabled = false;
         }
     }
     public void Update()
@@ -107,8 +110,6 @@ public class TopDownCarController : MonoBehaviour
             RigidbodyConstraints2D constraints = playerRigidbody.constraints;
             constraints = RigidbodyConstraints2D.None;
             playerRigidbody.constraints = constraints;
-            tileFromBoat = tileMapReadController.GetGridPosition(player.transform.position, true);
-            GameManagerSingleton.Instance.player.transform.position = tileFromBoat;
         }
     }
     //Frame-rate independent for physics calculations.

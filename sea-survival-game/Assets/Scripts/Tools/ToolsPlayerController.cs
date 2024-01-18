@@ -85,7 +85,7 @@ public class ToolsPlayerController : MonoBehaviour
             {
                 topDownCarController.ToggleSeat();
             }
-            Debug.Log(distance);
+
             if (distance < 5f && distance > 0.1f)
             {
                notificationscript.boatToggle = true;

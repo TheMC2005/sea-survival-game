@@ -80,13 +80,13 @@ public class ToolsPlayerController : MonoBehaviour
             {
                 DayNightCycle.Instance.hours = 7;
             }
-            if(Input.GetKeyDown(KeyCode.E))
+            distance = (GameManagerSingleton.Instance.player.transform.position - topDownCarController.seat.transform.position).sqrMagnitude;
+            if (Input.GetKeyDown(KeyCode.E) && distance < 215f)
             {
                 topDownCarController.ToggleSeat();
             }
-            distance = (GameManagerSingleton.Instance.player.transform.position-topDownCarController.seat.transform.position).sqrMagnitude;
-            Debug.Log(distance);
-            if(distance < 5f && distance > 0.1f)
+            
+            if(distance < 215f && distance > 210f)
             {
                notificationscript.boatToggle = true;
                 notificationscript.ToggleBoatNotification();

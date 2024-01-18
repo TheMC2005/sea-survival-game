@@ -10229,7 +10229,7 @@ GameObject:
   - component: {fileID: 339058045}
   - component: {fileID: 339058049}
   m_Layer: 7
-  m_Name: NotificationUI
+  m_Name: NotificationUI/Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10331,6 +10331,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f60eda3d057f241bf2deaa2462ff66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BoatNotificationPanel: {fileID: 1197471339}
+  boatToggle: 0
 --- !u!1 &343179396 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6720594096900141760, guid: 44a183d260710094581a1831adde035a, type: 3}
@@ -49247,7 +49249,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 798940721}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.099, y: 0.352, z: 0}
+  m_LocalPosition: {x: 0, y: 0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76553,6 +76555,8 @@ MonoBehaviour:
   boatType: 0
   speedSlider: {fileID: 84595955}
   boatSpeedText: {fileID: 202013743}
+  player: {fileID: 1755755039}
+  characterController: {fileID: 1755755045}
 --- !u!50 &1721709851
 Rigidbody2D:
   serializedVersion: 4
@@ -76867,7 +76871,7 @@ MonoBehaviour:
   onTilePickUp: {fileID: 11400000, guid: 3830f5ceecf8ce44a9b1df30d2f480f4, type: 2}
   cropsManager: {fileID: 275563984}
   topDownCarController: {fileID: 1721709850}
-  notificationCanvas: {fileID: 0}
+  notificationscript: {fileID: 339058049}
 --- !u!114 &1755755048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88208,7 +88212,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: 724.2571}
+  m_AnchoredPosition: {x: 0.00012207031, y: 724.5}
   m_SizeDelta: {x: 0.89404297, y: -1448.9772}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2127970231

@@ -76549,6 +76549,7 @@ MonoBehaviour:
   accelerationFactor: 30
   turnFactor: 3.5
   maxSpeed: 20
+  isPlayerInSeat: 0
   playerRigidbody: {fileID: 1755755044}
   seat: {fileID: 798940721}
   cinemachineCamera: {fileID: 1709282465}
@@ -76556,7 +76557,9 @@ MonoBehaviour:
   boatType: 0
   speedSlider: {fileID: 84595955}
   boatSpeedText: {fileID: 202013743}
-  player: {fileID: 1755755039}
+  playerSpriterenderer: {fileID: 1755755041}
+  boatSpritePlayer: {fileID: -1985173714, guid: 1a377468946191f418b7d1821108b20a, type: 3}
+  swimmingPlayer: {fileID: -437732629, guid: efe756608217fc946ab17705d626c014, type: 3}
   characterController: {fileID: 1755755045}
 --- !u!50 &1721709851
 Rigidbody2D:
@@ -76593,7 +76596,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1721709848}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.96, y: -2.76, z: 14.442568}
+  m_LocalPosition: {x: 43.96, y: -2.76, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -76802,6 +76805,7 @@ MonoBehaviour:
   speed: 3
   shallowSpeed: 2.5
   swimmingSpeed: 2
+  topDownCarController: {fileID: 1721709850}
   speedMultiplier: 0
   motionVector: {x: 0, y: 0}
   swimmingMotionVector: {x: 0, y: 0}

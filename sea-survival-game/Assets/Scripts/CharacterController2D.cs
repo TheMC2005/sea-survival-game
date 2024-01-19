@@ -11,6 +11,7 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
     [SerializeField] public float speed = 3f;
     [SerializeField] public float shallowSpeed = 2.5f;
     [SerializeField] public float swimmingSpeed = 2f;
+    [SerializeField] TopDownCarController topDownCarController;
     public float speedMultiplier;
     public Vector2 motionVector;
     public Vector2 swimmingMotionVector;
@@ -29,6 +30,8 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
     {
         if (!GameManagerSingleton.Instance.IsPaused)
         {
+            if(topDownCarController.isPlayerInSeat ==  false) 
+            { 
             if (GameManagerSingleton.Instance.inShallow)
             {
                 animator.SetBool("inShallow", true);
@@ -72,6 +75,14 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
                 swimmingMotionVector = new Vector2(shorizontal, svertical);
                 animator.SetFloat("horizontalSwimming", shorizontal);
                 animator.SetFloat("verticalSwimming", svertical);
+            }
+          }
+            else
+            {
+                Debug.Log("Anyád");
+                animator.SetBool("inShallow", false);
+                animator.SetBool("isSwimming", false);
+                animator.SetBool("isMoving", false);
             }
         }
     }

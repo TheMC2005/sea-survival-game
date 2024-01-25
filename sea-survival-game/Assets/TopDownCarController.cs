@@ -22,6 +22,7 @@ public class TopDownCarController : MonoBehaviour
     public float turnFactor;
     public float maxSpeed;
     public bool isPlayerInSeat = false;
+
     //Local variables
     float accelerationInput = 0;
     float steeringInput = 0;
@@ -29,8 +30,10 @@ public class TopDownCarController : MonoBehaviour
     int randomTeleportY;    
     float rotationAngle = 0;
     float velocityVsUp = 0;
-
+    //Global variables
+    public bool anchorDown;
     //Components
+    [Header("Components")]
     Rigidbody2D carRigidbody2D;
     public Rigidbody2D playerRigidbody;
     public GameObject seat;
@@ -40,8 +43,6 @@ public class TopDownCarController : MonoBehaviour
     [SerializeField]BoatType boatType;
     [SerializeField] Slider speedSlider;
     [SerializeField] TextMeshProUGUI boatSpeedText;
-    
-
     public CharacterController2D characterController;
 
     //Awake is called when the script instance is being loaded.
@@ -86,6 +87,10 @@ public class TopDownCarController : MonoBehaviour
         characterController.animator.Play("Movement",0,0);
         characterController.animator.speed = 0;  
     }
+    public void ThrowAnchor()
+    {
+        
+    }
     public void ToggleSeat()
     {
         if (isPlayerInSeat)
@@ -93,23 +98,24 @@ public class TopDownCarController : MonoBehaviour
             characterController.enabled = true;
             isPlayerInSeat = false;
             cinemachineVirtualCamera.m_Lens.OrthographicSize = 5;
-            boatUICanvas.enabled = false;
+            boatUICanvas.gameObject.SetActive(false);   
            
             GameManagerSingleton.Instance.isSwimming = true;
             GameManagerSingleton.Instance.inShallow = false;
             characterController.animator.SetBool("inShallow", false);
             characterController.animator.SetBool("isSwimming", true);
             characterController.animator.SetBool("isMoving", false);
-            randomTeleportX = Random.Range(-1,1);
-            randomTeleportY = Random.Range(-1,1);
+            int randomTeleportX = (Random.Range(0, 2) == 0) ? -1 : 1;
+            int randomTeleportY = (Random.Range(0, 2) == 0) ? -1 : 1;
             GameManagerSingleton.Instance.player.transform.position += new Vector3(randomTeleportX, randomTeleportY, 0);
+
 
         }
         else
         {
             isPlayerInSeat = true;
             StartCoroutine(StopAnimation());
-            boatUICanvas.enabled = true;
+            boatUICanvas.gameObject.SetActive(true);
             cinemachineVirtualCamera.m_Lens.OrthographicSize = 10;
         }
     }

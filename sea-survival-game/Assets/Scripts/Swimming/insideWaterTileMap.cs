@@ -31,8 +31,8 @@ public class insideWaterTileMap : MonoBehaviour
     
     private void OnTriggerStay2D(Collider2D collision)
     {
-        GameManagerSingleton.Instance.isSwimming = true;
-        GameManagerSingleton.Instance.inShallow = false;
+       // GameManagerSingleton.Instance.isSwimming = true;
+      //  GameManagerSingleton.Instance.inShallow = false; azert vettem ki mert bajok voltak amikor hajoztam kozel a parthoz
     }
     private void Update()
     {

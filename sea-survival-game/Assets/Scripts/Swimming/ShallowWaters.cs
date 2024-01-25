@@ -25,7 +25,8 @@ public class ShallowWaters : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        GameManagerSingleton.Instance.inShallow = true;
-        GameManagerSingleton.Instance.isSwimming = false;
+        // Debug.Log("Ez van");
+        // GameManagerSingleton.Instance.inShallow = true;
+        // GameManagerSingleton.Instance.isSwimming = false; azert vettem ki mert bajok voltak amikor hajoztam kozel a parthoz
     }
 }

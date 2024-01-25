@@ -96,6 +96,7 @@ public class TopDownCarController : MonoBehaviour
             boatUICanvas.enabled = false;
            
             GameManagerSingleton.Instance.isSwimming = true;
+            GameManagerSingleton.Instance.inShallow = false;
             characterController.animator.SetBool("inShallow", false);
             characterController.animator.SetBool("isSwimming", true);
             characterController.animator.SetBool("isMoving", false);
@@ -126,7 +127,7 @@ public class TopDownCarController : MonoBehaviour
         else
         {
             RigidbodyConstraints2D constraints = playerRigidbody.constraints;
-            constraints = RigidbodyConstraints2D.None;
+            constraints = RigidbodyConstraints2D.FreezeRotation; //ez azért kell, hogy ne birjon nekem itt beybladezni a karakter
             playerRigidbody.constraints = constraints;
             characterController.animator.speed = 1;
 

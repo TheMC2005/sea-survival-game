@@ -76557,9 +76557,6 @@ MonoBehaviour:
   boatType: 0
   speedSlider: {fileID: 84595955}
   boatSpeedText: {fileID: 202013743}
-  playerSpriterenderer: {fileID: 1755755041}
-  boatSpritePlayer: {fileID: -1985173714, guid: 1a377468946191f418b7d1821108b20a, type: 3}
-  swimmingPlayer: {fileID: -437732629, guid: efe756608217fc946ab17705d626c014, type: 3}
   characterController: {fileID: 1755755045}
 --- !u!50 &1721709851
 Rigidbody2D:
@@ -76605,8 +76602,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1721709853
-BoxCollider2D:
+--- !u!60 &1721709853
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -76637,7 +76634,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01275444, y: 0.56322837}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -76647,9 +76644,23 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.6122856, y: 2.0250454}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.76478195, y: 1.4606351}
+      - {x: 0.7779045, y: 1.5850847}
+      - {x: -0.77819353, y: 1.5589707}
+      - {x: -0.7725258, y: 0.6158283}
+      - {x: -0.767301, y: -0.34360874}
+      - {x: 0.7141129, y: -0.32366276}
+      - {x: 0.79948044, y: 1.4572842}
+      - {x: 0.73462296, y: 1.4162782}
+      - {x: 0.6731262, y: -0.23100066}
+      - {x: -0.6778765, y: -0.18963462}
+      - {x: -0.6778765, y: -0.18963462}
+      - {x: -0.6778765, y: -0.18963462}
+      - {x: -0.6744547, y: -0.18621594}
+      - {x: -0.7044687, y: 1.4525924}
+  m_UseDelaunayMesh: 0
 --- !u!1 &1755755039
 GameObject:
   m_ObjectHideFlags: 0
@@ -76811,6 +76822,7 @@ MonoBehaviour:
   swimmingMotionVector: {x: 0, y: 0}
   shallowMotionVector: {x: 0, y: 0}
   LastMotionVector: {x: 0, y: 0}
+  animator: {fileID: 0}
   moving: 0
 --- !u!61 &1755755046
 BoxCollider2D:

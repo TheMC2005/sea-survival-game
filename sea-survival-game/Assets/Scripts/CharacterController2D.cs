@@ -17,7 +17,7 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
     public Vector2 swimmingMotionVector;
     public Vector2 shallowMotionVector;
     public Vector2 LastMotionVector;
-    Animator animator;
+    public Animator animator;
     public bool moving;
 
     void Awake()
@@ -79,7 +79,6 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
           }
             else
             {
-                Debug.Log("Anyád");
                 animator.SetBool("inShallow", false);
                 animator.SetBool("isSwimming", false);
                 animator.SetBool("isMoving", false);

@@ -25,7 +25,8 @@ public class TopDownCarController : MonoBehaviour
     //Local variables
     float accelerationInput = 0;
     float steeringInput = 0;
-    
+    int randomTeleportX;
+    int randomTeleportY;    
     float rotationAngle = 0;
     float velocityVsUp = 0;
 
@@ -39,9 +40,7 @@ public class TopDownCarController : MonoBehaviour
     [SerializeField]BoatType boatType;
     [SerializeField] Slider speedSlider;
     [SerializeField] TextMeshProUGUI boatSpeedText;
-    [SerializeField] SpriteRenderer playerSpriterenderer;
-    [SerializeField] Sprite boatSpritePlayer;
-    [SerializeField] Sprite swimmingPlayer;
+    
 
     public CharacterController2D characterController;
 
@@ -76,7 +75,17 @@ public class TopDownCarController : MonoBehaviour
         }
         boatSpeedText.text = 0.ToString();
     }
-
+    IEnumerator StopAnimation()
+    {
+        GameManagerSingleton.Instance.inShallow = false;
+        GameManagerSingleton.Instance.isSwimming = false;
+        characterController.animator.SetBool("inShallow", false);
+        characterController.animator.SetBool("isSwimming", false);
+        characterController.animator.SetBool("isMoving", true);
+        yield return new WaitForSeconds(0.25f);
+        characterController.animator.Play("Movement",0,0);
+        characterController.animator.speed = 0;  
+    }
     public void ToggleSeat()
     {
         if (isPlayerInSeat)
@@ -85,17 +94,25 @@ public class TopDownCarController : MonoBehaviour
             isPlayerInSeat = false;
             cinemachineVirtualCamera.m_Lens.OrthographicSize = 5;
             boatUICanvas.enabled = false;
-            playerSpriterenderer.sprite = swimmingPlayer;
+           
+            GameManagerSingleton.Instance.isSwimming = true;
+            characterController.animator.SetBool("inShallow", false);
+            characterController.animator.SetBool("isSwimming", true);
+            characterController.animator.SetBool("isMoving", false);
+            randomTeleportX = Random.Range(-1,1);
+            randomTeleportY = Random.Range(-1,1);
+            GameManagerSingleton.Instance.player.transform.position += new Vector3(randomTeleportX, randomTeleportY, 0);
+
         }
         else
         {
             isPlayerInSeat = true;
+            StartCoroutine(StopAnimation());
             boatUICanvas.enabled = true;
             cinemachineVirtualCamera.m_Lens.OrthographicSize = 10;
-            playerSpriterenderer.sprite = boatSpritePlayer;
-            characterController.enabled = false;
         }
     }
+    
     public void Update()
     {
         if (isPlayerInSeat)
@@ -104,12 +121,15 @@ public class TopDownCarController : MonoBehaviour
             GameManagerSingleton.Instance.player.transform.position = seat.transform.position;
             constraints = RigidbodyConstraints2D.FreezePosition;
             playerRigidbody.constraints = constraints;
+            characterController.enabled = false;
         }
         else
         {
             RigidbodyConstraints2D constraints = playerRigidbody.constraints;
             constraints = RigidbodyConstraints2D.None;
             playerRigidbody.constraints = constraints;
+            characterController.animator.speed = 1;
+
         }
     }
     //Frame-rate independent for physics calculations.

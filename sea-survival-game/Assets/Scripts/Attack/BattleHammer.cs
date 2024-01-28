@@ -18,6 +18,17 @@ public class BattleHammer : MonoBehaviour
         cc2d.enabled=false;
         tpc.enabled=false;
 
+        Collider2D coll = GetComponent<Collider2D>();
+        ContactFilter2D filter = new ContactFilter2D().NoFilter();
+        List<Collider2D> results = new List<Collider2D>();
+        int n = Physics2D.OverlapCollider(coll, filter, results);
+
+        for(int i=0; i<n; i++){
+            if(results[i].gameObject.tag=="enemy"){
+                results[i].gameObject.GetComponent<Hitpoints>().hp-=5;
+            }
+        }
+
         StartCoroutine(End());
     }
 
@@ -27,12 +38,5 @@ public class BattleHammer : MonoBehaviour
         cc2d.enabled=true;
         tpc.enabled=true;
         Destroy(this.gameObject);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag=="enemy"){
-            other.GetComponent<Hitpoints>().hp-=5;
-        }
     }
 }

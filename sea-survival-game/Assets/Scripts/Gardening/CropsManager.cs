@@ -8,7 +8,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
-using static UnityEditor.PlayerSettings;
 //emlekezteto a majmunnak mindennek csinalj adatbazist mint ahogy a tilebasenek is csinaltal koszi
 
 [System.Serializable]

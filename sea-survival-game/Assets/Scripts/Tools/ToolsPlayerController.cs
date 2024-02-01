@@ -3,11 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
-using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
-using static UnityEditor.Progress;
 /*
  * A jovobeli magamnak, ha epp keresed, hogy a tooloknal mert nem akar lefutni a script akkor emlekez arra, hogy vagy a use tool worldnel vagy a gridnel megkell hivnod
  * a function meg az itemnel csinalj hozza egy masik toolactiont

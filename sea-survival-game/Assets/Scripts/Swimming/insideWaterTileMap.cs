@@ -8,6 +8,7 @@ using UnityEngine.Tilemaps;
 public class insideWaterTileMap : MonoBehaviour
 {
     [SerializeField] CharacterController2D characterController;
+    [SerializeField] TileMapReadController tileMapReadController;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

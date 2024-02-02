@@ -12,6 +12,7 @@ public class CheckPlayerPosition : MonoBehaviour
     {
         Vector3Int playerCellPosition = tilemap.WorldToCell(GameManagerSingleton.Instance.player.transform.position);
         TileBase tile = tilemap.GetTile(playerCellPosition);
+        Debug.Log("Under player: "+tile.name);
         return tile;
     }
 }

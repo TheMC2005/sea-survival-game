@@ -12,6 +12,7 @@ public class insideWaterTileMap : MonoBehaviour
     [SerializeField] CheckPlayerPosition checkPlayer;
     //components
     [SerializeField] TileBase insideWaterTileBase;
+    [SerializeField] TileBase shallowWaters;
     private float updateInterval = 0.05f; 
     private float lastUpdateTime;
 
@@ -27,7 +28,13 @@ public class insideWaterTileMap : MonoBehaviour
         }
 
         lastUpdateTime = Time.time;
-
+        /*
+        if(checkPlayer.getTileBaseUnderPlayer() != insideWaterTileBase && checkPlayer.getTileBaseUnderPlayer() !=shallowWaters)
+        {
+            GameManagerSingleton.Instance.isSwimming = false;
+            GameManagerSingleton.Instance.inShallow = false;
+        }
+        */
         if (checkPlayer.getTileBaseUnderPlayer() == insideWaterTileBase)
         {
             Debug.Log("Player entered the waterTile");
@@ -37,7 +44,7 @@ public class insideWaterTileMap : MonoBehaviour
         else
         {
             Debug.Log("Player exited the WaterTile");
-            GameManagerSingleton.Instance.inShallow = true;
+            //GameManagerSingleton.Instance.inShallow = true;
         }
 
         if (!GameManagerSingleton.Instance.isSwimming)

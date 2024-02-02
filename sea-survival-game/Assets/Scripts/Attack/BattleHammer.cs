@@ -5,6 +5,8 @@ using UnityEngine;
 public class BattleHammer : MonoBehaviour
 {
     GameObject player;
+    [SerializeField] private int damage;
+    [SerializeField] private float time;
     CharacterController2D cc2d;
     ToolsPlayerController tpc;
 
@@ -25,7 +27,7 @@ public class BattleHammer : MonoBehaviour
 
         for(int i=0; i<n; i++){
             if(results[i].gameObject.tag=="enemy"){
-                results[i].gameObject.GetComponent<Hitpoints>().hp-=5;
+                results[i].gameObject.GetComponent<Hitpoints>().hp-=damage;
             }
         }
 
@@ -34,7 +36,7 @@ public class BattleHammer : MonoBehaviour
 
     IEnumerator End()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(time);
         cc2d.enabled=true;
         tpc.enabled=true;
         Destroy(this.gameObject);

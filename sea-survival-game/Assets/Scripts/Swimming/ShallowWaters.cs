@@ -1,32 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class ShallowWaters : MonoBehaviour
 {
-    
-    private void OnTriggerEnter2D(Collider2D collision)
+    //reference
+    public CheckPlayerPosition checkPlayer;
+    //components
+    [SerializeField] TileBase shallowWaterTilebase;
+    private float updateInterval = 0.05f;
+    private float lastUpdateTime;
+
+    private void Start()
     {
-        if (collision.CompareTag("Player"))
+        lastUpdateTime = Time.time;
+    }
+    private void Update()
+    {
+        if (Time.time - lastUpdateTime < updateInterval)
         {
-            Debug.Log("Player entered the shallowWaters!");
+            return;
+        }
+
+        lastUpdateTime = Time.time;
+        if (checkPlayer.getTileBaseUnderPlayer() == shallowWaterTilebase) 
+        {
+            Debug.Log("Player entered the shallowWaters");
             GameManagerSingleton.Instance.isSwimming = false;
             GameManagerSingleton.Instance.inShallow = true;
         }
-
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+        else
         {
             Debug.Log("Player exited the shallowWaters!");
             GameManagerSingleton.Instance.inShallow = false;
         }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        // Debug.Log("Ez van");
-        // GameManagerSingleton.Instance.inShallow = true;
-        // GameManagerSingleton.Instance.isSwimming = false; azert vettem ki mert bajok voltak amikor hajoztam kozel a parthoz
     }
 }

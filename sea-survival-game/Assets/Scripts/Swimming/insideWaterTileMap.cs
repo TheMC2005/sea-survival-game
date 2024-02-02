@@ -7,36 +7,39 @@ using UnityEngine.Tilemaps;
 
 public class insideWaterTileMap : MonoBehaviour
 {
+    //references
     [SerializeField] CharacterController2D characterController;
-    [SerializeField] TileMapReadController tileMapReadController;
+    [SerializeField] CheckPlayerPosition checkPlayer;
+    //components
+    [SerializeField] TileBase insideWaterTileBase;
+    private float updateInterval = 0.05f; 
+    private float lastUpdateTime;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Start()
     {
-        if (collision.CompareTag("Player"))
-        {
-            Debug.Log("Player entered the waterTilemap!");
-            GameManagerSingleton.Instance.inShallow = false;
-            GameManagerSingleton.Instance.isSwimming = true;
-            characterController.speed = 0.8f;
-
-        }
-        
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            Debug.Log("Player exited the waterTilemap!");
-        }
-    }
-    
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-       // GameManagerSingleton.Instance.isSwimming = true;
-      //  GameManagerSingleton.Instance.inShallow = false; azert vettem ki mert bajok voltak amikor hajoztam kozel a parthoz 
+        lastUpdateTime = Time.time;
     }
     private void Update()
     {
+        if (Time.time - lastUpdateTime < updateInterval)
+        {
+            return; 
+        }
+
+        lastUpdateTime = Time.time;
+
+        if (checkPlayer.getTileBaseUnderPlayer() == insideWaterTileBase)
+        {
+            Debug.Log("Player entered the waterTile");
+            GameManagerSingleton.Instance.isSwimming = true;
+            GameManagerSingleton.Instance.inShallow = false;
+        }
+        else
+        {
+            Debug.Log("Player exited the WaterTile");
+            GameManagerSingleton.Instance.inShallow = true;
+        }
+
         if (!GameManagerSingleton.Instance.isSwimming)
         {
             characterController.speed = Mathf.MoveTowards(characterController.speed, 3, Time.deltaTime);

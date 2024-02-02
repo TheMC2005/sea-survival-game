@@ -7,9 +7,9 @@ using UnityEngine.Tilemaps;
 public class ChunkManager : MonoBehaviour
 {
     public Tilemap tilemap; // Reference to your Tilemap
-    public TileBase waterTile; // Reference to your water tile
+    public TileBase waterTile; 
     public TileBase check;
-    public int chunkSize = 16; // Size of each chunk
+    public int chunkSize = 16; 
     public float playerProximityThreshold = 64f; // Proximity threshold to the player
 
     public List<TilemapChunk> chunks = new List<TilemapChunk>();

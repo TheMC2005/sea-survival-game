@@ -40,7 +40,7 @@ public class LanternController : MonoBehaviour
     {
         int hours1 = DayNightCycle.Instance.hours;
         int mins1 = DayNightCycle.Instance.mins;
-        if(hours1 == hoursOn && mins1 > minsOn && start==true)
+        if(hours1 >= hoursOn && hours1 <= hoursOn+2 && mins1 > minsOn && start==true)
         {
             light2d.enabled = true;
             deActivated.SetActive(false);
@@ -52,12 +52,12 @@ public class LanternController : MonoBehaviour
                 LightIntensityTurnOn = Convert.ToInt32(LightPlaceHolderTurnOn);
                 light2d.intensity = LightIntensityTurnOn;
             }
-            if(light2d.intensity == TargetIntensity)
+            if(LightIntensityTurnOn == TargetIntensity)
             {
                 start = false;
             }
         }
-        if(hours1==hoursOff && mins1>minsOff && start == false)
+        if(hours1>=hoursOff && hours1<=hoursOff+2 && mins1>minsOff && start == false)
         {
             _currentTurnOff = Mathf.MoveTowards(_currentTurnOff, _targetTurnOff, speedTurnOff * Time.deltaTime);
             LightPlaceHolderTurnOff = Mathf.Lerp(TargetIntensity, 1, curveTurnOff.Evaluate(_currentTurnOff));
@@ -75,6 +75,12 @@ public class LanternController : MonoBehaviour
             {
                 light2d.enabled = false;
                 start = true;
+                LightPlaceHolderTurnOn = 0;
+                LightPlaceHolderTurnOff = 0;
+                LightIntensityTurnOff = 0;
+                LightIntensityTurnOn = 0; 
+                _currentTurnOff = 0;
+                _currentTurnOn = 0;
             }
         }
     }

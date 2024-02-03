@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 
 public class DialogueTrigger : MonoBehaviour

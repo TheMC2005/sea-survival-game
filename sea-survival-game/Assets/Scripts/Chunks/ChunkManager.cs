@@ -28,7 +28,7 @@ public class ChunkManager : MonoBehaviour
         while (true)
         {
             CheckPlayerProximity();
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(6f);
         }
     }
 

@@ -1,18 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+
 
 public class DialogueTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private List<dialogueString> dialogueStrings = new List<dialogueString>();
+    [SerializeField] private Transform NPCTransform;
+    [SerializeField] public DialogueManager dialogueManager;
 
-    // Update is called once per frame
-    void Update()
+    private bool hasSpoken = false;
+    private float distance;
+
+    private void Update()
     {
-        
+        distance = (GameManagerSingleton.Instance.player.transform.position - NPCTransform.transform.position).sqrMagnitude;
+        if (Input.GetKeyDown(KeyCode.E) && distance < 5f)
+        {
+            dialogueManager.DialogueStart(dialogueStrings, NPCTransform);
+            hasSpoken = true;
+        }
     }
+}
+
+[System.Serializable]
+public class dialogueString
+{
+    public string text;
+    public bool isEnd;
+    [Header("Branch")]
+    public bool isQuestion;
+    public string answerOption1;
+    public string answerOption2;
+    public int option1IndexJump;
+    public int option2IndexJump;
+
+    [Header("Triggered Events")]
+    public UnityEvent startDialogueEvent;
+    public UnityEvent endDialogueEvent;
 }

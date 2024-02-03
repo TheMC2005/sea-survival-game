@@ -29,7 +29,7 @@ public class DialogueManager : MonoBehaviour
     }
     public void DialogueStart(List<dialogueString> textToPrint, Transform NPC)
     {
-        dialogueParent.SetActive(false);
+        dialogueParent.SetActive(true);
         characterController.enabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -109,6 +109,6 @@ public class DialogueManager : MonoBehaviour
 
         characterController.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.visible = true;
     }
 }

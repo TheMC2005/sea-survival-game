@@ -19,7 +19,7 @@ public class DialogueTrigger : MonoBehaviour
     private void Update()
     {
         distance = (GameManagerSingleton.Instance.player.transform.position - NPCTransform.transform.position).sqrMagnitude;
-        if (Input.GetKeyDown(KeyCode.E) && distance < 5f)
+        if (Input.GetKeyDown(KeyCode.E) && distance < 5f && !hasSpoken)
         {
             dialogueManager.DialogueStart(dialogueStrings, NPCTransform);
             hasSpoken = true;

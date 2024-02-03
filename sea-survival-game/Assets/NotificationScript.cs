@@ -9,6 +9,7 @@ public class NotificationScript : MonoBehaviour
 
     //Local Variable
     public bool boatToggle = false;
+    public bool dialogueToggle = false;
     private void Start()
     {
         notificationCanvas = GetComponent<Canvas>();
@@ -24,6 +25,19 @@ public class NotificationScript : MonoBehaviour
         {
             BoatNotificationPanel.SetActive(false);
         }
+
+        if(dialogueToggle)
+        {
+            BoatNotificationPanel.SetActive(true);
+        }
+        else
+        {
+            BoatNotificationPanel.SetActive(false);
+        }
+    }
+    private void Update()
+    {
+        Debug.Log(Cursor.lockState);
     }
 
 }

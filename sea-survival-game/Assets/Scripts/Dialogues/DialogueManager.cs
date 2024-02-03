@@ -19,6 +19,7 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Player")]
     [SerializeField] private CharacterController2D characterController;
+    [SerializeField] private GameObject inventorycanvas;
     private int currentDialogueIndex = 0;
     private Transform playerCamera;
 
@@ -30,6 +31,7 @@ public class DialogueManager : MonoBehaviour
     public void DialogueStart(List<dialogueString> textToPrint, Transform NPC)
     {
         dialogueParent.SetActive(true);
+        inventorycanvas.SetActive(false);
         characterController.enabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -107,8 +109,9 @@ public class DialogueManager : MonoBehaviour
         dialogueParent.SetActive(false);
         dialogueParent.SetActive(false);
 
+        inventorycanvas.SetActive(true);
         characterController.enabled = true;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 }

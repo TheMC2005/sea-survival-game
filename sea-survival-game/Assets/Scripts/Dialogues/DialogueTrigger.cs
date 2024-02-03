@@ -16,14 +16,27 @@ public class DialogueTrigger : MonoBehaviour
     private bool hasSpoken = false;
     private float distance;
 
+
+    [SerializeField] NotificationScript notificationScript;
     private void Update()
     {
         distance = (GameManagerSingleton.Instance.player.transform.position - NPCTransform.transform.position).sqrMagnitude;
+        if(distance < 5f && !hasSpoken)
+        {
+            notificationScript.dialogueToggle = true;
+            notificationScript.ToggleBoatNotification();
+        }
+        else
+        {
+            notificationScript.dialogueToggle = false;
+            notificationScript.ToggleBoatNotification();
+        }
         if (Input.GetKeyDown(KeyCode.E) && distance < 5f && !hasSpoken)
         {
             dialogueManager.DialogueStart(dialogueStrings, NPCTransform);
-            hasSpoken = true;
+            hasSpoken = true;    
         }
+        
     }
 }
 

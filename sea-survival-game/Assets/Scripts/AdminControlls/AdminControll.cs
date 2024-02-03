@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class AdminControll : MonoBehaviour
 {
+    [Header("Virtual Camera")]
     public GameObject virtualCameraObj;
     public CinemachineVirtualCamera VirtualCamera;
+    [Header("Boat")]
+    public GameObject boat;
     public void IncreaseVision()
     {
         VirtualCamera = virtualCameraObj.GetComponent<CinemachineVirtualCamera>();
@@ -16,5 +19,9 @@ public class AdminControll : MonoBehaviour
     {
         VirtualCamera = virtualCameraObj.GetComponent<CinemachineVirtualCamera>();
         VirtualCamera.m_Lens.OrthographicSize = 5;
+    }
+    public void EnableBoat()
+    {
+        boat.SetActive(true);
     }
 }

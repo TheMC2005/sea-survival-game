@@ -23,7 +23,8 @@ public class NotificationScript : MonoBehaviour
     public GameObject player;
 
     //References
-    TopDownCarController topDownCarController;
+    public TopDownCarController topDownCarController;
+    public MineEntrance mineEntrance;
     private void Start()
     {
         notificationCanvas = GetComponent<Canvas>();
@@ -46,9 +47,10 @@ public class NotificationScript : MonoBehaviour
     }
     private void Update()
     {
+        //Az npc-set a dialogueTriggerben van mert ott sokkal konnyebb volt es elegansabb
         ToggleBoatNotification();
         CheckIfNearCave();
-        CheckIfNearBoat();
+        CheckIfNearBoat(); 
     }
 
     private void CheckIfNearBoat()
@@ -68,7 +70,7 @@ public class NotificationScript : MonoBehaviour
         mineDistance = (player.transform.position - mine.transform.position).sqrMagnitude;
         if (Input.GetKeyDown(KeyCode.E) && mineDistance < 5f)
         {
-            //topDownCarController.ToggleSeat();
+            mineEntrance.EnterMine();
         }
         Debug.Log("MineDistance:" + mineDistance);
         toggleBools[0] = mineDistance < 5f && mineDistance > 0.1f;

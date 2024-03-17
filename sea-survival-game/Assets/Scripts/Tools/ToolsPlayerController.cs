@@ -25,7 +25,7 @@ public class ToolsPlayerController : MonoBehaviour
     [SerializeField] CropsManager cropsManager;
     [SerializeField] TopDownCarController topDownCarController;
     [SerializeField] NotificationScript notificationscript;
-    float distance;
+    
 
     Vector3Int selectedTilePosition;
     bool selectable;
@@ -78,22 +78,7 @@ public class ToolsPlayerController : MonoBehaviour
             {
                 DayNightCycle.Instance.hours = 7;
             }
-            distance = (GameManagerSingleton.Instance.player.transform.position - topDownCarController.seat.transform.position).sqrMagnitude;
-            if (Input.GetKeyDown(KeyCode.E) && distance < 5f)
-            {
-                topDownCarController.ToggleSeat();
-            }
-
-            if (distance < 5f && distance > 0.1f)
-            {
-               notificationscript.boatToggle = true;
-                notificationscript.ToggleBoatNotification();
-            }
-            else
-            {
-                notificationscript.boatToggle = false;
-                notificationscript.ToggleBoatNotification();
-            }
+            
             
         }
     }

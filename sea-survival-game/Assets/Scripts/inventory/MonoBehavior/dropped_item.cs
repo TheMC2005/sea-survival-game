@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 public class dropped_item : MonoBehaviour
 {
@@ -24,20 +25,23 @@ public class dropped_item : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        float distance = Vector3.Distance(transform.position, player.position); //object es player kozotti distance
-        if ((distance > pickUpDistance)||(!InventoryManager.inventory.IsFreeSpaceFor(item)))
+        if (!gameObject.IsDestroyed())
         {
-            return; // ha nagyobb a distance nem veszi fel csak vissza kuldi
-        }
-        transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-        if (distance < 0.1f)
-        {
-            for(int i = 0; i < amount; i++)
-            { 
-                InventoryManager.inventory.AddItem(item);
+            float distance = Vector3.Distance(transform.position, player.position); //object es player kozotti distance
+            if ((distance > pickUpDistance) || (!InventoryManager.inventory.IsFreeSpaceFor(item)))
+            {
+                return; // ha nagyobb a distance nem veszi fel csak vissza kuldi
             }
-            InventoryManager.LoadSlots(InventoryManager.inventory);
-            Destroy(gameObject);
+            transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+            if (distance < 0.1f)
+            {
+                for (int i = 0; i < amount; i++)
+                {
+                    InventoryManager.inventory.AddItem(item);
+                }
+                InventoryManager.LoadSlots(InventoryManager.inventory);
+                Destroy(gameObject);
+            }
+        }
         }
     }
-}

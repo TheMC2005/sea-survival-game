@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class DayNightCycle : MonoBehaviour, IDataPersistence
 {
@@ -11,7 +12,7 @@ public class DayNightCycle : MonoBehaviour, IDataPersistence
     public TextMeshProUGUI dayDisplay; 
     public Volume ppv; // post processing volume
     public CropsManager cropsManager;
-
+    Scene mainWorld;
     public float tick = 20000; 
     public float seconds;
     public int mins;
@@ -29,6 +30,7 @@ public class DayNightCycle : MonoBehaviour, IDataPersistence
     void Start()
     {
         ppv = gameObject.GetComponent<Volume>();
+        mainWorld = SceneManager.GetSceneByName("B-test");
     }
 
 
@@ -81,11 +83,11 @@ public class DayNightCycle : MonoBehaviour, IDataPersistence
                 ppv.weight = 1 - (float)mins / 60;
             }
         }
-        if(hours >= 21 || hours<6) // ez csak azert kell ha veletlen tesztelsz akkor ne legyen buggos pl, hogy 19:30 van es este van
+        if(hours >= 21 || hours<6 && SceneManager.GetActiveScene() == mainWorld) // ez csak azert kell ha veletlen tesztelsz akkor ne legyen buggos pl, hogy 19:30 van es este van
         {
             ppv.weight = 1;
         }
-        if(hours >=7 && hours<20) // same here
+        if(hours >=7 && hours<20 && SceneManager.GetActiveScene() == mainWorld) // same here
         {
             ppv.weight = 0.2f;
         }

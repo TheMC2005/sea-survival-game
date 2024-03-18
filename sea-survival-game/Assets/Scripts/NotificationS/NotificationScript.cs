@@ -16,15 +16,18 @@ public class NotificationScript : MonoBehaviour
     public bool dialogueToggle = false;
     //distances
     int numberOfDistances = 10; //ugy valtoztasd, hogy mennyi lesz
-    float mineDistance;
+    float mineEntranceDistance;
+    float mineExitDistance;
     float boatDistance;
     //Gameobjects
-    public GameObject mine;
+    public GameObject mineEntranceObj;
+    public GameObject mineExitObj;
     public GameObject player;
 
     //References
     public TopDownCarController topDownCarController;
     public MineEntrance mineEntrance;
+    public MineExit mineExit;
     private void Start()
     {
         notificationCanvas = GetComponent<Canvas>();
@@ -49,8 +52,19 @@ public class NotificationScript : MonoBehaviour
     {
         //Az npc-set a dialogueTriggerben van mert ott sokkal konnyebb volt es elegansabb
         ToggleBoatNotification();
-        CheckIfNearCave();
+        CheckIfNearCaveEntrance();
         CheckIfNearBoat(); 
+        CheckIfNearCaveExit();
+    }
+
+    private void CheckIfNearCaveExit()
+    {
+        mineExitDistance = (player.transform.position - mineExitObj.transform.position).sqrMagnitude;
+        if(Input.GetKeyDown(KeyCode.E) && mineExitDistance < 5f)
+        {
+            mineExit.ExitMine();
+        }
+        toggleBools[2] = mineExitDistance < 5f && mineExitDistance > 0.1f;
     }
 
     private void CheckIfNearBoat()
@@ -61,19 +75,21 @@ public class NotificationScript : MonoBehaviour
             topDownCarController.ToggleSeat();
         }
 
-       // toggleBools[0] = boatDistance < 5f && boatDistance > 0.1f;
+        toggleBools[0] = boatDistance < 5f && boatDistance > 0.1f;
         
     }
 
-    private void CheckIfNearCave()
+    private void CheckIfNearCaveEntrance()
     {
-        mineDistance = (player.transform.position - mine.transform.position).sqrMagnitude;
-        if (Input.GetKeyDown(KeyCode.E) && mineDistance < 5f)
+        mineEntranceDistance = (player.transform.position - mineEntranceObj.transform.position).sqrMagnitude;
+        if (Input.GetKeyDown(KeyCode.E) && mineEntranceDistance < 5f)
         {
             mineEntrance.EnterMine();
         }
-        Debug.Log("MineDistance:" + mineDistance);
-        toggleBools[0] = mineDistance < 5f && mineDistance > 0.1f;
+       // Debug.Log("MineEnterDistance:" + mineEntranceDistance);
+        toggleBools[1] = mineEntranceDistance < 5f && mineEntranceDistance > 0.1f;
     }
+
+   
 
 }

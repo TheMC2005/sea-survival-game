@@ -70,7 +70,7 @@ public class zambi : MonoBehaviour
     IEnumerator DamagePlayer(){
         yield return new WaitForSeconds(attackReadyTime);
         if(Vector2.Distance(gameObject.transform.position, player.transform.position)<attackRange){
-            playerhp.hp -= damage;
+            playerhp.DealDamage(damage);
             Debug.Log("hit");
         }
     }

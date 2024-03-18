@@ -52,20 +52,12 @@ public class NotificationScript : MonoBehaviour
     {
         //Az npc-set a dialogueTriggerben van mert ott sokkal konnyebb volt es elegansabb
         ToggleBoatNotification();
-        CheckIfNearCaveEntrance();
         CheckIfNearBoat(); 
-        CheckIfNearCaveExit();
+        StartCoroutine(CheckIfNearCaveEntranceCoroutine());
+        StartCoroutine(CheckIfNearCaveExitCoroutine());
     }
 
-    private void CheckIfNearCaveExit()
-    {
-        mineExitDistance = (player.transform.position - mineExitObj.transform.position).sqrMagnitude;
-        if(Input.GetKeyDown(KeyCode.E) && mineExitDistance < 5f)
-        {
-            mineExit.ExitMine();
-        }
-        toggleBools[2] = mineExitDistance < 5f && mineExitDistance > 0.1f;
-    }
+    
 
     private void CheckIfNearBoat()
     {
@@ -78,18 +70,36 @@ public class NotificationScript : MonoBehaviour
         toggleBools[0] = boatDistance < 5f && boatDistance > 0.1f;
         
     }
-
-    private void CheckIfNearCaveEntrance()
+    private IEnumerator CheckIfNearCaveExitCoroutine()
     {
-        mineEntranceDistance = (player.transform.position - mineEntranceObj.transform.position).sqrMagnitude;
-        if (Input.GetKeyDown(KeyCode.E) && mineEntranceDistance < 5f)
-        {
-            mineEntrance.EnterMine();
+            mineExitDistance = (player.transform.position - mineExitObj.transform.position).sqrMagnitude;
+            if (Input.GetKeyDown(KeyCode.E) && mineExitDistance < 5f)
+            {
+             yield return new WaitForSeconds(0.2f);
+             mineExit.ExitMine();
+             yield return new WaitForSeconds(0.2f);
         }
-       // Debug.Log("MineEnterDistance:" + mineEntranceDistance);
-        toggleBools[1] = mineEntranceDistance < 5f && mineEntranceDistance > 0.1f;
+            toggleBools[2] = mineExitDistance < 5f && mineExitDistance > 0.1f;
+
+            // Wait for 0.2 seconds
+            yield return new WaitForSeconds(0.2f);
+        
+    }
+    private IEnumerator CheckIfNearCaveEntranceCoroutine()
+    {
+            mineEntranceDistance = (player.transform.position - mineEntranceObj.transform.position).sqrMagnitude;
+            if (Input.GetKeyDown(KeyCode.E) && mineEntranceDistance < 5f)
+            {
+                yield return new WaitForSeconds(0.2f);
+                mineEntrance.EnterMine();
+                yield return new WaitForSeconds(0.2f);
+        }
+            toggleBools[1] = mineEntranceDistance < 5f && mineEntranceDistance > 0.1f;
+
+            // Wait for 0.2 seconds
+            yield return new WaitForSeconds(0.22f);
     }
 
-   
+
 
 }

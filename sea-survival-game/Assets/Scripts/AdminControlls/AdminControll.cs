@@ -24,4 +24,11 @@ public class AdminControll : MonoBehaviour
     {
         boat.SetActive(true);
     }
+    public void GiveSkillPoints()
+    {
+        Stats.Instance.GiveCraftingxp(1000);
+        Stats.Instance.GiveForagingxp(1000);
+        Stats.Instance.GiveForgexp(1000);
+        Stats.Instance.GiveMobilityxp(1000);
+    }
 }

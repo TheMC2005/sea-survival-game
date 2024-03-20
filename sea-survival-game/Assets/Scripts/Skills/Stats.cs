@@ -26,7 +26,8 @@ public class Stats : MonoBehaviour
     //References
     [SerializeField] UnityEngine.UI.Slider xpslider;
     [SerializeField] UnityEngine.UI.Slider foodslider;
-    
+    public UnityEngine.UI.Slider healthslider;
+
     public CharacterController2D characterController;
     public static Stats Instance { get; private set; }
     private void Awake()

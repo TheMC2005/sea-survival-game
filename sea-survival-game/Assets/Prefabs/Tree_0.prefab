@@ -147,3 +147,9 @@ MonoBehaviour:
   dropCount: 5
   spread: 0.65
   nodeType: 1
+  nodeHP: 3
+  xpToGive: 4
+  isForaging: 1
+  isMobility: 0
+  isForge: 0
+  isCrafting: 0

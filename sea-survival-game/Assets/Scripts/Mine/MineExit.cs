@@ -13,6 +13,6 @@ public class MineExit : MonoBehaviour
     public void ExitMine()
     {
         GameManagerSingleton.Instance.player.transform.position = mineEntrance.transform.position;
-        Debug.Log("Ez fut le");
+        GameManagerSingleton.Instance.insideMine = false;
     }
 }

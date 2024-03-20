@@ -70,26 +70,32 @@ public class DayNightCycle : MonoBehaviour, IDataPersistence
 
     public void ControlPPV() 
     {
-
-        if (hours >= 20 && hours < 21 && mins>15) 
+        if (GameManagerSingleton.Instance.insideMine == true)
         {
-            ppv.weight = (float)mins / 60; 
+            ppv.weight = 0.70f;
         }
-
-        if (hours >= 6 && hours < 7) 
+        else
         {
-            if(ppv.weight != 0.2f)
+            if (hours >= 20 && hours < 21 && mins > 15)
             {
-                ppv.weight = 1 - (float)mins / 60;
+                ppv.weight = (float)mins / 60;
             }
-        }
-        if(hours >= 21 || hours<6 && SceneManager.GetActiveScene() == mainWorld) // ez csak azert kell ha veletlen tesztelsz akkor ne legyen buggos pl, hogy 19:30 van es este van
-        {
-            ppv.weight = 1;
-        }
-        if(hours >=7 && hours<20 && SceneManager.GetActiveScene() == mainWorld) // same here
-        {
-            ppv.weight = 0.2f;
+
+            if (hours >= 6 && hours < 7)
+            {
+                if (ppv.weight != 0.2f)
+                {
+                    ppv.weight = 1 - (float)mins / 60;
+                }
+            }
+            if (hours >= 21 || hours < 6 && SceneManager.GetActiveScene() == mainWorld && GameManagerSingleton.Instance.insideMine == false) // ez csak azert kell ha veletlen tesztelsz akkor ne legyen buggos pl, hogy 19:30 van es este van
+            {
+                ppv.weight = 1;
+            }
+            if (hours >= 7 && hours < 20 && SceneManager.GetActiveScene() == mainWorld && GameManagerSingleton.Instance.insideMine == false) // same here
+            {
+                ppv.weight = 0.2f;
+            }
         }
     }
 
@@ -97,7 +103,7 @@ public class DayNightCycle : MonoBehaviour, IDataPersistence
     {
 
         timeDisplay.text = string.Format("{0:00}:{1:00}", hours, mins);
-        dayDisplay.text = "Day: " + days; 
+        dayDisplay.text = ""+days; 
     }
 
     public void LoadData(GameData data)

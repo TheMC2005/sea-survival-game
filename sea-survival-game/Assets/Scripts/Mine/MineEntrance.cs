@@ -17,7 +17,7 @@ public class MineEntrance : MonoBehaviour
     public void EnterMine()
     {
         GameManagerSingleton.Instance.player.transform.position = mineExit.transform.position;
-        Debug.Log("Ez történik");
+        GameManagerSingleton.Instance.insideMine = true;
     }
    /* private void Update()
     {

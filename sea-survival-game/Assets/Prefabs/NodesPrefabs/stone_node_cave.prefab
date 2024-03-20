@@ -148,3 +148,8 @@ MonoBehaviour:
   spread: 0.65
   nodeType: 2
   nodeHP: 2
+  xpToGive: 5
+  isForaging: 0
+  isMobility: 0
+  isForge: 1
+  isCrafting: 0

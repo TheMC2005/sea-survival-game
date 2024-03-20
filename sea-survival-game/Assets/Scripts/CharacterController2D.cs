@@ -20,11 +20,25 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
     public Animator animator;
     public bool moving;
 
+    public static CharacterController2D Instance { get; private set; }
     void Awake()
     {
+
+        if (Instance != null)
+        {
+            Debug.Log("Found more than one CharacterController2D in the scene.Destroying the newest one");
+            Destroy(this.gameObject);
+            return;
+        }
+        Instance = this;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
+
+    }
+    private void Start()
+    {
+        StartCoroutine(GiveMobilityXP());
     }
     private void Update()
     {
@@ -47,7 +61,8 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
 
             if(GameManagerSingleton.Instance.isMoving)  
             {
-                animator.SetBool("inShallow", false);
+                    
+                    animator.SetBool("inShallow", false);
                 animator.SetBool("isSwimming", false);
                 animator.SetBool("isMoving", true);
                 float horizontal = Input.GetAxisRaw("Horizontal");
@@ -83,6 +98,15 @@ public class CharacterController2D : MonoBehaviour, IDataPersistence
                 animator.SetBool("isSwimming", false);
                 animator.SetBool("isMoving", false);
             }
+        }
+    }
+
+    private IEnumerator GiveMobilityXP()
+    {
+        while (true)
+        {
+            Stats.Instance.GiveMobilityxp(2);
+            yield return new WaitForSeconds(10f);
         }
     }
 

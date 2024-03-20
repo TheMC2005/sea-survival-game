@@ -10,6 +10,13 @@ public class ResourceNode : ToolHit
     [SerializeField] float spread = 0.65f;
     [SerializeField] ResourceNodeType nodeType;
     [SerializeField] int nodeHP;
+    [SerializeField] int xpToGive;
+
+    //local bools
+    public bool isForaging;
+    public bool isMobility;
+    public bool isForge;
+    public bool isCrafting;
     public override void Hit(int level)
     {
         for (int i = 0; i < level; i++)
@@ -30,6 +37,22 @@ public class ResourceNode : ToolHit
                     Item.SummonItem(pickUpDrop, position);
                 }
                 Destroy(gameObject);
+                if (isCrafting)
+                {
+                    Stats.Instance.GiveCraftingxp(xpToGive);
+                }
+                if (isForge)
+                {
+                    Stats.Instance.GiveForgexp(xpToGive);
+                }
+                if (isForaging)
+                {
+                    Stats.Instance.GiveForagingxp(xpToGive);
+                }
+                if (isMobility)
+                {
+                    Stats.Instance.GiveMobilityxp(xpToGive);
+                }
             }
             if(nodeHP == 0)
             {

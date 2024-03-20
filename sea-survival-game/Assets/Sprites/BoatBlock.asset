@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: BoatBlock
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 5d9f9e606c290324f84e1112df92c467, type: 3}
+  m_Sprite: {fileID: -2078945766, guid: 6f86735c1ebca8f40ad013c94dcb86a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

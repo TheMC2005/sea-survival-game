@@ -23,6 +23,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
         itemDatabase = database;
         items = new int[27];
         itemcount = new int[27];
+        
     }
 
     public static void LoadSlots(Inventory inventory)

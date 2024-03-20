@@ -13,7 +13,6 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Button option2Button;
 
     [SerializeField] private float typingSpeed = 0.05f;
-    [SerializeField] private float turnSpeed = 2f;
 
     public List<dialogueString> dialogueList;
 

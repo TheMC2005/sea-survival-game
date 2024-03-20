@@ -103,7 +103,7 @@ public class DayNightCycle : MonoBehaviour, IDataPersistence
     {
 
         timeDisplay.text = string.Format("{0:00}:{1:00}", hours, mins);
-        dayDisplay.text = "Day: " + days; 
+        dayDisplay.text = ""+days; 
     }
 
     public void LoadData(GameData data)

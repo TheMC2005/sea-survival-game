@@ -25,7 +25,7 @@ public class GatherResourceNode : ToolAction
             {
                 if(hit.CanBeHit(canHitNodesOfType) == true)
                 {
-                    hit.Hit();
+                    hit.Hit(ToolsPlayerController.GetToolLevel());
                     return true;
                 } 
             }

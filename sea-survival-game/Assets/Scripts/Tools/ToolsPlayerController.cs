@@ -44,6 +44,18 @@ public class ToolsPlayerController : MonoBehaviour
             return false;
         }
     }
+    public static int GetToolLevel()
+    {
+        if (Hotbar.selSlot.item is Tool)
+        {
+            Tool toolItem = (Tool)Hotbar.selSlot.item;
+            return toolItem.toolLevel;
+        }
+        else
+        {
+            return 0;
+        }
+    }
     private void Awake()
     {
         character = GetComponent<CharacterController2D>();

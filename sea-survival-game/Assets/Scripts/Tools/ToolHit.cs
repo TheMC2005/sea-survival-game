@@ -9,6 +9,11 @@ public class ToolHit : MonoBehaviour
 
     }
 
+    public virtual void Hit(int level)
+    {
+
+    }
+
     public virtual bool CanBeHit(List<ResourceNodeType> canBeHit)
     {
         return true;

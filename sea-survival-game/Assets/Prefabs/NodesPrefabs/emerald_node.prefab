@@ -147,3 +147,4 @@ MonoBehaviour:
   dropCount: 3
   spread: 0.85
   nodeType: 2
+  nodeHP: 10

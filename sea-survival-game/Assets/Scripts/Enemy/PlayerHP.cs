@@ -6,8 +6,8 @@ public class PlayerHP : MonoBehaviour
 {
     public int hp;
 
-    void Update()
-    {
+    public void DealDamage(int a){
+        hp-=a;
         if (hp<=0){die();}
     }
     private void die(){

@@ -24,7 +24,7 @@ public class attackArea : MonoBehaviour
 
         for(int i=0; i<n; i++){
             if(results[i].gameObject.tag=="Player"){
-                results[i].gameObject.GetComponent<PlayerHP>().hp-=damage;
+                results[i].gameObject.GetComponent<PlayerHP>().DealDamage(damage);
             }
         }
 

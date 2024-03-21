@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 323713848646219597}
   - component: {fileID: 3596703577758903391}
   - component: {fileID: -2946268176806613397}
+  - component: {fileID: -218244291679081462}
   m_Layer: 0
   m_Name: CraftingTable
   m_TagString: Untagged
@@ -183,3 +184,21 @@ MonoBehaviour:
   dropCount: 1
   spread: 0.65
   nodeType: 3
+  nodeHP: 0
+  xpToGive: 0
+  isForaging: 0
+  isMobility: 0
+  isForge: 0
+  isCrafting: 0
+--- !u!114 &-218244291679081462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8426539266668494090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1fb1ebe44811ee4aa24e788c67e387c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -46,4 +46,14 @@ public class GameManagerSingleton : MonoBehaviour
         Instance = this;
     }
     public GameObject player;
+
+    public GameObject menu;
+    public void OpenMenu()
+    {
+        menu.SetActive(true);
+    }
+    public void CloseMenu()
+    {
+        menu.SetActive(false);
+    }
 }

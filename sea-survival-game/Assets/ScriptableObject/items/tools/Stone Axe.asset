@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Stone Axe
   maxq: 1
-  sprite: {fileID: 0}
+  sprite: {fileID: 741275794, guid: 954c1f1df1be6fb41ba35f55e66268a1, type: 3}
   toolType: 0
   toolLevel: 1
   onAction: {fileID: 11400000, guid: e933298b2d6bcca4d8ba60342491eb59, type: 2}

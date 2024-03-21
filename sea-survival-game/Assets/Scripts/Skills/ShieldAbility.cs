@@ -20,7 +20,7 @@ public class ShieldAbility : MonoBehaviour
     private void Update()
     {
         particlesystem.transform.position = GameManagerSingleton.Instance.player.transform.position;
-        if (Input.GetKeyDown(KeyCode.E) && canShield)
+        if (Input.GetKeyDown(KeyCode.O) && canShield)
         {
             Shield();
             particlesystem.Play();

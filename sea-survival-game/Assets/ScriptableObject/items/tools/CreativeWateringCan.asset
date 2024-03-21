@@ -14,11 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Creative Watering Can
   maxq: 1
-  sprite: {fileID: 21300000, guid: 7dcfad17e0925cd4990662d28809f7ab, type: 3}
+  sprite: {fileID: -620314381, guid: 954c1f1df1be6fb41ba35f55e66268a1, type: 3}
   toolType: 3
   toolLevel: 999
   onAction: {fileID: 0}
   onTileMapAction: {fileID: 11400000, guid: 9d4218949d866394eb9259a496efee41, type: 2}
   onItemUsed: {fileID: 0}
-  plowWitheredGround: {fileID: 0}
-  plowOutCrops: {fileID: 0}

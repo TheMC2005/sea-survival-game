@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94dffcd4ef974c94b93ffde765f3bc72, type: 3}
-  m_Name: Test2
+  m_Name: Craftingtable_recipe
   m_EditorClassIdentifier: 
-  Items: []
-  count: 
-  output: {fileID: 0}
-  outputCount: 0
+  Items:
+  - {fileID: 11400000, guid: f7192824366b96b44a527409e5c5ef8e, type: 2}
+  count: 05000000
+  output: {fileID: 11400000, guid: cef6bee29b7ab7047b5087f9d0dba1b6, type: 2}
+  outputCount: 1

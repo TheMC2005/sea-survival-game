@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94dffcd4ef974c94b93ffde765f3bc72, type: 3}
-  m_Name: NewCraftingRecipe
+  m_Name: sword_craft
   m_EditorClassIdentifier: 
-  Items: []
-  count: 
-  output: {fileID: 0}
-  outputCount: 0
+  Items:
+  - {fileID: 11400000, guid: 90225c8b2c5d22040948c468b04ceefd, type: 2}
+  count: 01000000
+  output: {fileID: 11400000, guid: 907c200af6cd0bb4ca02b6006db13225, type: 2}
+  outputCount: 1

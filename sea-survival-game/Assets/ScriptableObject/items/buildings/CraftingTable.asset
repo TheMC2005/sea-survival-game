@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Crafting Table
   maxq: 99
-  sprite: {fileID: 21300000, guid: 6bf99eea50a53bc478e86afabea970fe, type: 3}
+  sprite: {fileID: 1944914996, guid: 954c1f1df1be6fb41ba35f55e66268a1, type: 3}
   building: {fileID: 8426539266668494090, guid: 98ea4fbb6b559e74e8fb4fef3d52b0ae, type: 3}
   onAction: {fileID: 11400000, guid: 5750cc2fabd8cc1489e905973dcc1f81, type: 2}
   onItemUsed: {fileID: 0}

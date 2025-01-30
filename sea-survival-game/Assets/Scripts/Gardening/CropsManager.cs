@@ -539,7 +539,7 @@ public class CropsManager : MonoBehaviour, IDataPersistence
                 tileBaseName = cropTile.tileBaseName,
                 cropsID = cropTile.cropsID,
                 waterTime = cropTile.waterTime,
-    };
+            };
 
             data.crops.Add(position, dataCropsTile);
         }

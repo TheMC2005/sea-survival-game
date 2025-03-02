@@ -9,11 +9,11 @@ public class ChunkManager : MonoBehaviour
     public Tilemap tilemap;
     public TileBase waterTile;
     public int chunkSize = 16;
-    public float playerProximityThreshold = 64f;
-    public float checkInterval = 2f; 
+    public float playerProximityThreshold = 128f;
+    public float checkInterval = 2f;
 
     private Dictionary<Vector3Int, TilemapChunk> chunks = new Dictionary<Vector3Int, TilemapChunk>();
-    private HashSet<Vector3Int> activeWaterChunks = new HashSet<Vector3Int>(); 
+    private HashSet<Vector3Int> activeWaterChunks = new HashSet<Vector3Int>();
     private Transform player;
 
     void Start()
@@ -66,15 +66,16 @@ public class ChunkManager : MonoBehaviour
             if (shouldBeWater)
             {
                 newActiveWaterChunks.Add(chunkPos);
-                if (!activeWaterChunks.Contains(chunkPos)) 
-                {           
+                if (!activeWaterChunks.Contains(chunkPos))
+                {
+
                     chunk.RestoreNullTiles();
                     StartCoroutine(UpdateChunkGradually(chunk));
                 }
             }
             else
             {
-                if (activeWaterChunks.Contains(chunkPos)) 
+                if (activeWaterChunks.Contains(chunkPos))
                 {
                     chunk.ReplaceNullTilesWith(waterTile);
                     StartCoroutine(UpdateChunkGradually(chunk));
@@ -82,12 +83,12 @@ public class ChunkManager : MonoBehaviour
             }
         }
 
-        activeWaterChunks = newActiveWaterChunks; 
+        activeWaterChunks = newActiveWaterChunks;
     }
 
     IEnumerator UpdateChunkGradually(TilemapChunk chunk)
     {
-        yield return null; // Wait 1 frame
+        yield return null;
         chunk.UpdateTilemap(tilemap);
     }
 }
@@ -132,7 +133,7 @@ public class TilemapChunk
         {
             if (originalTiles[i] == null)
             {
-                tiles[i] = null; // Restore only null tiles
+                tiles[i] = null;
             }
         }
     }

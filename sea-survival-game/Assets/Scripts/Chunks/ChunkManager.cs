@@ -8,12 +8,12 @@ public class ChunkManager : MonoBehaviour
 {
     public Tilemap tilemap;
     public TileBase waterTile;
-    public TileBase check;
     public int chunkSize = 16;
     public float playerProximityThreshold = 64f;
+    public float checkInterval = 2f; 
 
     private Dictionary<Vector3Int, TilemapChunk> chunks = new Dictionary<Vector3Int, TilemapChunk>();
-    private HashSet<TileBase> tilesToNotRemove = new HashSet<TileBase>();
+    private HashSet<Vector3Int> activeWaterChunks = new HashSet<Vector3Int>(); 
     private Transform player;
 
     void Start()
@@ -28,7 +28,7 @@ public class ChunkManager : MonoBehaviour
         while (true)
         {
             CheckPlayerProximity();
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(checkInterval);
         }
     }
 
@@ -53,9 +53,11 @@ public class ChunkManager : MonoBehaviour
     void CheckPlayerProximity()
     {
         Vector3 playerPos = player.position;
+        HashSet<Vector3Int> newActiveWaterChunks = new HashSet<Vector3Int>();
 
         foreach (var kvp in chunks)
         {
+            Vector3Int chunkPos = kvp.Key;
             TilemapChunk chunk = kvp.Value;
             float distanceToPlayer = (playerPos - chunk.middlePoint).sqrMagnitude;
 
@@ -63,16 +65,30 @@ public class ChunkManager : MonoBehaviour
 
             if (shouldBeWater)
             {
-                chunk.RestoreNullTiles();
-                chunk.UpdateTilemap(tilemap);
-                
+                newActiveWaterChunks.Add(chunkPos);
+                if (!activeWaterChunks.Contains(chunkPos)) 
+                {           
+                    chunk.RestoreNullTiles();
+                    StartCoroutine(UpdateChunkGradually(chunk));
+                }
             }
             else
             {
-                chunk.ReplaceNullTilesWith(waterTile);
-                chunk.UpdateTilemap(tilemap);
+                if (activeWaterChunks.Contains(chunkPos)) 
+                {
+                    chunk.ReplaceNullTilesWith(waterTile);
+                    StartCoroutine(UpdateChunkGradually(chunk));
+                }
             }
         }
+
+        activeWaterChunks = newActiveWaterChunks; 
+    }
+
+    IEnumerator UpdateChunkGradually(TilemapChunk chunk)
+    {
+        yield return null; // Wait 1 frame
+        chunk.UpdateTilemap(tilemap);
     }
 }
 

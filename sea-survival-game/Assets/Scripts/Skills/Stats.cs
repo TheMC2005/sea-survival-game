@@ -114,7 +114,7 @@ public class Stats : MonoBehaviour
         {
             characterController.speed += 0.15f;
         }
-        if(food < 15)
+        if(food < 15 && characterController.speed > 1.25f)
         {
             characterController.speed -= 0.5f;
         }

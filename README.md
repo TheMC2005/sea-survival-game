@@ -14,12 +14,6 @@ Sea Survival Game is a 2.5D top-down survival game where players navigate throug
 - **Survival Mechanics**: Maintain your health, hunger, and thirst levels while surviving against natural elements and wildlife.
 - **Progressive Difficulty**: The further you explore, the more challenging the game becomes.
 
-### Prerequisites
-
-Before you begin, ensure you have the following installed on your system:
-
-- [Unity Hub](https://unity.com/download) (for Unity version management)
-
 ### Cloning the Repository
 
 To clone the project to your local machine, run:

@@ -10,9 +10,11 @@ Sea Survival Game is a 2.5D top-down survival game where players navigate throug
 
 - **Dynamic Ocean Environment**: A vast ocean to explore, with changing weather and day-night cycles.
 - **Resource Management**: Gather materials from the ocean and islands to craft essential tools and structures.
-- **Crafting System**: Create new items from gathered resources, including food, tools, and shelters.
-- **Survival Mechanics**: Maintain your health, hunger, and thirst levels while surviving against natural elements and wildlife.
+- **Crafting System**: Create new items from gathered resources, including tools.
+- **Survival Mechanics**: Maintain your health, hunger levels while surviving against natural elements and wildlife.
 - **Progressive Difficulty**: The further you explore, the more challenging the game becomes.
+
+- Many more to list, but it would be much better to explore rather than reading about it!
 
 ### Cloning the Repository
 

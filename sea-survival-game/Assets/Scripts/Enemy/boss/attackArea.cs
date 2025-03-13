@@ -14,7 +14,7 @@ public class attackArea : MonoBehaviour
     }
     IEnumerator End(){
         yield return new WaitForSeconds(1);
-        Debug.Log("fasz");
+       // Debug.Log("fasz");
         Collider2D coll = GetComponent<Collider2D>();
         ContactFilter2D filter = new ContactFilter2D().NoFilter();
         List<Collider2D> results = new List<Collider2D>();

@@ -317,7 +317,7 @@ public class CropsManager : MonoBehaviour, IDataPersistence
     public void RevertCrop(Vector3Int position, CropsTile crop)
     {
         crops.Remove((Vector2Int)position);
-        Debug.Log("En fvagayok");
+        //Debug.Log("En fvagayok");
         cropTilemap.SetTile(position, PlowableDirt);
 
 

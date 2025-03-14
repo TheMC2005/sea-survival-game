@@ -11,6 +11,7 @@ public class DialogueTrigger : MonoBehaviour
     [SerializeField] private List<dialogueString> dialogueStrings = new List<dialogueString>();
     [SerializeField] private Transform NPCTransform;
     [SerializeField] public DialogueManager dialogueManager;
+    [SerializeField] public int npcID;
 
     private bool hasSpoken = false;
     private float distance;
@@ -20,16 +21,21 @@ public class DialogueTrigger : MonoBehaviour
     private void Update()
     {
         distance = (GameManagerSingleton.Instance.player.transform.position - NPCTransform.transform.position).sqrMagnitude;
+        Debug.Log(distance < 5f && !hasSpoken);
         if (distance < 5f && !hasSpoken)
         {
+            Debug.Log("Mukodik");
             notificationScript.dialogueToggle = true;
+            notificationScript.toggleBools[npcID+1] = true;
             notificationScript.ToggleBoatNotification();
         }
         else
         {
             notificationScript.dialogueToggle = false;
+            notificationScript.toggleBools[npcID + 1] = false;
             notificationScript.ToggleBoatNotification();
         }
+
         if (Input.GetKeyDown(KeyCode.E) && distance < 5f && !hasSpoken)
         {
             dialogueManager.DialogueStart(dialogueStrings, NPCTransform);

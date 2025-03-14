@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class NotificationScript : MonoBehaviour
 {
@@ -15,7 +14,7 @@ public class NotificationScript : MonoBehaviour
     public bool toggleBool = false;
     public bool dialogueToggle = false;
     //distances
-    int numberOfDistances = 10; //ugy valtoztasd, hogy mennyi lesz
+    int numberOfDistances = 99; //ugy valtoztasd, hogy mennyi lesz
     float mineEntranceDistance;
     float mineExitDistance;
     float boatDistance;

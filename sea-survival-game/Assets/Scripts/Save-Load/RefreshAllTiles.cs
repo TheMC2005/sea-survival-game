@@ -13,6 +13,10 @@ public class RefreshAllTiles : MonoBehaviour
         {
             RefreshTiles();
         }
+        if(Input.GetKeyDown(KeyCode.U)) {
+            ResetHungerBar();
+            Debug.Log("Reset");
+        }
     }
 
     void RefreshTiles()
@@ -24,5 +28,9 @@ public class RefreshAllTiles : MonoBehaviour
             tilemap.RefreshTile(position);
         }
         Debug.Log("RefreshAllTiles Script lefutot");
+    }
+    void ResetHungerBar()
+    {
+        Stats.Instance.food = 100;
     }
 }
